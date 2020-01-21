@@ -4,7 +4,6 @@ class Level_1 extends Phaser.Scene {
   }
 
   create() {
-
     // Create world bounds
     this.physics.world.setBounds(0, 0, 1600, 1200); // The world bounds
 
@@ -16,7 +15,7 @@ class Level_1 extends Phaser.Scene {
     reticle = this.physics.add.sprite(800, 700, 'crosshair');
     reticle.setOrigin(0.5, 0.5).setDisplaySize(25, 25).setCollideWorldBounds(true);
     moving = false;
-    this.cameras.main.zoom = 0.5;
+    this.cameras.main.zoom = 0.7;
 
     this.anims.create({
       key: "player_run_down",
@@ -64,57 +63,6 @@ class Level_1 extends Phaser.Scene {
       'right': Phaser.Input.Keyboard.KeyCodes.D
     });
 
-    // Enables movement of player with WASD keys
-    this.input.keyboard.on('keydown_W', function (event) {
-      player.setAccelerationY(-800);
-      moving = true;
-      player.play("player_run_up");
-    });
-    this.input.keyboard.on('keydown_S', function (event) {
-      player.setAccelerationY(800);
-      moving = true;
-      player.play("player_run_down");
-    });
-    this.input.keyboard.on('keydown_A', function (event) {
-      player.setAccelerationX(-800);
-      moving = true;
-      player.play("player_run_left");
-    });
-    this.input.keyboard.on('keydown_D', function (event) {
-      player.setAccelerationX(800);
-      moving = true;
-      player.play("player_run_right");
-    });
-
-    // Stops player acceleration on uppress of WASD keys
-    this.input.keyboard.on('keyup_W', function (event) {
-      if (moveKeys['down'].isUp)
-      {
-        moving = false;
-        player.setAccelerationY(0);
-      }
-    });
-    this.input.keyboard.on('keyup_S', function (event) {
-      if (moveKeys['up'].isUp)
-      {
-        moving = false;
-        player.setAccelerationY(0);
-      }
-    });
-    this.input.keyboard.on('keyup_A', function (event) {
-      if (moveKeys['right'].isUp)
-      {
-        moving = false;
-        player.setAccelerationY(0);
-      }
-    });
-    this.input.keyboard.on('keyup_D', function (event) {
-      if (moveKeys['left'].isUp)
-      {
-        moving = false;
-        player.setAccelerationY(0);
-      }
-    });
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
       game.input.mouse.requestPointerLock();
@@ -150,15 +98,31 @@ class Level_1 extends Phaser.Scene {
           reticle.y = player.y-600;
       }
     }, this);
+    if (music.key!== 'level1Music')
+    {
+      music.stop();
+      music = this.sound.add('level1Music');
+      music.loop = true;
+      music.play();
+    }
+    // 2.2 create the cursorKeys
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    // 4.1  add a key for the player fire
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   }
 
   update() {
+    // 4.2 Event for the player shooting, just once per key pressing
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      console.log("Fire!");
+    }
+    this.movePlayerManager();
     //player.anims.play('player_walk_down');
     // Camera position is average between reticle and player positions
-    let avgX = ((player.x+reticle.x)/2)-400;
-    let avgY = ((player.y+reticle.y)/2)-300;
-    this.cameras.main.scrollX = avgX;
-    this.cameras.main.scrollY = avgY;
+    //let avgX = ((player.x+reticle.x)/2)-400;
+    //let avgY = ((player.y+reticle.y)/2)-300;
+    //this.cameras.main.scrollX = avgX;
+    //this.cameras.main.scrollY = avgY;
     // Make reticle move with player
     reticle.body.velocity.x = player.body.velocity.x;
     reticle.body.velocity.y = player.body.velocity.y;
@@ -243,5 +207,60 @@ class Level_1 extends Phaser.Scene {
     }
     // Constrain position of reticle
     constrainReticle(reticle, 550);
+  }
+
+  movePlayerManager()
+  {
+    player.setVelocity(0);
+
+    if(this.cursorKeys.left.isDown)
+    {
+      player.setVelocityX(-200);
+      if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_left')
+      {
+        //Do nothing
+      }
+      else
+      {
+          player.play("player_run_left");
+      }
+    }
+    else if(this.cursorKeys.right.isDown)
+    {
+      player.setVelocityX(200);
+      if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_right')
+      {
+        //Do nothing
+      }
+      else
+      {
+        player.play("player_run_right");
+      }
+    }
+
+    if(this.cursorKeys.up.isDown)
+    {
+      player.setVelocityY(-200);
+      if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_up')
+      {
+        //Do nothing
+      }
+      else
+      {
+        player.play("player_run_up");
+      }
+    }
+    else if(this.cursorKeys.down.isDown)
+    {
+      player.setVelocityY(200);
+      if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_down')
+      {
+        //Do nothing
+      }
+      else
+      {
+        player.play("player_run_down");
+      }
+    }
   }
 }

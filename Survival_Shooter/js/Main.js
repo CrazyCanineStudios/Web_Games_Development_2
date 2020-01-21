@@ -9,7 +9,7 @@ var config = {
         width: 1920,
         height: 1080
       },
-        scene: [Boot, MainMenu, Level_1],
+        scene: [Boot, MainMenu,Credits,Level_1],
         pixelArt: false,
         // 1.1 set the physics to arcade
         physics: {

@@ -5,6 +5,7 @@ class MainMenu extends Phaser.Scene {
 
   preload()
   {
+
   }
 
   create()
@@ -42,11 +43,15 @@ class MainMenu extends Phaser.Scene {
     {
       confirmSound.play();
       creditsButton.setFrame(8);
-      //this.scene.start("credits");
+      this.scene.start("credits");
     });
-    music = this.sound.add('titleMusic');
-    music.loop = true;
-    music.play();
+    if (music.key!== 'titleMusic')
+    {
+      music.stop();
+      music = this.sound.add('titleMusic');
+      music.loop = true;
+      music.play();
+    }
   }
   update ()
   {
