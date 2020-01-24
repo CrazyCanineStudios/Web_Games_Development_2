@@ -9,7 +9,8 @@ class Level_1 extends Phaser.Scene {
 
     this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
     this.background.setOrigin(0, 0);
-
+this.house = this.add.sprite(0,0,"house");
+this.house.setScale(2,2);
     player = this.physics.add.sprite(config.width/2,config.height/2,"player");
     player.setOrigin(0.5, 0.5).setDisplaySize(204, 265).setCollideWorldBounds(true).setDrag(500, 500);
     reticle = this.physics.add.sprite(800, 700, 'crosshair');
@@ -109,6 +110,7 @@ class Level_1 extends Phaser.Scene {
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     // 4.1  add a key for the player fire
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
   }
 
   update() {
@@ -116,13 +118,16 @@ class Level_1 extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("Fire!");
     }
+    if (Phaser.Input.Keyboard.JustDown(this.pause))
+    {
+      this.scene.start("mainMenu");
+    }
     this.movePlayerManager();
-    //player.anims.play('player_walk_down');
-    // Camera position is average between reticle and player positions
-    //let avgX = ((player.x+reticle.x)/2)-400;
-    //let avgY = ((player.y+reticle.y)/2)-300;
-    //this.cameras.main.scrollX = avgX;
-    //this.cameras.main.scrollY = avgY;
+    //Camera position is average between reticle and player positions
+    let avgX = ((player.x+reticle.x)/2)-400;
+    let avgY = ((player.y+reticle.y)/2)-300;
+    this.cameras.main.scrollX = avgX;
+    this.cameras.main.scrollY = avgY;
     // Make reticle move with player
     reticle.body.velocity.x = player.body.velocity.x;
     reticle.body.velocity.y = player.body.velocity.y;
@@ -211,11 +216,12 @@ class Level_1 extends Phaser.Scene {
 
   movePlayerManager()
   {
+    var speed = 400;
     player.setVelocity(0);
 
     if(this.cursorKeys.left.isDown)
     {
-      player.setVelocityX(-200);
+      player.setVelocityX(-speed);
       if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_left')
       {
         //Do nothing
@@ -227,7 +233,7 @@ class Level_1 extends Phaser.Scene {
     }
     else if(this.cursorKeys.right.isDown)
     {
-      player.setVelocityX(200);
+      player.setVelocityX(speed);
       if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_right')
       {
         //Do nothing
@@ -240,7 +246,7 @@ class Level_1 extends Phaser.Scene {
 
     if(this.cursorKeys.up.isDown)
     {
-      player.setVelocityY(-200);
+      player.setVelocityY(-speed);
       if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_up')
       {
         //Do nothing
@@ -252,7 +258,7 @@ class Level_1 extends Phaser.Scene {
     }
     else if(this.cursorKeys.down.isDown)
     {
-      player.setVelocityY(200);
+      player.setVelocityY(speed);
       if (player.anims.isPlaying && player.anims.currentAnim.key === 'player_run_down')
       {
         //Do nothing

@@ -15,7 +15,7 @@ var config = {
         physics: {
             default: "arcade",
             arcade: {
-                debug: false
+                debug: true
             }
         }
     }, player, moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,

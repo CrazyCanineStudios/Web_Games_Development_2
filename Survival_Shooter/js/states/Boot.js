@@ -11,6 +11,7 @@ class Boot extends Phaser.Scene {
     this.load.image("background", "assets/sprites/backgrounds/bg_level_1.png");
     //
     this.load.image("crosshair", "assets/sprites/spr_crosshair.png");
+    this.load.image("house", "assets/sprites/spr_ice_cream_store.png");
     this.load.spritesheet("player", "assets/sprites/spr_player_girl.png",{frameWidth: 204, frameHeight: 265});
     this.load.spritesheet("buttons", "assets/sprites/buttons.png",{frameWidth: 736, frameHeight: 276});
     this.load.spritesheet("backButtons", "assets/sprites/back_button.png",{frameWidth: 55, frameHeight: 24});
