@@ -15,10 +15,10 @@ var config = {
         physics: {
             default: "arcade",
             arcade: {
-                debug: true
+                debug: false
             }
         }
-    }, player, moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,
+    }, player, moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,quickStart = true,
     game = new Phaser.Game(config);
 
 

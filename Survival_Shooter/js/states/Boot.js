@@ -26,7 +26,46 @@ class Boot extends Phaser.Scene {
     music = this.sound.add('titleMusic');
     music.loop = true;
     music.play();
-    this.scene.start("mainMenu");
+    this.anims.create({
+      key: "player_run_down",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 0,
+        end: 13
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "player_run_up",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 14,
+        end: 27
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "player_run_right",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 28,
+        end: 41
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "player_run_left",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 42,
+        end: 55
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+    if (quickStart) this.scene.start("sp_house");
+    else this.scene.start("mainMenu");
+
   }
   update () {
 
