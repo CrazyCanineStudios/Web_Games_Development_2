@@ -2,6 +2,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
 {
     cursorKeys;
     speed;
+    characterNum;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
@@ -14,13 +15,17 @@ class Player extends Phaser.Physics.Arcade.Sprite
         switch (character)
         {
             case "Tom":
-                this.speed = 200;
+                this.speed = 300;
+                this.setTexture('player_tom');
+                this.characterNum = 1;
                 break;
             case  "Zoe":
                 this.speed = 300;
+                this.characterNum = 0;
                 break;
             default:
                 this.speed = 300;
+                this.characterNum = 0;
         }
     }
     update()
@@ -33,34 +38,68 @@ class Player extends Phaser.Physics.Arcade.Sprite
     movePlayer()
     {
         this.setVelocity(0);
+if (this.characterNum === 0)
+{
+    if  (this.cursorKeys.left.isDown)
+    {
+        this.setVelocityX(-this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_left'){}
+        else this.play("player_run_left");
+    }
 
-        if  (this.cursorKeys.left.isDown)
-        {
-            this.setVelocityX(-this.speed);
-            if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_left'){}
-            else this.play("player_run_left");
-        }
+    else if (this.cursorKeys.right.isDown)
+    {
+        this.setVelocityX(this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_right'){}
+        else this.play("player_run_right");
+    }
 
-        else if (this.cursorKeys.right.isDown)
-        {
-            this.setVelocityX(this.speed);
-            if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_right'){}
-            else this.play("player_run_right");
-        }
+    if  (this.cursorKeys.up.isDown)
+    {
+        this.setVelocityY(-this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_up'){}
+        else this.play("player_run_up");
+    }
 
-        if  (this.cursorKeys.up.isDown)
-        {
-            this.setVelocityY(-this.speed);
-            if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_up'){}
-            else this.play("player_run_up");
-        }
+    else if (this.cursorKeys.down.isDown)
+    {
+        this.setVelocityY(this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_down'){}
+        else this.play("player_run_down");
+    }
+}
+else if (this.characterNum === 1)
+{
+    if  (this.cursorKeys.left.isDown)
+    {
+        this.setVelocityX(-this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_left'){}
+        else this.play("tom_run_left");
+    }
 
-        else if (this.cursorKeys.down.isDown)
-        {
-            this.setVelocityY(this.speed);
-            if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_down'){}
-            else this.play("player_run_down");
-        }
+    else if (this.cursorKeys.right.isDown)
+    {
+        this.setVelocityX(this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_right'){}
+        else this.play("tom_run_right");
+    }
+
+    if  (this.cursorKeys.up.isDown)
+    {
+        this.setVelocityY(-this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up'){}
+        else this.play("tom_run_up");
+    }
+
+    else if (this.cursorKeys.down.isDown)
+    {
+        this.setVelocityY(this.speed);
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down'){}
+        else this.play("tom_run_down");
+    }
+}
+
+
     }
 
     constrainVelocity()

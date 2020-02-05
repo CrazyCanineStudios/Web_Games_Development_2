@@ -13,6 +13,7 @@ class Boot extends Phaser.Scene {
     this.load.image("crosshair", "assets/sprites/spr_crosshair.png");
     this.load.image("house", "assets/sprites/spr_ice_cream_store.png");
     this.load.spritesheet("player", "assets/sprites/spr_player_girl.png",{frameWidth: 204, frameHeight: 265});
+    this.load.spritesheet("player_tom", "assets/sprites/spr_player_tom.png",{frameWidth: 204, frameHeight: 265});
     this.load.spritesheet("buttons", "assets/sprites/buttons.png",{frameWidth: 736, frameHeight: 276});
     this.load.spritesheet("backButtons", "assets/sprites/back_button.png",{frameWidth: 55, frameHeight: 24});
     this.load.spritesheet("continueButton", "assets/sprites/continue_button.png",{frameWidth: 195, frameHeight: 66});
@@ -63,6 +64,80 @@ class Boot extends Phaser.Scene {
       frameRate: 12,
       repeat: -1
     });
+    this.anims.create({
+      key: "player_run_down",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 0,
+        end: 13
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "player_run_up",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 14,
+        end: 27
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "player_run_right",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 28,
+        end: 41
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "player_run_left",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 42,
+        end: 55
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
+      this.anims.create({
+          key: "tom_run_down",
+          frames: this.anims.generateFrameNumbers("player_tom", {
+              start: 0,
+              end: 13
+          }),
+          frameRate: 12,
+          repeat: -1
+      });
+
+      this.anims.create({
+          key: "tom_run_up",
+          frames: this.anims.generateFrameNumbers("player_tom", {
+              start: 14,
+              end: 27
+          }),
+          frameRate: 12,
+          repeat: -1
+      });
+      this.anims.create({
+          key: "tom_run_right",
+          frames: this.anims.generateFrameNumbers("player_tom", {
+              start: 28,
+              end: 41
+          }),
+          frameRate: 12,
+          repeat: -1
+      });
+      this.anims.create({
+          key: "tom_run_left",
+          frames: this.anims.generateFrameNumbers("player_tom", {
+              start: 42,
+              end: 55
+          }),
+          frameRate: 12,
+          repeat: -1
+      });
     if (quickStart) this.scene.start("sp_house");
     else this.scene.start("mainMenu");
 

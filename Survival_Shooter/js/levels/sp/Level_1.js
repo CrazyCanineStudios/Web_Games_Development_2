@@ -10,6 +10,7 @@ class Level_1 extends Phaser.Scene {
     this.background = this.add.tileSprite(0, 0, 1600, 1200, "background");
     this.background.setOrigin(0, 0);
     this.players = this.add.group();
+    this.projectiles = this.add.group();
     this.playerInput = [];
     this.playerInput [0] = this.input.keyboard.addKeys({
       'up': Phaser.Input.Keyboard.KeyCodes.W,
@@ -29,7 +30,8 @@ class Level_1 extends Phaser.Scene {
     });
 
     var player = new Player(this,config.width/2,config.height/2,"Zoe",0);
-    var player2 = new Player(this,config.width/2 + 30,config.height/2 + 30,"Zoe",1);
+    var player2 = new Player(this,config.width/2 + 30,config.height/2 + 30,"Tom",1);
+    var bullet = new WaterBalloon(this,player.x,player.y + 5);
     this.cameras.main.zoom = 0.7;
 
 // Locks pointer on mousedown
@@ -56,9 +58,10 @@ class Level_1 extends Phaser.Scene {
       var player = this.players.getChildren()[i];
       player.update();
     }
-    if (Phaser.Input.Keyboard.JustDown(this.pause))
+    for(var i = 0; i < this.projectiles.getChildren().length; i++)
     {
-      this.scene.start("mainMenu");
+      var projectile= this.projectiles.getChildren()[i];
+      projectile.update();
     }
   }
 }
