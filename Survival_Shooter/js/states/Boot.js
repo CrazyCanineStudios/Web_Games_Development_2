@@ -21,6 +21,8 @@ class Boot extends Phaser.Scene {
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
     this.load.audio('level1Music', ['assets/sounds/music/mus_level_1.ogg']);
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
+    this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
+    this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
   }
   create() {
     this.add.text(20, 20, "The game is loading");

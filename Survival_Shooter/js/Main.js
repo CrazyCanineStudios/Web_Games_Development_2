@@ -18,7 +18,7 @@ var config = {
                 debug: false
             }
         }
-    }, player, moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,quickStart,
+    },moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,quickStart = true,
     game = new Phaser.Game(config);
 
 
