@@ -10,7 +10,7 @@ var config = {
         height: 1080
       },
         scene: [Boot, MainMenu,Credits,Level_1],
-        pixelArt: false,
+        pixelArt: true,
         // 1.1 set the physics to arcade
         physics: {
             default: "arcade",

@@ -4,18 +4,20 @@ class Player extends Phaser.Physics.Arcade.Sprite
     speed;
     characterNum;
     camera;
+    shadow;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
         scene.add.existing(this);
         scene.physics.world.enableBody(this);
         this.body.setCollideWorldBounds(true);
-        this.body.setSize(90,120, 24, 50);
-        this.setOrigin(0.5, 0.5).setDisplaySize(57.8, 79.2).setCollideWorldBounds(true).setDrag(500, 500);
+        this.body.setCircle(20,8,5);
+        this.setOrigin(0.5, 0.5).setCollideWorldBounds(true).setDrag(500, 500);
         if (playerInput == null) playerInput = 0;
         this.cursorKeys = scene.playerInput[playerInput];
         scene.players.add(this);
         this.camera = scene.cameras.main;
+        this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
         switch (character)
         {
             case "Tom":
@@ -34,6 +36,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
     }
     update()
     {
+        this.shadow.x = this.x;
+        this.shadow.y = this.y + 15;
         this.depth = this.y + this.height / 2;
         this.movePlayer();
         this.constrainVelocity();
@@ -76,30 +80,99 @@ else if (this.characterNum === 1)
 {
     if  (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
     {
-        this.setVelocityX(-this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_left'){}
-        else this.play("tom_run_left");
+        if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
+        {
+            this.shadow.y = this.y + 10;
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up_left'){}
+            else this.play("tom_run_up_left");
+        }
+        else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_left'){}
+            else this.play("tom_run_down_left");
+        }
+        else
+        {
+            this.setVelocityX(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_left'){}
+            else this.play("tom_run_left");
+        }
     }
-
     else if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
     {
-        this.setVelocityX(this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_right'){}
-        else this.play("tom_run_right");
-    }
+        if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up_right'){}
+            else this.play("tom_run_up_right");
+        }
+        else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_right'){}
+            else this.play("tom_run_down_right");
+        }
+        else
+        {
 
+            this.setVelocityX(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_right'){}
+            else this.play("tom_run_right");
+        }
+    }
     if  (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
     {
-        this.setVelocityY(-this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up'){}
-        else this.play("tom_run_up");
+        if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up_right'){}
+            else this.play("tom_run_up_right");
+        }
+        else if (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up_left'){}
+            else this.play("tom_run_up_left");
+        }
+        else
+        {
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up'){}
+            else this.play("tom_run_up");
+        }
+
     }
 
     else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
     {
-        this.setVelocityY(this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down'){}
-        else this.play("tom_run_down");
+        if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_right'){}
+            else this.play("tom_run_down_right");
+        }
+        else if (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_left'){}
+            else this.play("tom_run_down_left");
+        }
+        else
+        {
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down'){}
+            else this.play("tom_run_down");
+        }
     }
 }
 

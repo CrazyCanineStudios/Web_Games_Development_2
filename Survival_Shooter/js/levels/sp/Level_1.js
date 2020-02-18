@@ -1,4 +1,6 @@
 class Level_1 extends Phaser.Scene {
+  spotlight;
+  charLight;
   constructor() {
     super("sp_house");
   }
@@ -32,16 +34,36 @@ class Level_1 extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,config.width/2,config.height/2 + 100,"Zoe",0);
+    this.player = new Player(this,config.width/2,config.height/2 + 100,"Tom",0);
     this.player2 = new Player(this,config.width/2 + 70,config.height/2 + 100,"Tom",1);
     var bullet = new WaterBalloon(this,this.player.x,this.player.y + 5);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
     this.cameras.main.zoom =2;
+    this.cameras.main.roundPixels = true;
     reticle.visible = false;
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.player2, platforms);
+    this.spotlight = this.make.sprite({
+      x: this.player.x,
+      y: this.player.y,
+      key: 'mask',
+      add: false
+    });
+    this.charLight = this.make.sprite({
+      x: this.player.x,
+      y: this.player.y,
+      key: 'character_mask',
+      add: false
+    });
+    floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
+    walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
+    this.player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+    this.player2.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+    this.player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+    this.player2.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -62,6 +84,8 @@ class Level_1 extends Phaser.Scene {
   }
   update()
   {
+    this.charLight.x = this.spotlight.x;
+    this.charLight.y = this.spotlight.y;
     this.cameras.main.startFollow(reticle);
     for(var i = 0; i < this.players.getChildren().length; i++)
     {
@@ -78,17 +102,22 @@ class Level_1 extends Phaser.Scene {
     {
       console.log(this.player.body.x + " is bigger than " + this.player2.body.x);
       var difference = (this.player.body.x + this.player2.body.x)/2;
+      difference = Phaser.Math.RoundTo(difference,0);
+      this.spotlight.x = difference;
       this.averagePlayerPosX = difference;
     }
     else if (this.player.body.x < this.player2.body.x)
     {
       console.log(this.player.body.x + " is smaller than " + this.player2.body.x);
       var difference = (this.player2.body.x + this.player.body.x)/2;
+      difference = Phaser.Math.RoundTo(difference,0);
+      this.spotlight.x = difference;
       this.averagePlayerPosX = difference;
     }
     else if (this.player.body.x === this.player2.body.x)
     {
       console.log(this.player.body.x + " is the same as " + this.player2.body.x);
+      this.spotlight.x = this.player.body.x;
       this.averagePlayerPosX = this.player.body.x;
     }
 
@@ -96,17 +125,22 @@ class Level_1 extends Phaser.Scene {
     {
       console.log(this.player.body.y + " is bigger than " + this.player2.body.y);
       var difference = (this.player.body.y + this.player2.body.y)/2;
+      difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
+      this.spotlight.y = difference;
     }
     else if (this.player.body.y < this.player2.body.y)
     {
       console.log(this.player.body.y + " is smaller than " + this.player2.body.y);
       var difference = (this.player2.body.y + this.player.body.y)/2;
+      difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
+      this.spotlight.y = difference;
     }
     else if (this.player.body.y === this.player2.body.y)
     {
       console.log(this.player.body.y + " is the same as " + this.player2.body.y);
+      this.spotlight.y = this.player.y;
       this.averagePlayerPosY = this.player.body.y;
     }
     reticle.x = this.averagePlayerPosX;
