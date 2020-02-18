@@ -15,7 +15,7 @@ class Boot extends Phaser.Scene {
     this.load.image('character_mask', 'assets/sprites/mask.png');
     this.load.image("shadow", "assets/sprites/shadow.png");
     this.load.image("house", "assets/sprites/spr_ice_cream_store.png");
-    this.load.spritesheet("player", "assets/sprites/zoey.png",{frameWidth: 41, frameHeight: 53});
+    this.load.spritesheet("player", "assets/sprites/zoey2.png",{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet("player_tom", "assets/sprites/spr_tom.png",{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet("buttons", "assets/sprites/buttons.png",{frameWidth: 736, frameHeight: 276});
     this.load.spritesheet("backButtons", "assets/sprites/back_button.png",{frameWidth: 55, frameHeight: 24});
@@ -100,6 +100,43 @@ class Boot extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers("player_tom", {
         start:190,
         end: 168
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "zoey_run_right",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 0,
+        end: 23
+      }),
+      frameRate: 30,
+      repeat: 1
+    });
+    this.anims.create({
+      key: "zoey_run_down",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 24,
+        end: 47
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "zoey_run_left",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 48,
+        end: 71
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "zoey_run_up",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 72,
+        end: 95
       }),
       frameRate: 30,
       repeat: -1

@@ -34,7 +34,7 @@ class Level_1 extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,config.width/2,config.height/2 + 100,"Tom",0);
+    this.player = new Player(this,config.width/2,config.height/2 + 100,"Zoe",0);
     this.player2 = new Player(this,config.width/2 + 70,config.height/2 + 100,"Tom",1);
     var bullet = new WaterBalloon(this,this.player.x,this.player.y + 5);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);

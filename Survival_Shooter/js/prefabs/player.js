@@ -51,29 +51,29 @@ if (this.characterNum === 0)
     if  (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x + 50)
     {
         this.setVelocityX(-this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_left'){}
-        else this.play("player_run_left");
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_left'){}
+        else this.play("zoey_run_left");
     }
 
     else if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
     {
         this.setVelocityX(this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_right'){}
-        else this.play("player_run_right");
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_right'){}
+        else this.play("zoey_run_right");
     }
 
     if  (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
     {
         this.setVelocityY(-this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_up'){}
-        else this.play("player_run_up");
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_up'){}
+        else this.play("zoey_run_up");
     }
 
     else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
     {
         this.setVelocityY(this.speed);
-        if (this.anims.isPlaying && this.anims.currentAnim.key === 'player_run_down'){}
-        else this.play("player_run_down");
+        if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_down'){}
+        else this.play("zoey_run_down");
     }
 }
 else if (this.characterNum === 1)
