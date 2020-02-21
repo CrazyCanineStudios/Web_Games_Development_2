@@ -36,7 +36,6 @@ class Level_1 extends Phaser.Scene {
     });
     this.player = new Player(this,config.width/2,config.height/2 + 100,"Zoe",0);
     this.player2 = new Player(this,config.width/2 + 70,config.height/2 + 100,"Tom",1);
-    var bullet = new WaterBalloon(this,this.player.x,this.player.y + 5);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
@@ -100,7 +99,6 @@ class Level_1 extends Phaser.Scene {
 
     if (this.player.body.x > this.player2.body.x)
     {
-      console.log(this.player.body.x + " is bigger than " + this.player2.body.x);
       var difference = (this.player.body.x + this.player2.body.x)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.spotlight.x = difference;
@@ -108,7 +106,6 @@ class Level_1 extends Phaser.Scene {
     }
     else if (this.player.body.x < this.player2.body.x)
     {
-      console.log(this.player.body.x + " is smaller than " + this.player2.body.x);
       var difference = (this.player2.body.x + this.player.body.x)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.spotlight.x = difference;
@@ -116,14 +113,12 @@ class Level_1 extends Phaser.Scene {
     }
     else if (this.player.body.x === this.player2.body.x)
     {
-      console.log(this.player.body.x + " is the same as " + this.player2.body.x);
       this.spotlight.x = this.player.body.x;
       this.averagePlayerPosX = this.player.body.x;
     }
 
     if (this.player.body.y > this.player2.body.y)
     {
-      console.log(this.player.body.y + " is bigger than " + this.player2.body.y);
       var difference = (this.player.body.y + this.player2.body.y)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
@@ -131,7 +126,6 @@ class Level_1 extends Phaser.Scene {
     }
     else if (this.player.body.y < this.player2.body.y)
     {
-      console.log(this.player.body.y + " is smaller than " + this.player2.body.y);
       var difference = (this.player2.body.y + this.player.body.y)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
@@ -139,11 +133,20 @@ class Level_1 extends Phaser.Scene {
     }
     else if (this.player.body.y === this.player2.body.y)
     {
-      console.log(this.player.body.y + " is the same as " + this.player2.body.y);
       this.spotlight.y = this.player.y;
       this.averagePlayerPosY = this.player.body.y;
     }
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
+
+    for (var i = 0; i < this.projectiles.getChildren().length; i++)
+    {
+      var beam = this.projectiles.getChildren()[i];
+      beam.update();
+    }
   }
+  shootBeam(x,y,direction) {
+    var beam = new Beam(this,x,y,direction);
+  }
+
 }
