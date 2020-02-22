@@ -29,7 +29,11 @@ class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
     this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
     this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
-
+    
+    this.load.spritesheet("beam", "assets/sprites/beam.png",{
+      frameWidth: 16,
+      frameHeight: 16
+    });
   }
   create() {
     this.add.text(20, 20, "The game is loading");
@@ -143,6 +147,12 @@ class Boot extends Phaser.Scene {
         end: 95
       }),
       frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "beam_anim",
+      frames: this.anims.generateFrameNumbers("beam"),
+      frameRate: 20,
       repeat: -1
     });
     if (quickStart) this.scene.start("sp_house2");

@@ -5,6 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     characterNum;
     camera;
     shadow;
+    facingDir;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
@@ -18,6 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         scene.players.add(this);
         this.camera = scene.cameras.main;
         this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
+        this.facingDir = "left";
         switch (character)
         {
             case "Tom":
@@ -39,6 +41,10 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.shadow.x = this.x;
         this.shadow.y = this.y + 15;
         this.depth = this.y + this.height / 2;
+        if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
+        {
+            this.scene.shootBeam(this.x,this.y,this.facingDir);
+        }
         this.movePlayer();
         this.constrainVelocity();
     }
@@ -50,6 +56,7 @@ if (this.characterNum === 0)
 {
     if  (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x + 50)
     {
+        this.facingDir = "left";
         this.setVelocityX(-this.speed);
         if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_left'){}
         else this.play("zoey_run_left");
@@ -57,6 +64,7 @@ if (this.characterNum === 0)
 
     else if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
     {
+        this.facingDir = "right";
         this.setVelocityX(this.speed);
         if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_right'){}
         else this.play("zoey_run_right");
@@ -64,6 +72,7 @@ if (this.characterNum === 0)
 
     if  (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
     {
+        this.facingDir = "up";
         this.setVelocityY(-this.speed);
         if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_up'){}
         else this.play("zoey_run_up");
@@ -71,6 +80,7 @@ if (this.characterNum === 0)
 
     else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
     {
+        this.facingDir = "down";
         this.setVelocityY(this.speed);
         if (this.anims.isPlaying && this.anims.currentAnim.key === 'zoey_run_down'){}
         else this.play("zoey_run_down");
@@ -97,6 +107,7 @@ else if (this.characterNum === 1)
         }
         else
         {
+            this.facingDir = "left";
             this.setVelocityX(-this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_left'){}
             else this.play("tom_run_left");
@@ -120,7 +131,7 @@ else if (this.characterNum === 1)
         }
         else
         {
-
+            this.facingDir = "right";
             this.setVelocityX(this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_right'){}
             else this.play("tom_run_right");
@@ -144,6 +155,7 @@ else if (this.characterNum === 1)
         }
         else
         {
+            this.facingDir = "up";
             this.setVelocityY(-this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up'){}
             else this.play("tom_run_up");
@@ -169,6 +181,7 @@ else if (this.characterNum === 1)
         }
         else
         {
+            this.facingDir = "down";
             this.setVelocityY(this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down'){}
             else this.play("tom_run_down");
@@ -178,7 +191,6 @@ else if (this.characterNum === 1)
 
 
     }
-
     constrainVelocity()
     {
         var angle, currVelocitySqr, vx, vy;
