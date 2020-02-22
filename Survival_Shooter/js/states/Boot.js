@@ -9,7 +9,7 @@ class Boot extends Phaser.Scene {
     this.load.image('menuImage','assets/sprites/menu.png');
     this.load.image('creditsImage','assets/sprites/spr_credits.png');
     this.load.image("background", "assets/sprites/backgrounds/bg_level_1.png");
-    //
+   //
     this.load.image("crosshair", "assets/sprites/spr_crosshair.png");
     this.load.image('mask', 'assets/sprites/mask1.png');
     this.load.image('character_mask', 'assets/sprites/mask.png');
@@ -24,8 +24,12 @@ class Boot extends Phaser.Scene {
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
     this.load.audio('level1Music', ['assets/sounds/music/mus_level_1.ogg']);
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
-    this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
+
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
+    this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
+    this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
+    this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
+
   }
   create() {
     this.add.text(20, 20, "The game is loading");
@@ -141,7 +145,7 @@ class Boot extends Phaser.Scene {
       frameRate: 30,
       repeat: -1
     });
-    if (quickStart) this.scene.start("sp_house");
+    if (quickStart) this.scene.start("sp_house2");
     else this.scene.start("mainMenu");
 
   }
