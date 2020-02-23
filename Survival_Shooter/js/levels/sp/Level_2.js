@@ -37,7 +37,6 @@ class Level_2 extends Phaser.Scene {
     });
     this.player = new Player(this,256,736,"Zoe",0);
     this.player2 = new Player(this,288,736,"Tom",1);
-    var bullet = new WaterBalloon(this,this.player.x,this.player.y + 5);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
@@ -147,5 +146,8 @@ class Level_2 extends Phaser.Scene {
     }
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
+  }
+  shootBeam(x,y,direction) {
+    var beam = new Beam(this,x,y,direction);
   }
 }
