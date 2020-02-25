@@ -27,9 +27,13 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.setTexture('player_tom');
                 this.characterNum = 1;
                 break;
-            case  "Zoe":
+            case  "Zoey":
                 this.speed = 180;
                 this.characterNum = 0;
+                break;
+            case  "Harry":
+                this.speed = 180;
+                this.characterNum = 2;
                 break;
             default:
                 this.speed = 180;
@@ -162,7 +166,6 @@ else if (this.characterNum === 1)
         }
 
     }
-
     else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
     {
         if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
@@ -188,9 +191,108 @@ else if (this.characterNum === 1)
         }
     }
 }
-
+else if (this.characterNum === 2)
+{
+    if  (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
+    {
+        if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
+        {
+            this.shadow.y = this.y + 10;
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_up_left'){}
+            else this.play("harry_run_up_left");
+        }
+        else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_down_left'){}
+            else this.play("harry_run_down_left");
+        }
+        else
+        {
+            this.facingDir = "left";
+            this.setVelocityX(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_left'){}
+            else this.play("harry_run_left");
+        }
+    }
+    else if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
+    {
+        if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_up_right'){}
+            else this.play("harry_run_up_right");
+        }
+        else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_down_right'){}
+            else this.play("harry_run_down_right");
+        }
+        else
+        {
+            this.facingDir = "right";
+            this.setVelocityX(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_right'){}
+            else this.play("harry_run_right");
+        }
+    }
+    if  (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
+    {
+        if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_up_right'){}
+            else this.play("harry_run_up_right");
+        }
+        else if (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_up_left'){}
+            else this.play("harry_run_up_left");
+        }
+        else
+        {
+            this.facingDir = "up";
+            this.setVelocityY(-this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_up'){}
+            else this.play("harry_run_up");
+        }
 
     }
+    else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
+    {
+        if (this.cursorKeys.right.isDown && this.body.right < this.camera.worldView.right - 50)
+        {
+            this.setVelocityX(this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_down_right'){}
+            else this.play("harry_run_down_right");
+        }
+        else if (this.cursorKeys.left.isDown && this.body.x > this.camera.worldView.x+ 50)
+        {
+            this.setVelocityX(-this.speed);
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_down_left'){}
+            else this.play("harry_run_down_left");
+        }
+        else
+        {
+            this.facingDir = "down";
+            this.setVelocityY(this.speed);
+            if (this.anims.isPlaying && this.anims.currentAnim.key === 'harry_run_down'){}
+            else this.play("harry_run_down");
+        }
+    }
+}
+}
     constrainVelocity()
     {
         var angle, currVelocitySqr, vx, vy;

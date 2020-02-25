@@ -18,6 +18,7 @@ class Level_2 extends Phaser.Scene {
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
     this.players = this.add.group();
     this.projectiles = this.add.group();
+    this.pickUps = this.add.group();
     this.playerInput = [];
     this.playerInput [0] = this.input.keyboard.addKeys({
       'up': Phaser.Input.Keyboard.KeyCodes.W,
@@ -35,7 +36,7 @@ class Level_2 extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,256,736,"Zoe",0);
+    this.player = new Player(this,256,736,"Harry",0);
     this.player2 = new Player(this,288,736,"Tom",1);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
@@ -57,6 +58,7 @@ class Level_2 extends Phaser.Scene {
       key: 'character_mask',
       add: false
     });
+    var healthPickup = new health_pickUp(this,276,584);
     floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);

@@ -25,7 +25,7 @@ class MainMenu extends Phaser.Scene {
     {
       confirmSound.play();
       singlePlayerButton.setFrame(2);
-      this.scene.start("sp_house");
+      this.scene.start("sp_house2");
     });
     var multiplayerButton = this.add.sprite(1545,595,'buttons',4);
     multiplayerButton.setInteractive();
