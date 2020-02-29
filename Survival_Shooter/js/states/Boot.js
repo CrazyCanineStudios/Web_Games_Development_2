@@ -7,6 +7,10 @@ class Boot extends Phaser.Scene {
     var dir = "assets/sprites/";
 
     this.load.image('menuImage', dir + 'menu.png');
+    this.load.image('storyImage', dir + 'story.png');
+    this.load.image('Tom_dialog', dir + 'Tom_Portrait.png');
+    this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
+    this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
     this.load.image('creditsImage', dir + 'spr_credits.png');
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
     this.load.image('crosshair',  dir + 'spr_crosshair.png');
@@ -32,9 +36,6 @@ class Boot extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
     this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
-
-    
-
   }
   create() {
     this.add.text(20, 20, "The game is loading");

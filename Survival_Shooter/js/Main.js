@@ -2,14 +2,20 @@ var config = {
         type: Phaser.AUTO,
         width: 1920,
         height: 1080,
+        parent: 'shooter-game',
+        scale: {
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: 1920,
+            height: 1080
+        },
         backgroundColor: 0x000000,
-      scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1920,
-        height: 1080
-      },
-        scene: [Boot, MainMenu, Credits, Level_1, Level_2],
+        plugins: {
+            scene: [
+                { key: 'DialogModalPlugin', plugin: DialogModalPlugin, mapping: 'dialog' }
+            ]
+        },
+        scene: [Boot, MainMenu, Credits, Story, Level_2],
         pixelArt: true,
         // 1.1 set the physics to arcade
         physics: {
@@ -18,7 +24,6 @@ var config = {
                 debug: false
             }
         }
-    },moveKeys, reticle, bullets, lastFired, moving, time, music,confirmSound,quickStart = true,
-    game = new Phaser.Game(config);
+    },moveKeys, reticle, bullets, lastFired,player, moving, time, music,confirmSound,quickStart, game = new Phaser.Game(config);
 
 

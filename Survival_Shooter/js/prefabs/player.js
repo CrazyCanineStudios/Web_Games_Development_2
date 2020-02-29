@@ -33,12 +33,14 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 break;
             case  "Harry":
                 this.speed = 180;
+                this.setTexture('player_harry');
                 this.characterNum = 2;
                 break;
             default:
                 this.speed = 180;
                 this.characterNum = 0;
         }
+        this.alive = true;
     }
     update()
     {

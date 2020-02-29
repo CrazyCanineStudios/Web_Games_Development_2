@@ -36,25 +36,25 @@ class Level_2 extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,256,736,"Harry",0);
+    player = new Player(this,256,736,"Harry",0);
     this.player2 = new Player(this,288,736,"Tom",1);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
-    reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
-    this.cameras.main.zoom =2;
+    reticle = this.physics.add.sprite(player.x,player.y, 'target');
+    this.cameras.main.zoom =3;
     this.cameras.main.roundPixels = true;
     reticle.visible = false;
-    this.physics.add.collider(this.player, platforms);
+    this.physics.add.collider(player, platforms);
     this.physics.add.collider(this.player2, platforms);
     this.spotlight = this.make.sprite({
-      x: this.player.x,
-      y: this.player.y,
+      x: player.x,
+      y: player.y,
       key: 'mask',
       add: false
     });
     this.charLight = this.make.sprite({
-      x: this.player.x,
-      y: this.player.y,
+      x: player.x,
+      y: player.y,
       key: 'character_mask',
       add: false
     });
@@ -62,9 +62,9 @@ class Level_2 extends Phaser.Scene {
     floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    this.player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+    player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
     this.player2.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
+    player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
     this.player2.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
 
 
@@ -101,50 +101,44 @@ class Level_2 extends Phaser.Scene {
       projectile.update();
     }
 
-    if (this.player.body.x > this.player2.body.x)
+    if (player.body.x > this.player2.body.x)
     {
-      console.log(this.player.body.x + " is bigger than " + this.player2.body.x);
-      var difference = (this.player.body.x + this.player2.body.x)/2;
+      var difference = (player.body.x + this.player2.body.x)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.spotlight.x = difference;
       this.averagePlayerPosX = difference;
     }
-    else if (this.player.body.x < this.player2.body.x)
+    else if (player.body.x < this.player2.body.x)
     {
-      console.log(this.player.body.x + " is smaller than " + this.player2.body.x);
-      var difference = (this.player2.body.x + this.player.body.x)/2;
+      var difference = (this.player2.body.x + player.body.x)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.spotlight.x = difference;
       this.averagePlayerPosX = difference;
     }
-    else if (this.player.body.x === this.player2.body.x)
+    else if (player.body.x === this.player2.body.x)
     {
-      console.log(this.player.body.x + " is the same as " + this.player2.body.x);
-      this.spotlight.x = this.player.body.x;
-      this.averagePlayerPosX = this.player.body.x;
+      this.spotlight.x = player.body.x;
+      this.averagePlayerPosX = player.body.x;
     }
 
-    if (this.player.body.y > this.player2.body.y)
+    if (player.body.y > this.player2.body.y)
     {
-      console.log(this.player.body.y + " is bigger than " + this.player2.body.y);
-      var difference = (this.player.body.y + this.player2.body.y)/2;
+      var difference = (player.body.y + this.player2.body.y)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
       this.spotlight.y = difference;
     }
-    else if (this.player.body.y < this.player2.body.y)
+    else if (player.body.y < this.player2.body.y)
     {
-      console.log(this.player.body.y + " is smaller than " + this.player2.body.y);
-      var difference = (this.player2.body.y + this.player.body.y)/2;
+      var difference = (this.player2.body.y + player.body.y)/2;
       difference = Phaser.Math.RoundTo(difference,0);
       this.averagePlayerPosY = difference;
       this.spotlight.y = difference;
     }
-    else if (this.player.body.y === this.player2.body.y)
+    else if (player.body.y === this.player2.body.y)
     {
-      console.log(this.player.body.y + " is the same as " + this.player2.body.y);
-      this.spotlight.y = this.player.y;
-      this.averagePlayerPosY = this.player.body.y;
+      this.spotlight.y = player.y;
+      this.averagePlayerPosY = player.body.y;
     }
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
