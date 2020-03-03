@@ -15,10 +15,18 @@ class Boot extends Phaser.Scene {
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
     this.load.image('crosshair',  dir + 'spr_crosshair.png');
     this.load.image('mask', dir + 'mask1.png');
+    this.load.image('zoey_health', dir + 'health.png');
     this.load.image('character_mask', dir + 'mask.png');
     this.load.image('shadow', dir + 'shadow.png');
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
     this.load.image('level2_atlas',dir + 'tilemaps/level2_atlas.png');
+
+    // Character Select
+    this.load.image('charSelect', dir + 'character_select_menu.png');
+    this.load.spritesheet('harry_char_select', dir + "spr_harry_character_select.png",{frameWidth: 500, frameHeight: 500});
+    this.load.spritesheet('tom_char_select', dir + "spr_tom_character_select.png",{frameWidth: 500, frameHeight: 500});
+    this.load.spritesheet('zoey_char_select', dir + "spr_zoey_character_select.png",{frameWidth: 500, frameHeight: 500});
+
 
     this.load.spritesheet('player', dir + 'zoey2.png',{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet('player_tom', dir + 'spr_tom.png',{frameWidth: 53, frameHeight: 53});
@@ -31,6 +39,7 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('health_pickUp', dir + 'spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
+    this.load.audio('characterSelectMusic', ['assets/sounds/music/mus_character_Select.ogg']);
     this.load.audio('level1Music', ['assets/sounds/music/mus_level_1.ogg']);
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
 
@@ -241,7 +250,7 @@ class Boot extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
-    if (quickStart) this.scene.start("sp_house2");
+    if (quickStart) this.scene.start("sp_char_select");
     else this.scene.start("mainMenu");
 
   }

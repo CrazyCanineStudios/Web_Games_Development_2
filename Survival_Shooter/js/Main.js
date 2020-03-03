@@ -15,7 +15,7 @@ var config = {
                 { key: 'DialogModalPlugin', plugin: DialogModalPlugin, mapping: 'dialog' }
             ]
         },
-        scene: [Boot, MainMenu, Credits, Story, Level_2],
+        scene: [Boot, MainMenu, Credits, SP_1_Intro,SP_2_Character_Select,SP_3_Level,MP_Level],
         pixelArt: true,
         // 1.1 set the physics to arcade
         physics: {
@@ -24,6 +24,6 @@ var config = {
                 debug: false
             }
         }
-    },moveKeys, reticle, bullets, lastFired,player, moving, time, music,confirmSound,quickStart, game = new Phaser.Game(config);
+    },moveKeys, reticle,player1Char = "Tom", bullets, lastFired,player, moving, time, music,confirmSound,quickStart, game = new Phaser.Game(config);
 
 
