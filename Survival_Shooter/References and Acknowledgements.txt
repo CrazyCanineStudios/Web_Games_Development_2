@@ -8,10 +8,14 @@ Some code has been adapted and referenced from :
 	Phaser Top Down Target Focused Camera Example - https://phaser.io/examples/v3/view/games/topdownshooter/topdowntargetfocus
 	Phaser Top Down Combat Example - https://phaser.io/examples/v3/view/games/topdownshooter/topdowncombatmechanics
 	Luis Zuno's Phaser 3 Youtube Tutorials - https://www.youtube.com/watch?v=frRWKxB9Hm0&list=PLDyH9Tk5ZdFzEu_izyqgPFtHJJXkc79no
+	Health Bar tuts used: https://www.youtube.com/watch?v=fIXJrC4Yb8s
+	https://www.youtube.com/watch?v=QxQRtwAtqKE
+	https://www.youtube.com/watch?v=dJwjv5LfJPs&t=148s
 
 Some character sprites were created by screenshotting and editing royalty free 3D character models:
 
 	Player 1 (Cute Female 2) https://assetstore.unity.com/packages/3d/characters/cute-female-2-14144
 	Player 2 (Cute Male 3) - https://assetstore.unity.com/packages/3d/characters/cute-male-3-18090?aid=1100lJ2z&cid=1011l7Agp9tI&utm_source=aff
-
- 
+	
+ 	Monster balls were sourced from https://opengameart.org/content/monster-balls-pack
+	
