@@ -8,8 +8,8 @@ class SP_3_Level extends Phaser.Scene {
   create() {
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-      this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
-      this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
+    this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
+    this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
     this.background.setOrigin(0, 0);
     const map = this.make.tilemap({ key: 'level2' });
     const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
@@ -63,6 +63,10 @@ class SP_3_Level extends Phaser.Scene {
     player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
     player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
 
+    // Create enemies group with collision
+    this.enemies = this.add.group();
+    this.physics.add.collider(this.enemies, platforms);
+    var enemy = new Enemy(this, 288, 600);
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -97,6 +101,13 @@ class SP_3_Level extends Phaser.Scene {
     {
       var projectile= this.projectiles.getChildren()[i];
       projectile.update();
+    }
+
+    // Call update on enemies
+    for(var i = 0; i < this.enemies.getChildren().length; i++)
+    {
+        var enemy= this.enemies.getChildren()[i];
+        enemy.update();
     }
 
     reticle.x = player.x;
