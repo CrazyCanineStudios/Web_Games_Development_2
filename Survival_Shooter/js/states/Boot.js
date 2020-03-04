@@ -15,7 +15,6 @@ class Boot extends Phaser.Scene {
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
     this.load.image('crosshair',  dir + 'spr_crosshair.png');
     this.load.image('mask', dir + 'mask1.png');
-    this.load.image('zoey_health', dir + 'health.png');
     this.load.image('character_mask', dir + 'mask.png');
     this.load.image('shadow', dir + 'shadow.png');
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
@@ -250,7 +249,7 @@ class Boot extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
-    if (quickStart) this.scene.start("sp_char_select");
+    if (quickStart) this.scene.start("sp_1");
     else this.scene.start("mainMenu");
 
   }

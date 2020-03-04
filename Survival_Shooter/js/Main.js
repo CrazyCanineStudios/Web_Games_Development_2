@@ -15,7 +15,7 @@ var config = {
                 { key: 'DialogModalPlugin', plugin: DialogModalPlugin, mapping: 'dialog' }
             ]
         },
-        scene: [Boot, MainMenu, Credits, SP_1_Intro,SP_2_Character_Select,SP_3_Level,MP_Level],
+        scene: [Boot, MainMenu, Credits, SP_1_Intro,SP_2_Character_Select,SP_3_Level,MP_Level,User_Interface],
         pixelArt: true,
         // 1.1 set the physics to arcade
         physics: {

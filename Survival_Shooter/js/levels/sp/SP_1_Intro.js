@@ -120,12 +120,13 @@ class SP_1_Intro extends Phaser.Scene {
   {
     if (Phaser.Input.Keyboard.JustDown(this.skipButton))
     {
-      this.scene.start("sp_house2");
+      this.scene.start(this.levelToLoad);
     }
     if (this.i<this.sentences.length)
     {
       if (this.actualText!==this.sentences[this.i])
       {
+        console.log(this.character1[this.i].toString());
         this.dialog.setCharacter1(this.character1[this.i],true);
         this.dialog.setCharacter2(this.character2[this.i],this.character2Visible[this.i]);
 

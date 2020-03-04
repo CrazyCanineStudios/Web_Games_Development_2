@@ -24,6 +24,9 @@ DialogModalPlugin.prototype = {
     shutdown: function () {
         if (this.timedEvent) this.timedEvent.remove();
         if (this.text) this.text.destroy();
+        if (this.character1) this.character1.destroy();
+        if (this.character2) this.character2.destroy();
+        if (this.nameText) this.nameText.destroy();
     },
 
     // called when a Scene is destroyed by the Scene Manager
@@ -120,9 +123,12 @@ DialogModalPlugin.prototype = {
     {
         if (this.character1!=null)
         {
-            this.character1.setTexture(characterPortrait);
-            this.character1.alpha = showCharacter ? 1 : 0;
-            this.character1.depth=0;
+            if (characterPortrait != null & this.character1!=null)
+            {
+                this.character1.setTexture(characterPortrait);
+                this.character1.alpha = showCharacter ? 1 : 0;
+                this.character1.depth=0;
+            }
         }
         else
         {
@@ -177,8 +183,8 @@ DialogModalPlugin.prototype = {
 
     // Creates the dialog window
     _createWindow: function () {
-        var gameHeight = this._getGameHeight();
-        var gameWidth = this._getGameWidth();
+        var gameHeight = config.height;
+        var gameWidth = config.width;
         var windowDimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
         this.graphics = this.scene.add.graphics();
         this.graphics.depth=1;
@@ -192,12 +198,12 @@ DialogModalPlugin.prototype = {
 
     // Gets the width of the game (based on the scene)
     _getGameWidth: function () {
-        return this.scene.sys.game.config.width;
+        return config.width;
     },
 
     // Gets the height of the game (based on the scene)
     _getGameHeight: function () {
-        return this.scene.sys.game.config.height;
+        return config.height;
     },
 
     // Calculates where to place the dialog window based on the game size

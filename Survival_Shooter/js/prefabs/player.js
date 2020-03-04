@@ -12,7 +12,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         scene.add.existing(this);
         scene.physics.world.enableBody(this);
         this.body.setCollideWorldBounds(true);
-        this.body.setCircle(20,8,5);
+        this.body.setSize(32,32,8,5);
         this.setOrigin(0.5, 0.5).setCollideWorldBounds(true).setDrag(500, 500);
         if (playerInput == null) playerInput = 0;
         this.cursorKeys = scene.playerInput[playerInput];

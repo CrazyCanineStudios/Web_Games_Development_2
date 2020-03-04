@@ -63,9 +63,6 @@ class SP_3_Level extends Phaser.Scene {
     player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
     player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
 
-    // Health code
-    var menuImage = this.add.sprite(this.cameras.main.width, this.cameras.main.height, 'zoey_health');
-    menuImage.setScrollFactor(0);
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -79,11 +76,13 @@ class SP_3_Level extends Phaser.Scene {
       music.loop = true;
       music.play();
     }
+    this.scene.launch('UIScene');
   }
   update()
   {
     if (Phaser.Input.Keyboard.JustDown(this.pause))
     {
+      this.scene.stop('UIScene');
       this.scene.start("mainMenu");
     }
     this.charLight.x = this.spotlight.x;
