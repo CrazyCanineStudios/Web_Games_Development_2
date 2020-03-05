@@ -17,7 +17,7 @@ class Boot extends Phaser.Scene {
     this.load.image('mask', dir + 'mask1.png');
     this.load.image('character_mask', dir + 'mask.png');
     this.load.image('shadow', dir + 'shadow.png');
-      this.load.image('enemy', dir + 'enemy_test_pointer.png');
+      this.load.image('enemy', dir + 'monster 32x.png');
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
     this.load.image('level2_atlas',dir + 'tilemaps/level2_atlas.png');
 
