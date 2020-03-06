@@ -64,7 +64,7 @@ class SP_3_Level extends Phaser.Scene {
     player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
 
     // Create enemies group with collision
-    this.enemies = this.add.group();
+    this.enemies = this.add.group({classType: Enemy, runChildUpdate: true});
     this.enemies.create(this.enemy = new Enemy(this, 288, 600));
 
     // When an enemy and a wall collide
@@ -109,13 +109,6 @@ class SP_3_Level extends Phaser.Scene {
     {
       var projectile= this.projectiles.getChildren()[i];
       projectile.update();
-    }
-
-    // Call update on enemies
-    for(var i = 0; i < this.enemies.getChildren().length; i++)
-    {
-        var enemy= this.enemies.getChildren()[i];
-        enemy.update();
     }
 
     reticle.x = player.x;
