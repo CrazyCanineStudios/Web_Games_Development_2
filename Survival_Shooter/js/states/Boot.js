@@ -17,7 +17,7 @@ class Boot extends Phaser.Scene {
     this.load.image('mask', dir + 'mask1.png');
     this.load.image('character_mask', dir + 'mask.png');
     this.load.image('shadow', dir + 'shadow.png');
-      this.load.image('enemy', dir + 'monster 32x.png');
+    this.load.spritesheet('enemy', dir + 'spr_enemy.png',{frameWidth: 48, frameHeight: 48});
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
     this.load.image('level2_atlas',dir + 'tilemaps/level2_atlas.png');
 
@@ -248,6 +248,43 @@ class Boot extends Phaser.Scene {
       key: "beam_anim",
       frames: this.anims.generateFrameNumbers("beam"),
       frameRate: 20,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "enemy_run_down",
+      frames: this.anims.generateFrameNumbers("enemy", {
+        start:48,
+        end: 71
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "enemy_run_left",
+      frames: this.anims.generateFrameNumbers("enemy", {
+        start:25,
+        end: 47
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "enemy_run_up",
+      frames: this.anims.generateFrameNumbers("enemy", {
+        start:0,
+        end: 24
+      }),
+      frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "enemy_run_right",
+      frames: this.anims.generateFrameNumbers("enemy", {
+        start:72,
+        end: 94
+      }),
+      frameRate: 30,
       repeat: -1
     });
     if (quickStart) this.scene.start("sp_1");
