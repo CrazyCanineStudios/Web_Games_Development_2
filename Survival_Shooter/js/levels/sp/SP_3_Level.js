@@ -65,7 +65,12 @@ class SP_3_Level extends Phaser.Scene {
 
     // Create enemies group with collision
     this.enemies = this.add.group({classType: Enemy, runChildUpdate: true});
-    this.enemies.create(this.enemy = new Enemy(this, 288, 600));
+    this.physics.add.collider(this.enemies, this.enemies);
+
+    this.enemies.create(this.enemy1 = new Enemy(this, 288, 600));
+    this.enemies.create(this.enemy2 = new Enemy(this, 100, 750));
+    this.enemies.create(this.enemy3 = new Enemy(this, 128, 450));
+    this.enemies.create(this.enemy4 = new Enemy(this, 512, 200));
 
     // When an enemy and a wall collide
     this.physics.add.collider(this.enemies, platforms);
@@ -74,7 +79,7 @@ class SP_3_Level extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(20); projectile.destroy();});
 
     // When the enemy and a player collide
-    this.physics.add.collider(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    this.physics.add.collider(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage)});
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {

@@ -21,9 +21,9 @@ var config = {
         physics: {
             default: "arcade",
             arcade: {
-                debug: false
+                debug: true
             }
         }
-    },moveKeys, reticle,player1Char = "Tom", bullets, lastFired,player, moving, time, music,confirmSound,quickStart = true, game = new Phaser.Game(config);
+    }, moveKeys, reticle, player1Char = "Tom", bullets, lastFired, player, player2, moving, time, music,confirmSound,quickStart = true, game = new Phaser.Game(config);
 
 
