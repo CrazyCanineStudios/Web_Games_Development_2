@@ -41,6 +41,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.characterNum = 0;
         }
         this.alive = true;
+
+        this.health = 100;
     }
     update()
     {
@@ -53,6 +55,24 @@ class Player extends Phaser.Physics.Arcade.Sprite
         }
         this.movePlayer();
         this.constrainVelocity();
+    }
+
+    // When the player takes damage
+    takeDamage(amount)
+    {
+        if(this.health > amount){
+            this.health = this.health - amount;
+            console.log("Player Health: " + this.health);
+        }
+        else{
+            this.die();
+        }
+    }
+
+    // When the player dies
+    die()
+    {
+        this.destroy()
     }
 
     movePlayer()

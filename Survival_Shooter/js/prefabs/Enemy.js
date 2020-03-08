@@ -13,24 +13,50 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.setOrigin(0.5, 0.5).setCollideWorldBounds(true).setDrag(500, 500);
         this.body.setCollideWorldBounds(true);
         this.body.setSize(32);
-
         this.health = 100;
         this.damage = 20;
         this.speed = 100;
         this.attackTime = 60;
 
+        // Can't get players group (yet), so target is set to player for now
+        this.target = player;
+        this.players = this.scene.players;
+
         // Set sprite texture
         this.setTexture('enemy');
+        this.setSize(32, 32);
     }
 
     // Actions every frame
-    update(){
-        this.getTarget(game.scene);
-        this.moveToTarget(player, this.speed, this.scene);
+    update()
+    {
+        // Find a target player, depending on if co-op or not
+        if(this.players){
+            this.getTarget();
+        }
+        else{
+            this.target = player;
+        }
+
+        // If a target has been found, move towards it
+        if (this.target)
+        this.moveToTarget(this.target, this.speed, this.scene);
     }
 
-    getTarget(scene){
-
+    // Find a target
+    getTarget()
+    {
+        // Check which is the closest out of the group
+        var closestDistance = 0;
+        for (var i = 0; i < this.players.getChildren().length; i++) {
+            var player = this.players.getChildren()[i];
+            var distance = Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y);
+            if (distance < closestDistance) {
+                // Set this as the new target
+                this.target = player;
+                console.log(this.target);
+            }
+        }
     }
 
     // Rotate and move towards a target
@@ -44,7 +70,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
             //this.rotation = (Phaser.Math.Angle.Between(target.x, target.y, this.x, this.y) + 1.5);
             //this.enemyAngle = this.rotation * 100;
             scene.physics.moveTo(this, target.x, target.y, speed);
-            console.log("TargetX : " + target.x + " Target Y : " + target.y);
+            //console.log("TargetX : " + target.x + " Target Y : " + target.y);
             if (this.x > target.x  && target.x>target.y)
             {
                 //console.log("Moving left");
@@ -82,8 +108,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
             this.attackTime = 0;
 
             // Deal damage
-            console.log("Enemy attacks" + target);
-            User_Interface.value -= damage;
+            player.takeDamage(damage);
         }
         // Increase the timer
         else {
@@ -104,7 +129,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     }
 
     // When the enemy dies
-    die(){
+    die()
+    {
         this.destroy()
     }
 }
