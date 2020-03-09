@@ -13,14 +13,15 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.setOrigin(0.5, 0.5).setCollideWorldBounds(true).setDrag(500, 500);
         this.body.setCollideWorldBounds(true);
         this.body.setSize(32);
-        this.health = 100;
-        this.damage = 20;
-        this.speed = 100;
+
         this.attackTime = 60;
+        this.health = 100;
+        this.damage = 10;
+        this.speed = 100;
 
         // Can't get players group (yet), so target is set to player for now
         this.target = player;
-        this.players = this.scene.players;
+        this.players = scene.players;
 
         // Set sprite texture
         this.setTexture('enemy');
@@ -109,6 +110,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
 
             // Deal damage
             player.takeDamage(damage);
+            console.log("Enemy Attacks")
         }
         // Increase the timer
         else {
