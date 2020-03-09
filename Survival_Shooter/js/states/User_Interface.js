@@ -37,13 +37,11 @@ preload ()
         let ourGame = this.scene.get('sp_1');
 
         //  Listen for events from it
-        ourGame.events.on('decreaseHealth', function () {
-
-            this.healthValue.setText("Sugar Levels : " + this.value);
-        }, this);
+        ourGame.events.on('decreaseHealth', function () { this.healthValue.setText("Sugar Levels : " + this.value); }, this);
     }
     update()
     {
+        this.value = player.health;
         this.healthValue.setText("Sugar Levels : " + this.value);
         if (Phaser.Input.Keyboard.JustDown(this.decreaseHealth))
         {

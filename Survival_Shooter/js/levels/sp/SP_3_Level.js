@@ -79,7 +79,7 @@ class SP_3_Level extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(20); projectile.destroy();});
 
     // When the enemy and a player collide
-    this.physics.add.collider(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage)});
+    this.physics.add.collider(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -93,6 +93,7 @@ class SP_3_Level extends Phaser.Scene {
       music.loop = true;
       music.play();
     }
+
     this.scene.launch('UIScene');
   }
   update()
