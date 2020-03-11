@@ -16,20 +16,29 @@ preload ()
 }
     create ()
     {
-        this.decreaseHealth = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        this.increaseHealth = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         this.value = 100;
+        this.value2 = 100;
         this.p = 76 / 100;
-        var healthBar = this.add.sprite(200,100, 'health');
+       this.healthBar = this.add.sprite(200,100, 'health');
         var healthPortrait = this.add.sprite(200,100, 'zoey_health');
+        this.healthBar2 = this.add.sprite(config.width - config.width/5,100, 'health');
+        var healthPortrait2 = this.add.sprite(config.width - config.width/5,100, 'zoey_health');
         this.healthValue = this.add.text(50, 170, "Sugar Levels : " + this.value, { font: '32px Arial', fill: '#ffb428' });
+        this.healthValue2 = this.add.text(config.width - config.width/5, 170, "Sugar Levels : " + this.value2, { font: '32px Arial', fill: '#ffb428' });
         this.healthMask = this.make.sprite({
-            x: healthBar.x,
-            y: healthBar.y,
+            x: this.healthBar.x,
+            y: this.healthBar.y,
             key: 'health_mask',
             add: false
         });
-        healthBar.mask = new Phaser.Display.Masks.BitmapMask(this, this.healthMask);
+        this.healthMask2 = this.make.sprite({
+            x: this.healthBar2.x,
+            y: this.healthBar2.y,
+            key: 'health_mask',
+            add: false
+        });
+        this.healthBar.mask = new Phaser.Display.Masks.BitmapMask(this, this.healthMask);
+        this.healthBar2.mask = new Phaser.Display.Masks.BitmapMask(this, this.healthMask2);
         //let info = this.add.text(25, 10, 'Score: 0', { font: '48px Arial', fill: '#ffb428' });
 
         if (this.value>100) this.value = 100;
@@ -42,17 +51,10 @@ preload ()
     update()
     {
         this.value = player.health;
+        this.value2 = player2.health;
         this.healthValue.setText("Sugar Levels : " + this.value);
-        if (Phaser.Input.Keyboard.JustDown(this.decreaseHealth))
-        {
-            console.log(this.value);
-            if (this.value>0) this.value-=10;
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.increaseHealth))
-        {
-            console.log(this.value);
-            if (this.value<100) this.value+=10;
-        }
-        this.healthMask.x = 2 * this.value;
+        this.healthValue2.setText("Sugar Levels : " + this.value2);
+        this.healthMask.x = this.healthBar.x * (this.value/100);
+        this.healthMask2.x = this.healthBar2.x *(this.value2/100);
     }
 }

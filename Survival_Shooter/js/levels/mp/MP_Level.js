@@ -46,30 +46,10 @@ class MP_Level extends Phaser.Scene {
     reticle.visible = false;
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.player2, platforms);
-    this.spotlight = this.make.sprite({
-      x: this.player.x,
-      y: this.player.y,
-      key: 'mask',
-      add: false
-    });
-    this.charLight = this.make.sprite({
-      x: this.player.x,
-      y: this.player.y,
-      key: 'character_mask',
-      add: false
-    });
     var healthPickup = new health_pickUp(this,276,584);
-    floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    this.player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player2.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player2.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-
-    // Health code
-    var menuImage = this.add.sprite(this.cameras.main.width, this.cameras.main.height, 'zoey_health');
-    menuImage.setScrollFactor(0);
+    this.darkness = this.add.sprite(this.player.x,this.player.y, 'darkness');
+    this.darkness.setOrigin(0.5, 0.5);
+    this.darkness.depth=7;
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -89,18 +69,36 @@ class MP_Level extends Phaser.Scene {
     }
     player = this.player;
     player2 = this.player2;
+
+    // Create enemies group with collision
+    this.enemies = this.add.group({classType: Enemy, runChildUpdate: true});
+    this.physics.add.collider(this.enemies, this.enemies);
+
+    this.enemies.create(this.enemy1 = new Enemy(this, 288, 600));
+    this.enemies.create(this.enemy2 = new Enemy(this, 100, 750));
+    this.enemies.create(this.enemy3 = new Enemy(this, 128, 450));
+    this.enemies.create(this.enemy4 = new Enemy(this, 512, 200));
+
+    // When an enemy and a wall collide
+    this.physics.add.collider(this.enemies, platforms);
+
+    // When an enemy and a player projectile collide
+    this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(20); projectile.destroy();});
+
+    // When the enemy and a player collide
+    this.physics.add.overlap(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    this.physics.add.overlap(this.enemies, player2, function(enemy, player2) {enemy.attack(player2, enemy.damage);});
+
+    this.scene.launch('UIScene');
   }
   update()
   {
 
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
-    this.spotlight.x = this.averagePlayerPosX;
-    this.charLight.x = this.averagePlayerPosX;
-    this.spotlight.y = this.averagePlayerPosY;
-    this.charLight.y = this.averagePlayerPosY;
-    this.charLight.x = this.spotlight.x;
-    this.charLight.y = this.spotlight.y;
+    this.darkness.x = this.averagePlayerPosX;
+    this.darkness.y = this.averagePlayerPosY;
+
     this.cameras.main.startFollow(reticle);
     for(var i = 0; i < this.players.getChildren().length; i++)
     {

@@ -20,7 +20,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.speed = 100;
 
         // Can't get players group (yet), so target is set to player for now
-        this.target = player;
+        this.target = null;
         this.players = scene.players;
 
         // Set sprite texture
@@ -32,12 +32,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     update()
     {
         // Find a target player, depending on if co-op or not
-        if(this.players){
-            this.getTarget();
-        }
-        else{
-            this.target = player;
-        }
+        this.getTarget();
 
         // If a target has been found, move towards it
         if (this.target)
@@ -48,16 +43,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     getTarget()
     {
         // Check which is the closest out of the group
-        var closestDistance = 0;
-        for (var i = 0; i < this.players.getChildren().length; i++) {
-            var player = this.players.getChildren()[i];
-            var distance = Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y);
-            if (distance < closestDistance) {
-                // Set this as the new target
-                this.target = player;
-                console.log(this.target);
-            }
+        var distance = Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y);
+        var distance2 = Phaser.Math.Distance.Between(this.x, this.y, player2.x, player2.y);
+
+        if (distance < distance2) {
+            // Set this as the new target
+            this.target = player;
         }
+        else {
+            this.target = player2;
+        }
+
     }
 
     // Rotate and move towards a target
@@ -109,7 +105,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
             this.attackTime = 0;
 
             // Deal damage
-            player.takeDamage(damage);
+            target.takeDamage(damage);
             console.log("Enemy Attacks")
         }
         // Increase the timer
