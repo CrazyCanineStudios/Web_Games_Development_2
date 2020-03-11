@@ -2,7 +2,7 @@ class MP_Level extends Phaser.Scene {
   spotlight;
   charLight;
   constructor() {
-    super("sp_house2");
+    super("mp_1");
   }
 
   create() {
@@ -36,40 +36,20 @@ class MP_Level extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    player = new Player(this,256,736,"Harry",0);
+    this.player = new Player(this,256,736,"Harry",0);
     this.player2 = new Player(this,288,736,"Tom",1);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
-    reticle = this.physics.add.sprite(player.x,player.y, 'target');
+    reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
     this.cameras.main.zoom =3;
     this.cameras.main.roundPixels = true;
     reticle.visible = false;
-    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.player2, platforms);
-    this.spotlight = this.make.sprite({
-      x: player.x,
-      y: player.y,
-      key: 'mask',
-      add: false
-    });
-    this.charLight = this.make.sprite({
-      x: player.x,
-      y: player.y,
-      key: 'character_mask',
-      add: false
-    });
     var healthPickup = new health_pickUp(this,276,584);
-    floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player2.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    this.player2.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-
-    // Health code
-    var menuImage = this.add.sprite(this.cameras.main.width, this.cameras.main.height, 'zoey_health');
-    menuImage.setScrollFactor(0);
+    this.darkness = this.add.sprite(this.player.x,this.player.y, 'darkness');
+    this.darkness.setOrigin(0.5, 0.5);
+    this.darkness.depth=7;
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -87,11 +67,38 @@ class MP_Level extends Phaser.Scene {
       music.loop = true;
       music.play();
     }
+    player = this.player;
+    player2 = this.player2;
+
+    // Create enemies group with collision
+    this.enemies = this.add.group({classType: Enemy, runChildUpdate: true});
+    this.physics.add.collider(this.enemies, this.enemies);
+
+    this.enemies.create(this.enemy1 = new Enemy(this, 288, 600));
+    this.enemies.create(this.enemy2 = new Enemy(this, 100, 750));
+    this.enemies.create(this.enemy3 = new Enemy(this, 128, 450));
+    this.enemies.create(this.enemy4 = new Enemy(this, 512, 200));
+
+    // When an enemy and a wall collide
+    this.physics.add.collider(this.enemies, platforms);
+
+    // When an enemy and a player projectile collide
+    this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(20); projectile.destroy();});
+
+    // When the enemy and a player collide
+    this.physics.add.overlap(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    this.physics.add.overlap(this.enemies, player2, function(enemy, player2) {enemy.attack(player2, enemy.damage);});
+
+    this.scene.launch('UIScene');
   }
   update()
   {
-    this.charLight.x = this.spotlight.x;
-    this.charLight.y = this.spotlight.y;
+
+    reticle.x = this.averagePlayerPosX;
+    reticle.y = this.averagePlayerPosY;
+    this.darkness.x = this.averagePlayerPosX;
+    this.darkness.y = this.averagePlayerPosY;
+
     this.cameras.main.startFollow(reticle);
     for(var i = 0; i < this.players.getChildren().length; i++)
     {
@@ -104,47 +111,40 @@ class MP_Level extends Phaser.Scene {
       projectile.update();
     }
 
-    if (player.body.x > this.player2.body.x)
+    if (this.player.body.x > this.player2.body.x)
     {
-      var difference = (player.body.x + this.player2.body.x)/2;
-      difference = Phaser.Math.RoundTo(difference,0);
-      this.spotlight.x = difference;
+      ///console.log(this.player.body.x + " is bigger than " + this.player2.body.x);
+      var difference = (this.player.body.x + this.player2.body.x)/2;
       this.averagePlayerPosX = difference;
     }
-    else if (player.body.x < this.player2.body.x)
+    else if (this.player.body.x < this.player2.body.x)
     {
-      var difference = (this.player2.body.x + player.body.x)/2;
-      difference = Phaser.Math.RoundTo(difference,0);
-      this.spotlight.x = difference;
+      //console.log(this.player.body.x + " is smaller than " + this.player2.body.x);
+      var difference = (this.player2.body.x + this.player.body.x)/2;
       this.averagePlayerPosX = difference;
     }
-    else if (player.body.x === this.player2.body.x)
+    else if (this.player.body.x === this.player2.body.x)
     {
-      this.spotlight.x = player.body.x;
-      this.averagePlayerPosX = player.body.x;
+      //console.log(this.player.body.x + " is the same as " + this.player2.body.x);
+      this.averagePlayerPosX = this.player.body.x;
     }
-
-    if (player.body.y > this.player2.body.y)
+    if (this.player.body.y > this.player2.body.y)
     {
-      var difference = (player.body.y + this.player2.body.y)/2;
-      difference = Phaser.Math.RoundTo(difference,0);
+      //console.log(this.player.body.y + " is bigger than " + this.player2.body.y);
+      var difference = (this.player.body.y + this.player2.body.y)/2;
       this.averagePlayerPosY = difference;
-      this.spotlight.y = difference;
     }
-    else if (player.body.y < this.player2.body.y)
+    else if (this.player.body.y < this.player2.body.y)
     {
-      var difference = (this.player2.body.y + player.body.y)/2;
-      difference = Phaser.Math.RoundTo(difference,0);
+      //console.log(this.player.body.y + " is smaller than " + this.player2.body.y);
+      var difference = (this.player2.body.y + this.player.body.y)/2;
       this.averagePlayerPosY = difference;
-      this.spotlight.y = difference;
     }
-    else if (player.body.y === this.player2.body.y)
+    else if (this.player.body.y === this.player2.body.y)
     {
-      this.spotlight.y = player.y;
-      this.averagePlayerPosY = player.body.y;
+      //console.log(this.player.body.y + " is the same as " + this.player2.body.y);
+      this.averagePlayerPosY = this.player.body.y;
     }
-    reticle.x = this.averagePlayerPosX;
-    reticle.y = this.averagePlayerPosY;
   }
   shootBeam(x,y,direction) {
     var beam = new Beam(this,x,y,direction);

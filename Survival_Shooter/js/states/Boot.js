@@ -13,6 +13,7 @@ class Boot extends Phaser.Scene {
     this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
     this.load.image('creditsImage', dir + 'spr_credits.png');
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
+    this.load.image("darkness",  dir + 'darkness.png');
     this.load.image('crosshair',  dir + 'spr_crosshair.png');
     this.load.image('mask', dir + 'mask1.png');
     this.load.image('character_mask', dir + 'mask.png');
@@ -47,7 +48,7 @@ class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
   }
   create() {
-    this.add.text(20, 20, "The game is loading");
+    var loadingText = this.add.text(20, 20, "The game is loading");
     music = this.sound.add('titleMusic');
     music.loop = true;
     music.play();
@@ -287,7 +288,7 @@ class Boot extends Phaser.Scene {
       frameRate: 30,
       repeat: -1
     });
-    if (quickStart) this.scene.start("sp_1");
+    if (quickStart) this.scene.start("mp_1");
     else this.scene.start("mainMenu");
 
   }
