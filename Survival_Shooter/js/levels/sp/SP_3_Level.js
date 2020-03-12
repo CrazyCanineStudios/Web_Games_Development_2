@@ -124,7 +124,7 @@ class SP_3_Level extends Phaser.Scene {
     this.charLight.x = player.x;
     this.charLight.y = player.y;
   }
-  shootBeam(x,y,direction) {
-    var beam = new Beam(this,x,y,direction);
+  shootBeam(x,y,direction,melee) {
+    var beam = new Beam(this,x,y,direction,melee);
   }
 }

@@ -7,6 +7,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
     shadow;
     facingDir;
     health;
+    ammo;
+    useStamina;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
@@ -21,12 +23,15 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.camera = scene.cameras.main;
         this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
         this.facingDir = "left";
+        this.ammo = 5;
+        this.attackTime = 5;
         switch (character)
         {
             case "Tom":
                 this.speed = 180;
                 this.setTexture('player_tom');
                 this.characterNum = 1;
+                this.useStamina = true;
                 break;
             case  "Zoey":
                 this.speed = 180;
@@ -50,9 +55,44 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.shadow.x = this.x;
         this.shadow.y = this.y + 15;
         this.depth = this.y + this.height / 2;
+        // Increase the timer
+        this.attackTime++;
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
         {
-            this.scene.shootBeam(this.x,this.y,this.facingDir);
+            // Check if enough time has passed since the last attack
+            if (this.attackTime >= 10)
+            {
+                switch (this.characterNum)
+                {
+                    case 0:
+                        //zoey
+                        if (this.ammo>0)
+                        {
+                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                            this.ammo--;
+                        }
+                        break;
+                    case  1: // 1 = tom
+                        //tom
+                        this.scene.shootBeam(this.x,this.y,this.facingDir,true);
+                        break;
+                    case  2: // 2 = harry
+                        if (this.ammo>0)
+                        {
+                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                            this.ammo--;
+                        }
+                        break;
+                    default:
+                        if (this.ammo>0)
+                        {
+                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                            this.ammo--;
+                        }
+                }
+                // Reset the timer
+                this.attackTime = 0;
+            }
         }
         this.movePlayer();
         this.constrainVelocity();
@@ -73,7 +113,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
     // When the player dies
     die()
     {
-        this.destroy()
+
+        //this.destroy()
     }
 
     movePlayer()

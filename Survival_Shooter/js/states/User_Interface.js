@@ -24,7 +24,7 @@ preload ()
         this.p = 76 / 100;
         this.healthBar = this.add.sprite(config.width * 0.125,100, 'health');
         this.player1HealthPortrait = this.add.sprite(config.width * 0.125,100, 'zoey_health');
-        this.healthValue = this.add.text(50, 170, "Sugar Levels : " + this.value, { font: '32px Arial', fill: '#ffb428' });
+        this.healthValue = this.add.text(this.healthBar.x - 150, 170, "Sugar Levels : " + this.value, { font: '32px Arial', fill: '#ffb428' });
         this.healthMask = this.make.sprite({
             x: this.healthBar.x,
             y: this.healthBar.y,
@@ -35,7 +35,9 @@ preload ()
 
         this.healthBar2 = this.add.sprite(config.width * 0.875,100, 'health');
         this.player2HealthPortrait = this.add.sprite(config.width * 0.875,100, 'zoey_health');
-        this.healthValue2 = this.add.text(config.width/1.2, 170, "Sugar Levels : " + this.value2, { font: '32px Arial', fill: '#ffb428' });
+        this.healthValue2 = this.add.text(this.healthBar2.x - 150, 170, "Sugar Levels : " + this.value2, { font: '32px Arial', fill: '#ffb428' });
+        this.ammoValue = this.add.text(this.healthBar.x - 150, 220, "Ammo : " + 5, { font: '32px Arial', fill: '#ffb428' });
+        this.ammoValue2 = this.add.text(this.healthBar2.x - 150, 220, "Ammo : " + 5, { font: '32px Arial', fill: '#ffb428' });
         this.healthMask2 = this.make.sprite({
             x: this.healthBar2.x,
             y: this.healthBar2.y,
@@ -95,6 +97,8 @@ preload ()
         }
         this.value = player.health;
         this.healthValue.setText("Sugar Levels : " + this.value);
+        player.useStamina ? this.ammoValue.setText("Stamina: " + player.ammo) : this.ammoValue.setText("Ammo: " + player.ammo);
+        player2.useStamina ? this.ammoValue2.setText("Stamina: " + player2.ammo) : this.ammoValue2.setText("Ammo: " + player2.ammo);
         this.healthMask.x = (this.healthBar.x - 200 ) + (this.value * 2) ;
 
         this.value2 = player2.health;

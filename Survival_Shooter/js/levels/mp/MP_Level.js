@@ -146,7 +146,7 @@ class MP_Level extends Phaser.Scene {
       this.averagePlayerPosY = this.player.body.y;
     }
   }
-  shootBeam(x,y,direction) {
-    var beam = new Beam(this,x,y,direction);
+  shootBeam(x,y,direction,melee) {
+    var beam = new Beam(this,x,y,direction,melee);
   }
 }
