@@ -7,6 +7,8 @@ class Boot extends Phaser.Scene {
     var dir = "assets/sprites/";
 
     this.load.image('menuImage', dir + 'menu.png');
+    this.load.image('howToPlay', dir + 'spr_howToPlay.png');
+    this.load.image('howToPlay_sp', dir + 'spr_howToPlay_sp.png');
     this.load.image('storyImage', dir + 'story.png');
     this.load.image('Tom_dialog', dir + 'Tom_Portrait.png');
     this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
@@ -48,7 +50,6 @@ class Boot extends Phaser.Scene {
     this.load.audio('gun_attack', ['assets/sounds/sound effects/snd_bubble_gun.wav']);
 
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
-    this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
   }
   create() {
     var loadingText = this.add.text(20, 20, "The game is loading");

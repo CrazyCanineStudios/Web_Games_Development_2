@@ -35,7 +35,7 @@ class MainMenu extends Phaser.Scene {
     {
       confirmSound.play();
       multiplayerButton.setFrame(5);
-      //this.scene.start("playMulitplayer");
+      this.scene.start("mp_howToPlay");
     });
     var creditsButton = this.add.sprite(1516,890,'buttons',7);
     creditsButton.setInteractive();

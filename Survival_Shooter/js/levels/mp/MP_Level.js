@@ -4,15 +4,18 @@ class MP_Level extends Phaser.Scene {
   constructor() {
     super("mp_1");
   }
-
+preload()
+{
+  this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
+}
   create() {
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
       this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
       this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
     this.background.setOrigin(0, 0);
-    const map = this.make.tilemap({ key: 'level2' });
-    const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
+    var map = this.make.tilemap({ key: 'level2' });
+    var tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
     const walls = map.createStaticLayer('Walls', tileset, 0, 0);
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
@@ -55,10 +58,6 @@ class MP_Level extends Phaser.Scene {
     game.canvas.addEventListener('mousedown', function () {
       game.input.mouse.requestPointerLock();
     });
-    if (Phaser.Input.Keyboard.JustDown(this.pause))
-    {
-      this.scene.start("mainMenu");
-    }
 
     if (music.key!== 'level1Music')
     {

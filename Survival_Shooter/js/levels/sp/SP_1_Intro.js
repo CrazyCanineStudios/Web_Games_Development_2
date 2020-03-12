@@ -99,7 +99,7 @@ class SP_1_Intro extends Phaser.Scene {
     this.skipButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
     this.dialog.init();
     this.i = 0;
-    this.levelToLoad = "sp_char_select";
+    this.levelToLoad = "sp_howToPlay";
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
