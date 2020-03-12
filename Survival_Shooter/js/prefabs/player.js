@@ -6,6 +6,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     camera;
     shadow;
     facingDir;
+    health;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
