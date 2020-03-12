@@ -4,11 +4,13 @@ class Beam extends Phaser.GameObjects.Sprite{
     super(scene, x, y, "beam");
 
     scene.add.existing(this);
+    this.melee = melee;
     if (!melee)
     {
       this.play("beam_anim");
       scene.physics.world.enableBody(this);
       this.attackTime = 0;
+      this.damage = 20;
       switch (direction) {
         case "left":
           this.body.velocity.x = -250;
@@ -29,8 +31,13 @@ class Beam extends Phaser.GameObjects.Sprite{
     else
     {
         //Melee attack
-        this.setTexture('melee_attack')
-      this.attackTime = 2;
+      this.melee = true;
+      this.damage = 60;
+        this.setTexture('melee_attack');
+        scene.physics.world.enableBody(this);
+        this.body.setSize(32,32,8,5);
+        this.setOrigin(0.5, 0.5);
+        this.attackTime = 0;
     }
 
     scene.projectiles.add(this);
@@ -42,14 +49,17 @@ class Beam extends Phaser.GameObjects.Sprite{
     if(this.y < 32 ){
       this.destroy();
     }
-    // Check if enough time has passed since the last attack
-    if (this.attackTime > 60)
+    if (this.melee)
     {
-      this.destroy();
-    }
-    // Increase the timer
-    else {
-      this.attackTime++;
+      // Check if enough time has passed since the last attack
+      if (this.attackTime > 30)
+      {
+        this.destroy();
+      }
+      // Increase the timer
+      else {
+        this.attackTime++;
+      }
     }
   }
 }

@@ -9,6 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     health;
     ammo;
     useStamina;
+    attacking;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
@@ -23,31 +24,36 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.camera = scene.cameras.main;
         this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
         this.facingDir = "left";
-        this.ammo = 5;
-        this.attackTime = 5;
+        this.ammo = 100;
+        this.attackTime = 60;
+        this.actualAttackTime = 60;
         switch (character)
         {
             case "Tom":
+                this.actualAttackTime = 30;
                 this.speed = 180;
                 this.setTexture('player_tom');
                 this.characterNum = 1;
                 this.useStamina = true;
                 break;
             case  "Zoey":
+                this.actualAttackTime = 10;
                 this.speed = 180;
                 this.characterNum = 0;
                 break;
             case  "Harry":
+                this.actualAttackTime = 10;
                 this.speed = 180;
                 this.setTexture('player_harry');
                 this.characterNum = 2;
                 break;
             default:
+                this.actualAttackTime = 30;
                 this.speed = 180;
                 this.characterNum = 0;
         }
         this.alive = true;
-
+        this.attackSound = scene.sound.add('melee_attack');
         this.health = 100;
     }
     update()
@@ -56,11 +62,11 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.shadow.y = this.y + 15;
         this.depth = this.y + this.height / 2;
         // Increase the timer
-        this.attackTime++;
+        this.attackTime < this.actualAttackTime ?  this.attackTime++ :  this.attacking = false;
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
         {
             // Check if enough time has passed since the last attack
-            if (this.attackTime >= 10)
+            if (this.attackTime >= this.actualAttackTime)
             {
                 switch (this.characterNum)
                 {
@@ -68,17 +74,28 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         //zoey
                         if (this.ammo>0)
                         {
+                            this.attackSound.stop();
+                            this.attackSound = this.scene.sound.add('gun_attack');
+                            this.attackSound.play();
                             this.scene.shootBeam(this.x,this.y,this.facingDir,false);
                             this.ammo--;
                         }
                         break;
                     case  1: // 1 = tom
                         //tom
+
+                            this.attackSound.stop();
+                            this.attackSound = this.scene.sound.add('melee_attack');
+                            this.attackSound.play();
                         this.scene.shootBeam(this.x,this.y,this.facingDir,true);
+                        this.attacking = true;
                         break;
                     case  2: // 2 = harry
                         if (this.ammo>0)
                         {
+                            this.attackSound.stop();
+                            this.attackSound = this.scene.sound.add('gun_attack');
+                            this.attackSound.play();
                             this.scene.shootBeam(this.x,this.y,this.facingDir,false);
                             this.ammo--;
                         }
@@ -86,6 +103,9 @@ class Player extends Phaser.Physics.Arcade.Sprite
                     default:
                         if (this.ammo>0)
                         {
+                            this.attackSound.stop();
+                            this.attackSound = this.scene.sound.add('gun_attack');
+                            this.attackSound.play();
                             this.scene.shootBeam(this.x,this.y,this.facingDir,false);
                             this.ammo--;
                         }
@@ -94,7 +114,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.attackTime = 0;
             }
         }
-        this.movePlayer();
+        if (!this.attacking) this.movePlayer();
         this.constrainVelocity();
     }
 

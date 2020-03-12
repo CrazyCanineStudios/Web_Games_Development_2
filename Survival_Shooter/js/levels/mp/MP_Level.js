@@ -83,7 +83,7 @@ class MP_Level extends Phaser.Scene {
     this.physics.add.collider(this.enemies, platforms);
 
     // When an enemy and a player projectile collide
-    this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(20); projectile.destroy();});
+    this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
 
     // When the enemy and a player collide
     this.physics.add.overlap(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
