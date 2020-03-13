@@ -73,10 +73,34 @@ preload()
     this.enemies = this.add.group({classType: Enemy, runChildUpdate: true});
     this.physics.add.collider(this.enemies, this.enemies);
 
+    // Create the enemies' projectile group
+    this.enemyProjectiles = this.add.group({classType: enemyBeam, runChildUpdate: true});
+    this.physics.add.collider(this.enemyProjectiles, platforms, function (enemyProjectile, platform) {enemyProjectile.destroy();});
+
+    // When a player and an enemy's projectile overlap
+    this.physics.add.overlap(this.enemyProjectiles, player, function (enemyProjectile, player) {enemyProjectile.destroy(); player.takeDamage(enemyProjectile.damage);});
+    this.physics.add.overlap(this.enemyProjectiles, player2, function (enemyProjectile, player) {enemyProjectile.destroy(); player.takeDamage(enemyProjectile.damage);});
+
+    // Create the Boss enemy
+    var boss = new Boss(this, 1650, 300);
+
+    // Create the melee enemies
     this.enemies.create(this.enemy1 = new Enemy(this, 288, 600));
     this.enemies.create(this.enemy2 = new Enemy(this, 100, 750));
     this.enemies.create(this.enemy3 = new Enemy(this, 128, 450));
     this.enemies.create(this.enemy4 = new Enemy(this, 512, 200));
+    this.enemies.create(this.enemy5 = new Enemy(this, 258, 172));
+    this.enemies.create(this.enemy6 = new Enemy(this, 512, 128));
+    this.enemies.create(this.enemy7 = new Enemy(this, 786, 128));
+    this.enemies.create(this.enemy8 = new Enemy(this, 1020, 200));
+    this.enemies.create(this.enemy9 = new Enemy(this, 1120, 200));
+    this.enemies.create(this.enemy10 = new Enemy(this, 868, 464));
+    this.enemies.create(this.enemy11 = new Enemy(this, 1268, 350));
+    this.enemies.create(this.enemy12 = new Enemy(this, 860, 752));
+    this.enemies.create(this.enemy13 = new Enemy(this, 976, 624));
+    this.enemies.create(this.enemy14 = new Enemy(this, 1200, 600));
+    this.enemies.create(this.enemy15 = new Enemy(this, 1522, 570));
+    this.enemies.create(this.enemy16 = new Enemy(this, 1522, 720));
 
     // When an enemy and a wall collide
     this.physics.add.collider(this.enemies, platforms);
@@ -92,7 +116,6 @@ preload()
   }
   update()
   {
-
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
     this.darkness.x = this.averagePlayerPosX;
