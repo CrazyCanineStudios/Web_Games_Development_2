@@ -33,7 +33,12 @@ class Boss extends Phaser.Physics.Arcade.Sprite
     update()
     {
         // Find a target player, depending on if co-op or not
-        this.getTarget();
+        if(player2) {
+            this.getTarget();
+        }
+        else{
+            this.target = player;
+        }
 
         // If a target has been found, move towards it
         if (this.target)

@@ -133,6 +133,25 @@ class Player extends Phaser.Physics.Arcade.Sprite
     // When the player dies
     die()
     {
+        if (lives > 1)
+        {
+            // Take away one life and reset health
+            lives -= 1;
+            this.health = 100;
+
+            // Reset locations
+            player.x = 256;
+            player.y = 736;
+
+            if(player2){
+                player2.x = 288;
+                player2.y = 736;
+            }
+        }
+        else{
+            Phaser.scene.start("mainMenu");
+        }
+
 
         //this.destroy()
     }
