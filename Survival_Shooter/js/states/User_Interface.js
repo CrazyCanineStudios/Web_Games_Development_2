@@ -56,6 +56,9 @@ preload ()
 
         //  Listen for events from it
         ourGame.events.on('decreaseHealth', function () { this.healthValue.setText("Sugar Levels : " + this.value); }, this);
+
+        // Create the Lives display
+        this.livesDisplay = this.add.text((config.width / 2) - 70, 50, "Lives : " + lives, { font: '32px Arial', fill: '#ffb428', align: 'center' });
     }
     update()
     {
@@ -102,6 +105,9 @@ preload ()
         this.healthValue.setText("Sugar Levels : " + this.value);
         player.useStamina ? this.ammoValue.setText("Stamina: " + player.ammo) : this.ammoValue.setText("Ammo: " + player.ammo);
         this.healthMask.x = (this.healthBar.x - 200 ) + (this.value * 2) ;
+
+        // Update the Lives display
+        this.livesDisplay.setText("Lives : " + lives);
 
         if (player2!=null)
         {
