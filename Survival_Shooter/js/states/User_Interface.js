@@ -77,32 +77,48 @@ preload ()
                 default:
                     this.player1HealthPortrait.setTexture('zoey_health');
             }
-            switch(player2.characterNum)
+            if (player2!=null)
             {
-                case 0:
-                    //zoey
-                    this.player2HealthPortrait.setTexture('zoey_health');
-                    break;
-                case  1: // 1 = tom
-                    //tom
-                    this.player2HealthPortrait.setTexture('tom_health');
-                    break;
-                case  2: // 2 = harry
-                    this.player2HealthPortrait.setTexture('harry_health');
-                    break;
-                default:
-                    this.player2HealthPortrait.setTexture('zoey_health');
+                switch(player2.characterNum)
+                {
+                    case 0:
+                        //zoey
+                        this.player2HealthPortrait.setTexture('zoey_health');
+                        break;
+                    case  1: // 1 = tom
+                        //tom
+                        this.player2HealthPortrait.setTexture('tom_health');
+                        break;
+                    case  2: // 2 = harry
+                        this.player2HealthPortrait.setTexture('harry_health');
+                        break;
+                    default:
+                        this.player2HealthPortrait.setTexture('zoey_health');
+                }
             }
             this.doOnce = false;
         }
         this.value = player.health;
         this.healthValue.setText("Sugar Levels : " + this.value);
         player.useStamina ? this.ammoValue.setText("Stamina: " + player.ammo) : this.ammoValue.setText("Ammo: " + player.ammo);
-        player2.useStamina ? this.ammoValue2.setText("Stamina: " + player2.ammo) : this.ammoValue2.setText("Ammo: " + player2.ammo);
         this.healthMask.x = (this.healthBar.x - 200 ) + (this.value * 2) ;
 
-        this.value2 = player2.health;
-        this.healthValue2.setText("Sugar Levels : " + this.value2);
-        this.healthMask2.x = (this.healthBar2.x - 200 ) + (this.value2 * 2) ;
+        if (player2!=null)
+        {
+            this.player2HealthPortrait.visible = true;
+            this.healthBar2.visible=true;
+            this.healthMask2.visible = true;
+            this.value2 = player2.health;
+            player2.useStamina ? this.ammoValue2.setText("Stamina: " + player2.ammo) : this.ammoValue2.setText("Ammo: " + player2.ammo);
+            this.healthValue2.setText("Sugar Levels : " + this.value2);
+            this.healthMask2.x = (this.healthBar2.x - 200 ) + (this.value2 * 2) ;
+        }
+        else
+        {
+            this.player2HealthPortrait.visible = false;
+            this.healthBar2.visible=false;
+            this.healthMask2.visible = false;
+        }
+
     }
 }

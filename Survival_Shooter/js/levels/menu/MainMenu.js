@@ -10,7 +10,8 @@ class MainMenu extends Phaser.Scene {
 
   create()
   {
-
+  player = null;
+  player2 = null;
     game.input.mouse.releasePointerLock();
     var menuImage = this.add.sprite(config.width/2, config.height/2, 'menuImage');
     menuImage.setDisplaySize(config.width,config.height);

@@ -42,18 +42,24 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // Find a target
     getTarget()
     {
-        // Check which is the closest out of the group
-        var distance = Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y);
-        var distance2 = Phaser.Math.Distance.Between(this.x, this.y, player2.x, player2.y);
+        if (player2!=null)
+        {
+            // Check which is the closest out of the group
+            var distance = Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y);
+            var distance2 = Phaser.Math.Distance.Between(this.x, this.y, player2.x, player2.y);
 
-        if (distance < distance2) {
-            // Set this as the new target
+            if (distance < distance2) {
+                // Set this as the new target
+                this.target = player;
+            }
+            else {
+                this.target = player2;
+            }
+        }
+        else
+        {
             this.target = player;
         }
-        else {
-            this.target = player2;
-        }
-
     }
 
     // Rotate and move towards a target

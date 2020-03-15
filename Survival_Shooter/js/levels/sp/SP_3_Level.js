@@ -4,7 +4,10 @@ class SP_3_Level extends Phaser.Scene {
   constructor() {
     super("sp_1");
   }
-
+  preload()
+  {
+    this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
+  }
   create() {
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
