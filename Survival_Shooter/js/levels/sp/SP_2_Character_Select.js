@@ -14,6 +14,7 @@ class SP_2_Character_Select extends Phaser.Scene {
     {
     }
     create() {
+        game.input.mouse.releasePointerLock();
         this.confirmSound = this.sound.add('confirmSound');
         this.index = 1;
         var storyImage = this.add.sprite(config.width/2, config.height/2, 'charSelect');

@@ -121,37 +121,17 @@ DialogModalPlugin.prototype = {
     },
     setCharacter1: function (characterPortrait,showCharacter)
     {
-        if (this.character1!=null)
-        {
-            if (characterPortrait != null & this.character1!=null)
-            {
-                this.character1.setTexture(characterPortrait);
-                this.character1.alpha = showCharacter ? 1 : 0;
-                this.character1.depth=0;
-            }
-        }
-        else
-        {
-            this.character1 = this.scene.add.sprite(config.width/4, config.height/2,characterPortrait);
-            this.character1.alpha = showCharacter ? 1 : 0;
-            this.character1.depth=0;
-        }
-        //var character2 = this.add.sprite(config.width - config.width/4, config.height/2, 'Harry_dialog');
+        if (this.character1) this.character1.destroy();
+        this.character1 = this.scene.add.sprite(config.width/4, config.height/2,characterPortrait);
+        this.character1.alpha = showCharacter ? 1 : 0;
+        this.character1.depth=0;
     },
     setCharacter2: function (characterPortrait,showCharacter)
     {
-        if (this.character2!=null)
-        {
-            this.character2.setTexture(characterPortrait);
-            this.character2.alpha = showCharacter ? 1 : 0;
-            this.character2.depth=0;
-        }
-        else
-        {
-            this.character2 = this.scene.add.sprite(config.width - config.width/4, config.height/2,characterPortrait);
-            this.character2.alpha = showCharacter ? 1 : 0;
-            this.character2.depth=0;
-        }
+        if (this.character2) this.character2.destroy();
+        this.character2 = this.scene.add.sprite(config.width - config.width/4, config.height/2,characterPortrait);
+        this.character2.alpha = showCharacter ? 1 : 0;
+        this.character2.depth=0;
     },
     // Sets the text for the dialog window
     setName: function (text) {

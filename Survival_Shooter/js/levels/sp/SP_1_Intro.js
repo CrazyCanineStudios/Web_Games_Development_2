@@ -13,10 +13,15 @@ class SP_1_Intro extends Phaser.Scene {
   {
   }
   create() {
+    game.input.mouse.releasePointerLock();
     var storyImage = this.add.sprite(config.width/2, config.height/2, 'storyImage');
     storyImage.setDisplaySize(config.width,config.height);
     storyImage.setOrigin(0.5,0.5); // The anchor sets the pivot point of the sprite. Setting than anchor to 0.5,0.5 means the pivot is centered
     storyImage.fixedToCamera = true;
+    var dialogueButtons = this.add.sprite(config.width* 0.80, config.height* 0.75, 'dialogue_Buttons');
+    dialogueButtons.play('anim_dialogue_Buttons');
+    dialogueButtons.depth = 10;
+
     this.sentences = [
       "Thanks again for inviting me to the sleepover, Harry",
       "Don't mention it, Tom. Did you bring your baseball bat?",
@@ -100,6 +105,7 @@ class SP_1_Intro extends Phaser.Scene {
     this.dialog.init();
     this.i = 0;
     this.levelToLoad = "sp_howToPlay";
+    this.actualText = "";
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
@@ -126,7 +132,6 @@ class SP_1_Intro extends Phaser.Scene {
     {
       if (this.actualText!==this.sentences[this.i])
       {
-        console.log(this.character1[this.i].toString());
         this.dialog.setCharacter1(this.character1[this.i],true);
         this.dialog.setCharacter2(this.character2[this.i],this.character2Visible[this.i]);
 

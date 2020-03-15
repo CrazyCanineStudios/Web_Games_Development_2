@@ -30,6 +30,7 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('harry_char_select', dir + "spr_harry_character_select.png",{frameWidth: 500, frameHeight: 500});
     this.load.spritesheet('tom_char_select', dir + "spr_tom_character_select.png",{frameWidth: 500, frameHeight: 500});
     this.load.spritesheet('zoey_char_select', dir + "spr_zoey_character_select.png",{frameWidth: 500, frameHeight: 500});
+    this.load.spritesheet('dialogue_Buttons', dir + "dialogue_buttons.png",{frameWidth: 745, frameHeight: 208});
 
 
     this.load.spritesheet('player', dir + 'zoey2.png',{frameWidth: 53, frameHeight: 53});
@@ -290,6 +291,15 @@ class Boot extends Phaser.Scene {
         end: 94
       }),
       frameRate: 30,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "anim_dialogue_Buttons",
+      frames: this.anims.generateFrameNumbers("dialogue_Buttons", {
+        start:0,
+        end: 7
+      }),
+      frameRate: 16,
       repeat: -1
     });
     if (quickStart) this.scene.start("mp_1");

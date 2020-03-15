@@ -116,6 +116,11 @@ preload()
   }
   update()
   {
+    if (Phaser.Input.Keyboard.JustDown(this.pause))
+    {
+      this.scene.stop('UIScene');
+      this.scene.start("mainMenu");
+    }
     reticle.x = this.averagePlayerPosX;
     reticle.y = this.averagePlayerPosY;
     this.darkness.x = this.averagePlayerPosX;
