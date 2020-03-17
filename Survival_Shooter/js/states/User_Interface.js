@@ -114,6 +114,8 @@ preload ()
             this.player2HealthPortrait.visible = true;
             this.healthBar2.visible=true;
             this.healthMask2.visible = true;
+            this.healthValue2.visible = true;
+            this.ammoValue2.visible = true;
             this.value2 = player2.health;
             player2.useStamina ? this.ammoValue2.setText("Stamina: " + player2.ammo) : this.ammoValue2.setText("Ammo: " + player2.ammo);
             this.healthValue2.setText("Sugar Levels : " + this.value2);
@@ -124,6 +126,8 @@ preload ()
             this.player2HealthPortrait.visible = false;
             this.healthBar2.visible=false;
             this.healthMask2.visible = false;
+            this.ammoValue2.visible = false;
+            this.healthValue2.visible = false;
         }
 
     }

@@ -149,7 +149,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
             }
         }
         else{
-            Phaser.scene.start("mainMenu");
+            this.scene.scene.stop('UIScene');
+            this.scene.scene.start("game_over");
         }
 
 

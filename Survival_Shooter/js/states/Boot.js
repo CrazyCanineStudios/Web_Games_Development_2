@@ -14,6 +14,7 @@ class Boot extends Phaser.Scene {
     this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
     this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
     this.load.image('creditsImage', dir + 'spr_credits.png');
+    this.load.image('gameOverImage', dir + 'gameOver_2.png');
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
     this.load.image("darkness",  dir + 'darkness.png');
     this.load.image('crosshair',  dir + 'spr_crosshair.png');
@@ -44,6 +45,7 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('health_pickUp', dir + 'spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
+    this.load.audio('gameOverMusic', ['assets/sounds/music/mus_game_over.wav']);
     this.load.audio('characterSelectMusic', ['assets/sounds/music/mus_character_Select.ogg']);
     this.load.audio('level1Music', ['assets/sounds/music/mus_level_1.ogg']);
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
@@ -302,7 +304,7 @@ class Boot extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     });
-    if (quickStart) this.scene.start("mp_1");
+    if (quickStart) this.scene.start("game_over");
     else this.scene.start("mainMenu");
 
   }
