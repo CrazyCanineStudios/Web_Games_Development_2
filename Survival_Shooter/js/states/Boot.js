@@ -23,6 +23,7 @@ class Boot extends Phaser.Scene {
     this.load.image('mask', dir + 'mask1.png');
     this.load.image('character_mask', dir + 'mask.png');
     this.load.image('shadow', dir + 'shadow.png');
+    this.load.image('ammo_pu', dir + 'ammo_pickup.png');
     this.load.image('melee_attack', dir + 'spr_melee_attack.png');
     this.load.spritesheet('enemy', dir + 'spr_enemy.png',{frameWidth: 48, frameHeight: 48});
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
@@ -53,6 +54,8 @@ class Boot extends Phaser.Scene {
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
     this.load.audio('melee_attack', ['assets/sounds/sound effects/snd_attack.wav']);
     this.load.audio('gun_attack', ['assets/sounds/sound effects/snd_bubble_gun.wav']);
+    this.load.audio('tom_pickup_Sound', ['assets/sounds/voices/snd_tom_pickup.wav']);
+    this.load.audio('enemy_hurt_sound', ['assets/sounds/voices/snd_monster_hurt_02.wav']);
 
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
   }

@@ -56,7 +56,7 @@ class SP_1_Intro extends Phaser.Scene {
       "Uhh, I'm not sure. I've disabled the main power source but it's still working",
       "Eek, There's monsters outside beside that glowy thing",
       "Of course, the back up generator. It's being powered remotely. We'll need to go outside and turn it off.",
-      "We'll have to get through those clown monsters out there. Lucky for us, I've got my new bat.",
+      "We'll have to get through those clown monsters out there. Lucky for us, I've got my new baseball bat.",
     ];
     this.names = [
       "Tom",
@@ -144,6 +144,14 @@ class SP_1_Intro extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.pause))
     {
       this.scene.start("mainMenu");
+    }
+    if (mpIntro)
+    {
+      this.levelToLoad = "mp_howToPlay";
+    }
+    else
+    {
+      this.levelToLoad = "sp_howToPlay";
     }
   }
   update()

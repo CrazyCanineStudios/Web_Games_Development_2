@@ -26,6 +26,7 @@ class MainMenu extends Phaser.Scene {
     {
       confirmSound.play();
       singlePlayerButton.setFrame(2);
+      mpIntro = false;
       this.scene.start("sp_0");
     });
     var multiplayerButton = this.add.sprite(1545,595,'buttons',4);
@@ -36,7 +37,8 @@ class MainMenu extends Phaser.Scene {
     {
       confirmSound.play();
       multiplayerButton.setFrame(5);
-      this.scene.start("mp_howToPlay");
+      mpIntro = true;
+      this.scene.start("sp_0");
     });
     var creditsButton = this.add.sprite(1516,890,'buttons',7);
     creditsButton.setInteractive();

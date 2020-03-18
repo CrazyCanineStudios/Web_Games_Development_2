@@ -26,6 +26,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         // Set sprite texture
         this.setTexture('enemy');
         this.setSize(32, 32);
+        this.hurtSound = scene.sound.add('enemy_hurt_sound');
     }
 
     // Actions every frame
@@ -128,6 +129,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
             console.log("Enemy Health: " + this.health);
         }
         else{
+            this.hurtSound.stop();
+            this.hurtSound.play();
             this.die();
         }
     }

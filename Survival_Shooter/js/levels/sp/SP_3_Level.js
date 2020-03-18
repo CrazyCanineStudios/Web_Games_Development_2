@@ -59,7 +59,8 @@ class SP_3_Level extends Phaser.Scene {
       key: 'character_mask',
       add: false
     });
-    var healthPickup = new health_pickUp(this,276,584);
+    var healthPickup = new health_pickUp(this,276,584,"health");
+    var ammoPickup = new health_pickUp(this,276,650,"ammo");
     floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
     objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
@@ -120,7 +121,23 @@ class SP_3_Level extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
 
     // When the enemy and a player collide
-    this.physics.add.overlap(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    this.physics.add.overlap(this.enemies, this.players, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    // When the player and a pick up collide
+    this.physics.add.overlap(this.pickUps, this.players, function(pickup, player)
+    {
+      if (pickup.pickupType === "health" && player.health<100)
+      {
+        player.health +=10;
+        player.pickupSound.stop();
+        player.pickupSound.play();
+        pickup.destroy();
+      }
+      if (pickup.pickupType === "ammo" && !player.useStamina && player.ammo<100)
+      {
+        player.ammo +=10;
+        pickup.destroy();
+      }
+    });
 
     this.scene.launch('UIScene');
   }

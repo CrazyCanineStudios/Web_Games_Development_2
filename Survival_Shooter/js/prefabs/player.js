@@ -9,6 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     health;
     ammo;
     useStamina;
+    pickupSound;
     attacking;
     constructor(scene,x,y,character,playerInput){
 
@@ -27,6 +28,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.ammo = 100;
         this.attackTime = 60;
         this.actualAttackTime = 60;
+        this.pickupSound = scene.sound.add('tom_pickup_Sound');
         switch (character)
         {
             case "Tom":

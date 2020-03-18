@@ -49,7 +49,8 @@ preload()
     reticle.visible = false;
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.player2, platforms);
-    var healthPickup = new health_pickUp(this,276,584);
+    var healthPickup = new health_pickUp(this,276,584,"health");
+    var ammoPickup = new health_pickUp(this,276,650,"ammo");
     this.darkness = this.add.sprite(this.player.x,this.player.y, 'darkness');
     this.darkness.setOrigin(0.5, 0.5);
     this.darkness.depth=7;
@@ -109,8 +110,23 @@ preload()
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
 
     // When the enemy and a player collide
-    this.physics.add.overlap(this.enemies, player, function(enemy, player) {enemy.attack(player, enemy.damage);});
-    this.physics.add.overlap(this.enemies, player2, function(enemy, player2) {enemy.attack(player2, enemy.damage);});
+    this.physics.add.overlap(this.enemies, this.players, function(enemy, player) {enemy.attack(player, enemy.damage);});
+    // When the player and a pick up collide
+    this.physics.add.overlap(this.pickUps, this.players, function(pickup, player)
+    {
+      if (pickup.pickupType === "health" && player.health<100)
+      {
+        player.health +=10;
+        player.pickupSound.stop();
+        player.pickupSound.play();
+        pickup.destroy();
+      }
+      if (pickup.pickupType === "ammo" && !player.useStamina && player.ammo<100)
+      {
+        player.ammo +=10;
+        pickup.destroy();
+      }
+    });
 
     this.scene.launch('UIScene');
   }
