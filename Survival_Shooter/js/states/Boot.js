@@ -11,6 +11,8 @@ class Boot extends Phaser.Scene {
     this.load.image('howToPlay_sp', dir + 'spr_howToPlay_sp.png');
     this.load.image('storyImage', dir + 'story.png');
     this.load.image('Tom_dialog', dir + 'Tom_Portrait.png');
+    this.load.image('Tom_happy_dialog', dir + 'Tom_Happy_Portrait.png');
+    this.load.image('Tom_bat_dialog', dir + 'Tom_Bat_Portrait.png');
     this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
     this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
     this.load.image('creditsImage', dir + 'spr_credits.png');
