@@ -4,6 +4,7 @@ class SP_1_Intro extends Phaser.Scene {
   character1;
   character2Visible;
   i;
+  voices;
   actualText;
   levelToLoad;
   constructor() {
@@ -11,6 +12,23 @@ class SP_1_Intro extends Phaser.Scene {
   }
   preload()
   {
+    this.load.audio('voice1', ['assets/sounds/voices/intro/1.wav']);
+    this.load.audio('voice2', ['assets/sounds/voices/intro/2.wav']);
+    this.load.audio('voice3', ['assets/sounds/voices/intro/3.wav']);
+    this.load.audio('voice4', ['assets/sounds/voices/intro/4.wav']);
+    this.load.audio('voice5', ['assets/sounds/voices/intro/5.wav']);
+    this.load.audio('voice6', ['assets/sounds/voices/intro/6.wav']);
+    this.load.audio('voice7', ['assets/sounds/voices/intro/7.wav']);
+    this.load.audio('voice8', ['assets/sounds/voices/intro/8.wav']);
+    this.load.audio('voice9', ['assets/sounds/voices/intro/9.wav']);
+    this.load.audio('voice10', ['assets/sounds/voices/intro/10.wav']);
+    this.load.audio('voice11', ['assets/sounds/voices/intro/11.wav']);
+    this.load.audio('voice12', ['assets/sounds/voices/intro/12.wav']);
+    this.load.audio('voice13', ['assets/sounds/voices/intro/13.wav']);
+    this.load.audio('voice14', ['assets/sounds/voices/intro/14.wav']);
+    this.load.audio('voice15', ['assets/sounds/voices/intro/15.wav']);
+    this.load.audio('voice16', ['assets/sounds/voices/intro/16.wav']);
+
   }
   create() {
     game.input.mouse.releasePointerLock();
@@ -26,7 +44,7 @@ class SP_1_Intro extends Phaser.Scene {
       "Thanks again for inviting me to the sleepover, Harry",
       "Don't mention it, Tom. I have something super cool to show you",
       "It's my latest invention, My Dream-inator, it can turn your thoughts into reality",
-      "No way, so if I wanted a new baseball bat, I'd just need to think it",
+      "No way, so if I wanted a new baseball bat, I'd just need to think about it",
       "Ahaha, This is awesome. We could do anything with this",
       "Harry, I can't sleep, the monsters won't leave me alone.",
       "Go away, Zoey. There's no such thing as monsters.",
@@ -57,6 +75,24 @@ class SP_1_Intro extends Phaser.Scene {
       "Zoey",
       "Harry",
       "Tom",
+    ];
+    this.voices = [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4",
+      "voice5",
+      "voice6",
+      "voice7",
+      "voice8",
+      "voice9",
+      "voice10",
+      "voice11",
+      "voice12",
+      "voice13",
+      "voice14",
+      "voice15",
+      "voice16",
     ];
     this.character1 = [
       'Tom_happy_dialog',
@@ -109,14 +145,6 @@ class SP_1_Intro extends Phaser.Scene {
     {
       this.scene.start("mainMenu");
     }
-
-    if (music.key!== 'characterSelectMusic')
-    {
-      music.stop();
-      music = this.sound.add('characterSelectMusic');
-      music.loop = true;
-      music.play();
-    }
   }
   update()
   {
@@ -133,6 +161,13 @@ class SP_1_Intro extends Phaser.Scene {
 
         this.dialog.setName(this.names[this.i]);
         this.dialog.setText(this.sentences[this.i], true);
+        if (music.key!== this.voices[this.i])
+        {
+          music.stop();
+          music = this.sound.add(this.voices[this.i]);
+          music.loop = false;
+          music.play();
+        }
         this.actualText=this.sentences[this.i];
       }
       if (Phaser.Input.Keyboard.JustDown(this.spacebar))
