@@ -17,7 +17,7 @@ class CreditsPanel extends Phaser.GameObjects.Sprite
 
   update()
   {
-      if (this.timeTillDestroy >= (1100 * this.num))
+      if (this.timeTillDestroy >= (1300 * this.num))
       {
           if (this.lastOne ===true)
           {
