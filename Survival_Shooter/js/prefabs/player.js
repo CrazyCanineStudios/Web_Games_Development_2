@@ -35,6 +35,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.actualAttackTime = 30;
                 this.speed = 180;
                 this.setTexture('player_tom');
+                this.pickupSound = scene.sound.add('tom_pickup_Sound');
                 this.characterNum = 1;
                 this.useStamina = true;
                 break;
@@ -47,6 +48,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
                 this.actualAttackTime = 10;
                 this.speed = 180;
                 this.setTexture('player_harry');
+                this.pickupSound = scene.sound.add('harry_pickup_Sound');
                 this.characterNum = 2;
                 break;
             default:

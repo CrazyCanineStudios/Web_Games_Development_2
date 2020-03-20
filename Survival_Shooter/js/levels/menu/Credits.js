@@ -11,10 +11,11 @@ class Credits extends Phaser.Scene {
   create()
   {
     game.input.mouse.releasePointerLock();
-    var menuImage = this.add.sprite(config.width/2, config.height/2, 'creditsImage');
-    menuImage.setDisplaySize(config.width,config.height);
-    menuImage.setOrigin(0.5,0.5); // The anchor sets the pivot point of the sprite. Setting than anchor to 0.5,0.5 means the pivot is centered
-    menuImage.fixedToCamera = true;
+    this.creditsGroup = this.add.group({runChildUpdate: true});
+    var creditsBG = this.add.sprite(config.width/2, config.height/2, 'creditsBackground');
+    var credits = new CreditsPanel(this,config.width/2,config.height/2,"creditsImage",1,false);
+    var credits2 = new CreditsPanel(this,config.width/2,credits.y + config.height,"credits2",2,true);
+    //var credits3 = new CreditsPanel(this,config.width/2,credits2.y + config.height,"credits2",3,true);
     confirmSound = this.sound.add('confirmSound');
     var creditsButton = this.add.sprite(1516,890,'buttons',7);
     creditsButton.setInteractive();
@@ -36,6 +37,5 @@ class Credits extends Phaser.Scene {
   }
   update ()
   {
-
   }
 }

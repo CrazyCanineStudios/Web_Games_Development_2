@@ -15,7 +15,9 @@ class Boot extends Phaser.Scene {
     this.load.image('Tom_bat_dialog', dir + 'Tom_Bat_Portrait.png');
     this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
     this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
+    this.load.image('creditsBackground', dir + 'credits_background.png');
     this.load.image('creditsImage', dir + 'spr_credits.png');
+    this.load.image('credits2', dir + 'credits.png');
     this.load.image('gameOverImage', dir + 'gameOver_2.png');
     this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
     this.load.image("darkness",  dir + 'darkness.png');
@@ -55,6 +57,7 @@ class Boot extends Phaser.Scene {
     this.load.audio('melee_attack', ['assets/sounds/sound effects/snd_attack.wav']);
     this.load.audio('gun_attack', ['assets/sounds/sound effects/snd_bubble_gun.wav']);
     this.load.audio('tom_pickup_Sound', ['assets/sounds/voices/snd_tom_pickup.wav']);
+    this.load.audio('harry_pickup_Sound', ['assets/sounds/voices/snd_harry_pickup.wav']);
     this.load.audio('enemy_hurt_sound', ['assets/sounds/voices/snd_monster_hurt_02.wav']);
 
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
@@ -309,7 +312,7 @@ class Boot extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     });
-    if (quickStart) this.scene.start("game_over");
+    if (quickStart) this.scene.start("credits");
     else this.scene.start("mainMenu");
 
   }
