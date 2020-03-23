@@ -118,6 +118,7 @@ class SP_3_Level extends Phaser.Scene {
 
     // When an enemy and a player projectile collide
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
+    this.physics.add.collider(platforms, this.projectiles, function(projectile){projectile.destroy();});
 
     // When the enemy and a player collide
     this.physics.add.overlap(this.enemies, this.players, function(enemy, player) {enemy.attack(player, enemy.damage);});
