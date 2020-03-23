@@ -1,26 +1,26 @@
 class MP_Level extends Phaser.Scene {
-  spotlight;
-  charLight;
   constructor() {
     super("mp_1");
   }
 preload()
 {
-  this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
+
 }
   create() {
-    // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-      this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
-      this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
+    this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
+    this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
     this.background.setOrigin(0, 0);
-    var map = this.make.tilemap({ key: 'level2' });
-    var tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
+    const map = this.make.tilemap({key: 'level2'});
+    const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
     const walls = map.createStaticLayer('Walls', tileset, 0, 0);
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
-    this.players = this.add.group();
-    this.projectiles = this.add.group();
+    this.darkness = this.add.sprite(0,0, 'darkness');
+    this.darkness.setOrigin(0.5, 0.5);
+    this.darkness.depth=7;
+    this.players = this.add.group({runChildUpdate: true});
+    this.projectiles = this.add.group({runChildUpdate: true});
     this.pickUps = this.add.group();
     this.playerInput = [];
     this.playerInput [0] = this.input.keyboard.addKeys({
@@ -49,11 +49,8 @@ preload()
     reticle.visible = false;
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.player2, platforms);
-    var healthPickup = new health_pickUp(this,276,584,"health");
-    var ammoPickup = new health_pickUp(this,276,650,"ammo");
-    this.darkness = this.add.sprite(this.player.x,this.player.y, 'darkness');
-    this.darkness.setOrigin(0.5, 0.5);
-    this.darkness.depth=7;
+    new health_pickUp(this,276,584,"health");
+    new health_pickUp(this, 276, 650, "ammo");
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -127,8 +124,10 @@ preload()
         pickup.destroy();
       }
     });
-
+      reticle.x = player.x;
+      reticle.y = player.y;
     this.scene.launch('UIScene');
+    this.cameras.main.startFollow(reticle);
   }
   update()
   {
@@ -137,23 +136,7 @@ preload()
       this.scene.stop('UIScene');
       this.scene.start("mainMenu");
     }
-    reticle.x = this.averagePlayerPosX;
-    reticle.y = this.averagePlayerPosY;
-    this.darkness.x = this.averagePlayerPosX;
-    this.darkness.y = this.averagePlayerPosY;
-
     this.cameras.main.startFollow(reticle);
-    for(var i = 0; i < this.players.getChildren().length; i++)
-    {
-      var player = this.players.getChildren()[i];
-      player.update();
-    }
-    for(var i = 0; i < this.projectiles.getChildren().length; i++)
-    {
-      var projectile= this.projectiles.getChildren()[i];
-      projectile.update();
-    }
-
     if (this.player.body.x > this.player2.body.x)
     {
       ///console.log(this.player.body.x + " is bigger than " + this.player2.body.x);
@@ -188,6 +171,10 @@ preload()
       //console.log(this.player.body.y + " is the same as " + this.player2.body.y);
       this.averagePlayerPosY = this.player.body.y;
     }
+    this.darkness.x = this.averagePlayerPosX;
+    this.darkness.y = this.averagePlayerPosY;
+    reticle.x = this.averagePlayerPosX;
+    reticle.y = this.averagePlayerPosY;
   }
   shootBeam(x,y,direction,melee) {
     var beam = new Beam(this,x,y,direction,melee);

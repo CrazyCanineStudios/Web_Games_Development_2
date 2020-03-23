@@ -6,7 +6,6 @@ class SP_3_Level extends Phaser.Scene {
   }
   preload()
   {
-    this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
   }
   create() {
     // Create world bounds

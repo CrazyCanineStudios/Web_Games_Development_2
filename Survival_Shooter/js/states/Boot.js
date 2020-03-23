@@ -59,6 +59,7 @@ class Boot extends Phaser.Scene {
     this.load.audio('enemy_hurt_sound', ['assets/sounds/voices/snd_monster_hurt_02.wav']);
 
     this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
+    this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
   }
   create() {
     var loadingText = this.add.text(20, 20, "The game is loading");
