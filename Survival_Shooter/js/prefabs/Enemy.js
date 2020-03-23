@@ -2,7 +2,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
 {
     enemyAngle;
     // Construct an enemy
-    constructor(scene, x, y)
+    constructor(scene, x, y, isRanged)
     {
         super(scene, x, y, "Enemy");
 
@@ -18,6 +18,18 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.health = 100;
         this.damage = 10;
         this.speed = 100;
+
+        this.isRanged = isRanged;
+        this.direction = null;
+
+        if(this.isRanged) {
+            this.targetRange = 256;
+            this.attackRange = 64;
+        }
+        else {
+            this.targetRange = 128;
+            this.attackRange = 32;
+        }
 
         // Can't get players group (yet), so target is set to player for now
         this.target = null;
@@ -37,7 +49,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
 
         // If a target has been found, move towards it
         if (this.target)
-        this.moveToTarget(this.target, this.speed, this.scene);
+        {
+            this.moveToTarget(this.target, this.speed, this.scene);
+            this.rangedAttack(this.direction);
+        }
     }
 
     // Find a target
@@ -69,7 +84,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         // Stop if within a certain distance
         var distance = Phaser.Math.Distance.Between(this.x, this.y, target.x, target.y);
 
-        if (distance < 128 && distance > 32)
+        if (distance < this.targetRange && distance > this.attackRange)
         {
             //this.rotation = (Phaser.Math.Angle.Between(target.x, target.y, this.x, this.y) + 1.5);
             //this.enemyAngle = this.rotation * 100;
@@ -80,44 +95,77 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
                 //console.log("Moving left");
                 if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_left'){}
                 else this.play("enemy_run_left");
+
+                // Notify direction as left
+                this.direction = "left";
             }
             else if (this.x <= target.x && target.x>target.y)
             {
                 //console.log("Moving right");
                 if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_right'){}
                 else this.play("enemy_run_right");
+
+                // Notify direction as right
+                this.direction = "right";
             }
             if (this.y > target.y && target.y>target.x)
             {
                 //console.log("Moving up");
                 if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_up'){}
                 else this.play("enemy_run_up");
+
+                // Notify direction as up
+                this.direction = "up";
             }
             else if (this.y <= target.y && target.y>target.x)
             {
                 //console.log("Moving down");
                 if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_down'){}
                 else this.play("enemy_run_down");
+
+                // Notify direction as down
+                this.direction = "down";
             }
         }
     }
 
-    // When the enemy deals damage
+    // Deal melee damage
     attack(target, damage)
     {
-        // Check if enough time has passed since the last attack
-        if (this.attackTime > 60)
+        if(!this.isRanged)
         {
-            // Reset the timer
-            this.attackTime = 0;
+            // Check if enough time has passed since the last attack
+            if (this.attackTime > 60) {
+                // Reset the timer
+                this.attackTime = 0;
 
-            // Deal damage
-            target.takeDamage(damage);
-            console.log("Enemy Attacks")
+                // Deal damage
+                target.takeDamage(damage);
+                console.log("Enemy Attacks")
+            }
+            // Increase the timer
+            else {
+                this.attackTime++;
+            }
         }
-        // Increase the timer
-        else {
-            this.attackTime++;
+    }
+
+    // Shoot a ranged bullet
+    rangedAttack(direction)
+    {
+        if(this.isRanged)
+        {
+            // Check if enough time has passed since the last attack
+            if (this.attackTime > 100) {
+                // Reset the timer
+                this.attackTime = 0;
+
+                var enemyBullet = new enemyBeam(this.scene, this.x, this.y, direction, false);
+            }
+            // Increase the timer
+            else {
+                this.attackTime++;
+            }
         }
     }
 
