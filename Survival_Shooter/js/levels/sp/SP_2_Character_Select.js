@@ -7,6 +7,9 @@ class SP_2_Character_Select extends Phaser.Scene {
     harrySelect;
     playerInput;
     confirmSound;
+    phase = 1;
+    player1Chosen;
+    currentPos;
     constructor() {
         super("sp_char_select");
     }
@@ -14,6 +17,8 @@ class SP_2_Character_Select extends Phaser.Scene {
     {
     }
     create() {
+        this.currentPos =0;
+        this.phase = 1;
         game.input.mouse.releasePointerLock();
         this.confirmSound = this.sound.add('confirmSound');
         this.index = 1;
@@ -103,6 +108,26 @@ class SP_2_Character_Select extends Phaser.Scene {
                 this.harrySelect.setFrame(0);
                 this.zoeySelect.setFrame(0);
         }
+        if (this.phase>1)
+        {
+            switch (this.player1Chosen)
+            {
+                case 0:
+                    this.tomSelect.setFrame(2);
+                    break;
+                case 1:
+                    this.tomSelect.setFrame(2);
+                    break;
+                case 2:
+                    this.zoeySelect.setFrame(2);
+                    break;
+                case 3:
+                    this.harrySelect.setFrame(2);
+                    break;
+                default:
+                    this.tomSelect.setFrame(2);
+            }
+        }
         if (Phaser.Input.Keyboard.JustDown(this.pause))
         {
             this.scene.start("mainMenu");
@@ -111,17 +136,52 @@ class SP_2_Character_Select extends Phaser.Scene {
         {
             if (this.index<3)
             {
+                this.currentPos = this.index;
                 this.index++;
             }
-            else{this.index = 1;}
+            else
+            {
+                this.currentPos = this.index;
+                this.index = 1;
+            }
         }
         if ((Phaser.Input.Keyboard.JustDown(this.playerInput[0].left)) || (Phaser.Input.Keyboard.JustDown(this.playerInput[1].left)))
         {
             if (this.index>1)
             {
+                this.currentPos = this.index;
                 this.index--;
             }
-            else{this.index = 3;}
+            else
+            {
+                this.currentPos = this.index;
+                this.index = 3;
+            }
+        }
+        console.log("This index : " + this.currentPos);
+        if (this.phase>1 && this.index===this.player1Chosen)
+        {
+            switch (this.player1Chosen)
+            {
+                case 0:
+                    if (this.currentPos === 3) this.index=2;
+                    else if (this.currentPos === 2) this.index=3;
+                    break;
+                case 1: // Tom
+                    if (this.currentPos === 3) this.index=2;
+                    else if (this.currentPos === 2) this.index=3;
+                    break;
+                case 2:
+                    if (this.currentPos === 1) this.index=3;
+                    else if (this.currentPos === 3) this.index=1;
+                    break;
+                case 3:
+                    if (this.currentPos === 1) this.index=2;
+                    else if (this.currentPos === 2) this.index=1;
+                    break;
+                default:
+                    this.index=1;
+            }
         }
         if ((Phaser.Input.Keyboard.JustDown(this.playerInput[0].attack)) || (Phaser.Input.Keyboard.JustDown(this.playerInput[1].attack)))
         {
@@ -134,23 +194,63 @@ class SP_2_Character_Select extends Phaser.Scene {
         {
             case 1:
                 this.confirmSound.play();
-                player1Char = "Tom";
-                this.scene.start("sp_1");
+                if (this.phase ===1)
+                {
+                    player1Char = "Tom";
+                    if (!mpIntro) this.scene.start("sp_1");
+                    this.player1Chosen = 1;
+                    this.phase++;
+                }
+                else if (this.phase ===2 && player1Char!=="Tom")
+                {
+                    player2Char = "Tom";
+                    if (mpIntro) this.scene.start("mp_1");
+                }
                 break;
             case 2:
                 this.confirmSound.play();
-                player1Char = "Zoey";
-                this.scene.start("sp_1");
+                if (this.phase ===1)
+                {
+                    player1Char = "Zoey";
+                    if (mpIntro ===false) this.scene.start("sp_1");
+                    this.player1Chosen = 2;
+                    this.phase++;
+                }
+                else if (this.phase ===2 && player1Char!=="Zoey")
+                {
+                    player2Char = "Zoey";
+                    if (mpIntro ===true) this.scene.start("mp_1");
+                }
                 break;
             case 3:
                 this.confirmSound.play();
-                player1Char = "Harry";
-                this.scene.start("sp_1");
+                if (this.phase ===1)
+                {
+                    player1Char = "Harry";
+                    if (mpIntro ===false) this.scene.start("sp_1");
+                    this.player1Chosen = 3;
+                    this.phase++;
+                }
+                else if (this.phase ===2  && player1Char!=="Harry")
+                {
+                    player2Char = "Harry";
+                    if (mpIntro ===true) this.scene.start("mp_1");
+                }
                 break;
             default:
                 this.confirmSound.play();
-                player1Char = "Tom";
-                this.scene.start("sp_1");
+                if (this.phase ===1)
+                {
+                    player1Char = "Tom";
+                    if (mpIntro ===false) this.scene.start("sp_1");
+                    this.player1Chosen = 0;
+                    this.phase++;
+                }
+                else if (this.phase ===2 && player1Char!=="Tom")
+                {
+                    player2Char = "Tom";
+                    if (mpIntro ===true) this.scene.start("mp_1");
+                }
         }
     }
 }

@@ -39,8 +39,8 @@ preload()
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,256,736,"Harry",0);
-    this.player2 = new Player(this,288,736,"Tom",1);
+    this.player = new Player(this,256,736,player1Char,0);
+    this.player2 = new Player(this,288,736,player2Char,1);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');

@@ -26,7 +26,7 @@ class MP_HowToPlay extends Phaser.Scene {
     {
       confirmSound.play();
       continueButton.setFrame(11);
-      this.scene.start("mp_1");
+      this.scene.start("sp_char_select");
     });
     if (music.key!== 'characterSelectMusic')
     {

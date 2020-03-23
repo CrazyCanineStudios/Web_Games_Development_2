@@ -16,7 +16,7 @@ class CreditsPanel extends Phaser.GameObjects.Sprite
     this.lastOne = lastOne;
     if (this.lastOne === true)
     {
-        this.actualTime = 1200;
+        this.actualTime = 1150;
     }
   }
 

@@ -310,7 +310,7 @@ class Boot extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     });
-    if (quickStart) this.scene.start("credits");
+    if (quickStart) this.scene.start("mainMenu");
     else this.scene.start("mainMenu");
 
   }
