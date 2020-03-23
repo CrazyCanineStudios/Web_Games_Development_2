@@ -3,6 +3,7 @@ class CreditsPanel extends Phaser.GameObjects.Sprite
   timeTillDestroy = 0;
   lastOne = false;
   num = 1;
+  actualTime = 1300;
   constructor(scene,x,y,image,num,lastOne)
   {
     super(scene, x, y,image);
@@ -13,11 +14,15 @@ class CreditsPanel extends Phaser.GameObjects.Sprite
     scene.creditsGroup.add(this);
     this.num = num;
     this.lastOne = lastOne;
+    if (this.lastOne === true)
+    {
+        this.actualTime = 1200;
+    }
   }
 
   update()
   {
-      if (this.timeTillDestroy >= (1300 * this.num))
+      if (this.timeTillDestroy >= (this.actualTime * this.num))
       {
           if (this.lastOne ===true)
           {
@@ -33,6 +38,10 @@ class CreditsPanel extends Phaser.GameObjects.Sprite
       // Increase the timer
       else
       {
+          if (this.lastOne ===true)
+          {
+              //console.log(this.timeTillDestroy + "/" + (this.actualTime * this.num);
+          }
         this.timeTillDestroy++;
       }
     }
