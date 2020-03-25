@@ -2,7 +2,7 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
   constructor(scene,x,y,direction,melee){
 
     super(scene, x, y, "beam");
-
+    this.dealsDamageToEnemy = false;
     scene.add.existing(this);
     this.melee = melee;
     if (!melee)
@@ -58,5 +58,10 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
         this.attackTime++;
       }
     }
+  }
+  reverse()
+  {
+    this.body.velocity.y = -this.body.velocity.y;
+    this.dealsDamageToEnemy = true;
   }
 }
