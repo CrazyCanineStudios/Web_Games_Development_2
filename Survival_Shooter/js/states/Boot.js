@@ -26,6 +26,7 @@ class Boot extends Phaser.Scene {
     this.load.image('ammo_pu', dir + 'ammo_pickup.png');
     this.load.image('melee_attack', dir + 'spr_melee_attack.png');
     this.load.spritesheet('enemy', dir + 'spr_enemy.png',{frameWidth: 48, frameHeight: 48});
+    this.load.image('barrier', dir + 'corner.png');
     this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
     this.load.image('level2_atlas',dir + 'tilemaps/level2_atlas.png');
 
