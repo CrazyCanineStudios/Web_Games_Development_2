@@ -10,7 +10,7 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
       this.play("beam_anim");
       scene.physics.world.enableBody(this);
       this.attackTime = 0;
-      this.damage = 20;
+      this.damage = 5;
       switch (direction) {
         case "left":
           this.body.velocity.x = -250;
@@ -32,7 +32,7 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
     {
         //Melee attack
       this.melee = true;
-      this.damage = 60;
+      this.damage = 5;
         this.setTexture('melee_attack');
         scene.physics.world.enableBody(this);
         this.body.setSize(32,32,8,5);

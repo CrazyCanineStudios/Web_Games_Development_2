@@ -141,8 +141,8 @@ preload()
       this.physics.world.enableBody(generator);
       generator.body.setSize(32,32,8,5);
       generator.body.setImmovable();
-      this.physics.add.collider(player, generator, function (player, generator) {game.scene.win();});
-      this.physics.add.collider(player2, generator, function (player, generator) {game.scene.win();});
+      this.physics.add.collider(player, generator, function (player, generator) {player.scene.win();});
+      this.physics.add.collider(player2, generator, function (player, generator) {player.scene.win();});
 
       this.scene.launch('UIScene');
     this.cameras.main.startFollow(reticle);
@@ -201,6 +201,7 @@ preload()
     // When the player(s) win the game
     win()
     {
+        this.scene.stop('UIScene');
         this.scene.start("mainMenu");
     }
 }

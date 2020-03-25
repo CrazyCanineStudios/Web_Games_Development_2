@@ -11,6 +11,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
     useStamina;
     pickupSound;
     attacking;
+    invicible;
+    busyTime = 0;
     constructor(scene,x,y,character,playerInput){
 
         super(scene, x, y, "player");
@@ -28,6 +30,8 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.ammo = 100;
         this.attackTime = 60;
         this.actualAttackTime = 60;
+        this.busyTime = 0;
+        this.invicible = false;
         this.pickupSound = scene.sound.add('tom_pickup_Sound');
         switch (character)
         {
@@ -67,6 +71,20 @@ class Player extends Phaser.Physics.Arcade.Sprite
         this.depth = this.y + this.height / 2;
         // Increase the timer
         this.attackTime < this.actualAttackTime ?  this.attackTime++ :  this.attacking = false;
+        if (this.invicible)
+        {
+            this.tint =0xff0000;
+        }
+            if (this.busyTime > 30)
+            {
+                this.tint = 0xffffff;
+                this.invicible = false;
+            }
+            // Increase the timer
+            else
+            {
+                this.busyTime++;
+            }
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
         {
             // Check if enough time has passed since the last attack
@@ -153,11 +171,31 @@ class Player extends Phaser.Physics.Arcade.Sprite
     // When the player takes damage
     takeDamage(amount)
     {
-        if(this.health > amount){
+        if(this.health > amount && this.invicible ===false)
+        {
             this.health = this.health - amount;
             console.log("Player Health: " + this.health);
+            switch (this.facingDir)
+            {
+                case "left":
+                    this.setVelocityX(300);
+                    break;
+                case  "right":
+                    this.setVelocityX(-300);
+                    break;
+                case  "down":
+                    this.setVelocityY(-300);
+                    break;
+                case  "up":
+                    this.setVelocityY(300);
+                    break;
+                default:
+            }
+            this.busyTime = 0;
+            this.invicible = true;
         }
-        else{
+        else if (this.health<=amount && this.invicible ===false)
+        {
             this.die();
         }
     }
