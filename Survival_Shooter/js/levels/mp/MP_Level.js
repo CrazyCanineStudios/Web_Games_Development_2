@@ -124,8 +124,15 @@ preload()
         pickup.destroy();
       }
     });
-      reticle.x = player.x;
-      reticle.y = player.y;
+
+    reticle.x = player.x;
+    reticle.y = player.y;
+
+    // Create the win condition barrier
+    this.barrier = this.add.sprite(1728, 208, 'barrier');
+    this.physics.add.collider(player, this.barrier);
+    this.physics.add.collider(player2, this.barrier);
+
     this.scene.launch('UIScene');
     this.cameras.main.startFollow(reticle);
   }

@@ -24,6 +24,6 @@ var config = {
                 debug: false
             }
         }
-    }, moveKeys, reticle, player1Char = "Tom",player2Char = "Harry",bullets,mpIntro, player, player2, lives = 1, moving, time, music,confirmSound,quickStart = false, game = new Phaser.Game(config);
+    }, moveKeys, reticle, player1Char = "Tom", player2Char = "Harry", bullets, mpIntro, player, player2, lives = 3, moving, time, music, confirmSound, quickStart = false, game = new Phaser.Game(config);
 
 
