@@ -24,7 +24,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         scene.players.add(this);
         this.camera = scene.cameras.main;
         this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
-        this.facingDir = "left";
+        this.facingDir = "right";
         this.ammo = 100;
         this.attackTime = 60;
         this.actualAttackTime = 60;
@@ -87,7 +87,35 @@ class Player extends Phaser.Physics.Arcade.Sprite
                         break;
                     case  1: // 1 = tom
                         //tom
-
+                        switch (this.facingDir)
+                        {
+                            case "left":
+                                this.play("tom_attack_left");
+                                break;
+                            case  "right":
+                                this.play("tom_attack_right");
+                                break;
+                            case  "up":
+                                this.play("tom_attack_up");
+                                break;
+                            case  "down":
+                                this.play("tom_attack_down");
+                                break;
+                            case  "down-right":
+                                this.play("tom_attack_down_right");
+                                break;
+                            case  "down-left":
+                                this.play("tom_attack_down_left");
+                                break;
+                            case  "up-left":
+                                this.play("tom_attack_up_left");
+                                break;
+                            case  "up-right":
+                                this.play("tom_attack_up_right");
+                                break;
+                            default:
+                                this.play("tom_attack_down");
+                        }
                             this.attackSound.stop();
                             this.attackSound = this.scene.sound.add('melee_attack');
                             this.attackSound.play();
@@ -204,6 +232,7 @@ else if (this.characterNum === 1)
     {
         if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
         {
+            this.facingDir = "up-left";
             this.shadow.y = this.y + 10;
             this.setVelocityX(-this.speed);
             this.setVelocityY(-this.speed);
@@ -212,6 +241,7 @@ else if (this.characterNum === 1)
         }
         else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
         {
+            this.facingDir = "down-left";
             this.setVelocityX(-this.speed);
             this.setVelocityY(this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_left'){}
@@ -229,6 +259,7 @@ else if (this.characterNum === 1)
     {
         if (this.cursorKeys.up.isDown && this.body.y > this.camera.worldView.y+ 50)
         {
+            this.facingDir = "up-right";
             this.setVelocityX(this.speed);
             this.setVelocityY(-this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_up_right'){}
@@ -236,6 +267,7 @@ else if (this.characterNum === 1)
         }
         else if (this.cursorKeys.down.isDown && this.body.bottom < this.camera.worldView.bottom - 50)
         {
+            this.facingDir = "down-right";
             this.setVelocityX(this.speed);
             this.setVelocityY(this.speed);
             if (this.anims.isPlaying && this.anims.currentAnim.key === 'tom_run_down_right'){}

@@ -41,6 +41,7 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('player', dir + 'zoey2.png',{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet('player_tom', dir + 'spr_tom.png',{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet('player_harry', dir + 'spr_player_harry.png',{frameWidth: 53, frameHeight: 53});
+    this.load.spritesheet('player_tom_attack', 'assets/sprites/spr_tom_attack.png',{frameWidth: 53, frameHeight: 53});
     this.load.spritesheet('buttons', dir + 'buttons.png',{frameWidth: 736, frameHeight: 276});
     this.load.spritesheet('backButtons', dir + 'back_button.png',{frameWidth: 55, frameHeight: 24});
     this.load.spritesheet('continueButton', dir + 'continue_button.png',{frameWidth: 195, frameHeight: 66});
@@ -140,6 +141,83 @@ class Boot extends Phaser.Scene {
       frameRate: 30,
       repeat: -1
     });
+
+
+
+    this.anims.create({
+      key: "tom_attack_down_left",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:24,
+        end: 47
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_down_right",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:0,
+        end: 23
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_up_right",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:48,
+        end: 71
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_up_left",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:72,
+        end: 95
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_left",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:96,
+        end: 119
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_right",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:120,
+        end: 143
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_up",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:144,
+        end: 167
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+    this.anims.create({
+      key: "tom_attack_down",
+      frames: this.anims.generateFrameNumbers("player_tom_attack", {
+        start:168,
+        end: 190
+      }),
+      frameRate: 30,
+      repeat: 0
+    });
+
+
 
     this.anims.create({
       key: "zoey_run_right",
