@@ -61,7 +61,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         }
         else {
             this.tint = 0xff0000;
-            if (this.busyTime > 100) {
+            if (this.busyTime > 30) {
                 this.busy = false;
             }
             // Increase the timer
@@ -224,6 +224,28 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // When the enemy dies
     die()
     {
-        this.destroy()
+        this.dropLoot();
+        this.destroy();
+    }
+
+    // Drop loot with a 1 in 3 chance of either health or ammo;
+    dropLoot(){
+        let value = Phaser.Math.Between(0, 2);
+
+        switch (value) {
+            case 0:
+                let healthPickup = new health_pickUp(this.scene, this.x, this.y, "health");
+                break;
+
+            case 1:
+                let ammoPickup = new health_pickUp(this.scene, this.x, this.y, "ammo");
+                break;
+
+            case 2:
+                break;
+
+            default:
+                break;
+        }
     }
 }
