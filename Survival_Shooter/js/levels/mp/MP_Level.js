@@ -218,7 +218,7 @@ preload()
     // When the player(s) win the game
     win()
     {
-        this.scene.stop('UIScene');
-        this.scene.start("mainMenu");
+      this.scene.stop('UIScene');
+      this.scene.start("mainMenu");
     }
 }

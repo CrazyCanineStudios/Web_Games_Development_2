@@ -22,7 +22,6 @@ class Boot extends Phaser.Scene {
     this.load.image('melee_attack', 'assets/sprites/spr_melee_attack.png');
     this.load.spritesheet('enemy', 'assets/sprites/enemies/spr_enemy_clown.png',{frameWidth: 48, frameHeight: 48});
     this.load.image('barrier', 'assets/sprites/spr_fence.png');
-    this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
     this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
 
     // Character Select
@@ -59,7 +58,6 @@ class Boot extends Phaser.Scene {
     this.load.audio('harry_pickup_Sound', ['assets/sounds/voices/snd_harry_pickup.wav']);
     this.load.audio('enemy_hurt_sound', ['assets/sounds/voices/snd_monster_hurt_02.wav']);
 
-    this.load.tilemapTiledJSON('level1', 'assets/maps/level1.json');
     this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');
   }
   create() {

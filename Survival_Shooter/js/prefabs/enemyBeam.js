@@ -61,6 +61,7 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
   }
   reverse()
   {
+    this.damage = 80;
     this.body.velocity.y = -this.body.velocity.y;
     this.dealsDamageToEnemy = true;
   }

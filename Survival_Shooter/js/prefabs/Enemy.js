@@ -59,15 +59,12 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
                 this.rangedAttack(this.direction);
             }
         }
-        else {
+        else
+        {
             this.tint = 0xff0000;
-            if (this.busyTime > 20) {
-                this.busy = false;
-            }
+            if (this.busyTime > 20) {this.busy = false;}
             // Increase the timer
-            else {
-                this.busyTime++;
-            }
+            else {this.busyTime++;}
         }
     }
 
@@ -238,7 +235,11 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
                 break;
 
             case 1:
-                let ammoPickup = new health_pickUp(this.scene, this.x, this.y, "ammo");
+                if (player1Char === "Tom" && mpIntro ===false){let ammoPickup = new health_pickUp(this.scene, this.x, this.y, "health");}
+                else
+                    {
+                    let ammoPickup = new health_pickUp(this.scene, this.x, this.y, "ammo");
+                    }
                 break;
 
             case 2:

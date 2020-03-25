@@ -186,6 +186,6 @@ class SP_3_Level extends Phaser.Scene {
   win()
   {
     this.scene.stop('UIScene');
-    this.scene.launch('mainMenu');
+    this.scene.start("mainMenu");
   }
 }
