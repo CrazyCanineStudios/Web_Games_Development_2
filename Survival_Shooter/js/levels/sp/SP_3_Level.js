@@ -146,11 +146,11 @@ class SP_3_Level extends Phaser.Scene {
     barrier.body.setImmovable();
     this.physics.add.collider(player, barrier);
 
-    let generator = this.add.sprite(1760, 212, 'ammo_pu');
+    let generator = this.add.sprite(1724, 200, 'ammo_pu');
     this.physics.world.enableBody(generator);
     generator.body.setSize(32,32,8,5);
     generator.body.setImmovable();
-    this.physics.add.collider(player, generator, function (player, generator) {this.scene.win();});
+    this.physics.add.collider(player, generator, function (player, generator) {game.scene.win();});
 
     this.scene.launch('UIScene');
   }

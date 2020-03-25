@@ -61,7 +61,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         }
         else {
             this.tint = 0xff0000;
-            if (this.busyTime > 100) {
+            if (this.busyTime > 30) {
                 this.busy = false;
             }
             // Increase the timer
