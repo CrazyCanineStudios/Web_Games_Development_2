@@ -13,6 +13,7 @@ class SP_3_Level extends Phaser.Scene {
     const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
     const walls = map.createStaticLayer('Walls', tileset, 0, 0);
+    const details = map.createStaticLayer('Details', tileset, 0, 0);
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
     this.darkness = this.add.sprite(0,0, 'darkness');
     this.darkness.setOrigin(0.5, 0.5);
