@@ -74,6 +74,7 @@ preload()
     // Create the enemies' projectile group
     this.enemyProjectiles = this.add.group({classType: enemyBeam, runChildUpdate: true});
     this.physics.add.collider(this.enemyProjectiles, platforms, function (enemyProjectile, platform) {enemyProjectile.destroy();});
+    this.physics.add.collider(platforms, this.projectiles, function(projectile){projectile.destroy();});
 
     // When a player and an enemy's projectile overlap
     this.physics.add.overlap(this.enemyProjectiles, player, function (enemyProjectile, player) {enemyProjectile.destroy(); player.takeDamage(enemyProjectile.damage);});

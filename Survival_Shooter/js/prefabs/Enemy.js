@@ -18,6 +18,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.health = 100;
         this.damage = 10;
         this.speed = 100;
+        this.busy = false;
+        this.busyTime = 0;
 
         this.isRanged = isRanged;
         this.direction = null;
@@ -44,14 +46,28 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // Actions every frame
     update()
     {
-        // Find a target player, depending on if co-op or not
-        this.getTarget();
-
-        // If a target has been found, move towards it
-        if (this.target)
+        if (!this.busy)
         {
-            this.moveToTarget(this.target, this.speed, this.scene);
-            this.rangedAttack(this.direction);
+            this.tint =0xffffff;
+            // Find a target player, depending on if co-op or not
+            this.getTarget();
+
+            // If a target has been found, move towards it
+            if (this.target)
+            {
+                this.moveToTarget(this.target, this.speed, this.scene);
+                this.rangedAttack(this.direction);
+            }
+        }
+        else {
+            this.tint = 0xff0000;
+            if (this.busyTime > 100) {
+                this.busy = false;
+            }
+            // Increase the timer
+            else {
+                this.busyTime++;
+            }
         }
     }
 
@@ -172,14 +188,36 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // When the enemy takes damage
     takeDamage(amount)
     {
-        if(this.health > amount){
+        if(this.health > amount && !this.busy)
+        {
+            this.busy = true;
+            switch (this.direction)
+            {
+                case "left":
+                    this.body.velocity.x = +300;
+                    break;
+                case  "right":
+                    this.body.velocity.x = -300;
+                    break;
+                case  "down":
+                    this.body.velocity.y = -300;
+                    break;
+                case  "up":
+                    this.body.velocity.y = +300;
+                    break;
+                default:
+            }
             this.health = this.health - amount;
             console.log("Enemy Health: " + this.health);
+            this.busyTime = 0;
         }
         else{
-            this.hurtSound.stop();
-            this.hurtSound.play();
-            this.die();
+            if (!this.busy)
+            {
+                this.hurtSound.stop();
+                this.hurtSound.play();
+                this.die();
+            }
         }
     }
 
