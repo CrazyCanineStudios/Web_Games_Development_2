@@ -130,11 +130,21 @@ preload()
     reticle.y = player.y;
 
     // Create the win condition barrier
-    this.barrier = this.add.sprite(1728, 208, 'barrier');
-    this.physics.add.collider(player, this.barrier);
-    this.physics.add.collider(player2, this.barrier);
+    barrier = this.add.sprite(1728, 208, 'barrier');
+    this.physics.world.enableBody(barrier);
+    barrier.body.setSize(64,64,8,5);
+    barrier.body.setImmovable();
+    this.physics.add.collider(player, barrier);
+    this.physics.add.collider(player2, barrier);
 
-    this.scene.launch('UIScene');
+      let generator = this.add.sprite(1760, 212, 'ammo_pu');
+      this.physics.world.enableBody(generator);
+      generator.body.setSize(32,32,8,5);
+      generator.body.setImmovable();
+      this.physics.add.collider(player, generator, function (player, generator) {this.scene.win();});
+      this.physics.add.collider(player2, generator, function (player, generator) {this.scene.win();});
+
+      this.scene.launch('UIScene');
     this.cameras.main.startFollow(reticle);
   }
   update()
@@ -187,4 +197,10 @@ preload()
   shootBeam(x,y,direction,melee) {
     var beam = new Beam(this,x,y,direction,melee);
   }
+
+    // When the player(s) win the game
+    win()
+    {
+        this.scene.launch('mainMenu');
+    }
 }

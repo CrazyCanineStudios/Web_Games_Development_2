@@ -159,6 +159,6 @@ class Boss extends Phaser.Physics.Arcade.Sprite
     die()
     {
         this.destroy();
-        //game.scene.launch('mainMenu');
+        barrier.destroy();
     }
 }
