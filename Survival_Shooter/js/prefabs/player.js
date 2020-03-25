@@ -26,6 +26,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
         scene.players.add(this);
         this.camera = scene.cameras.main;
         this.shadow = scene.add.sprite(this.x,this.y + 15, 'shadow');
+        this.shadow.alpha = 0.3;
         this.facingDir = "right";
         this.ammo = 100;
         this.attackTime = 60;

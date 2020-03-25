@@ -66,6 +66,7 @@ preload()
     player2 = this.player2;
 
     // Create enemies group with collision
+    // Create enemies group with collision
     this.enemies = this.add.group({runChildUpdate: true});
     this.physics.add.collider(this.enemies, this.enemies);
 
@@ -103,6 +104,24 @@ preload()
     this.physics.add.collider(this.enemies, platforms);
 
     // When an enemy and a player projectile collide
+    this.physics.add.collider(this.enemyProjectiles, this.projectiles, function(enemyProjectile, projectile)
+        {
+          if (projectile.melee)
+          {
+            enemyProjectile.reverse();
+            projectile.destroy();
+          }
+        }
+    );
+    this.physics.add.collider(this.enemyProjectiles, this.enemies, function(enemyProjectile, enemy)
+        {
+          if (enemyProjectile.dealsDamageToEnemy)
+          {
+            enemy.takeDamage(enemyProjectile.damage)
+            enemyProjectile.destroy();
+          }
+        }
+    );
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
 
     // When the enemy and a player collide

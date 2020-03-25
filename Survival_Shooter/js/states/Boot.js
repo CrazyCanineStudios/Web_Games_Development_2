@@ -6,30 +6,29 @@ class Boot extends Phaser.Scene {
     // console.log("Boot State Started");
     var dir = "assets/sprites/";
 
-    this.load.image('howToPlay', 'assets/sprites/spr_how_to_play.png');
-    this.load.image('howToPlay_sp', 'assets/sprites/spr_sp_how_to_play.png');
-    this.load.image('storyImage', 'assets/sprites/spr_intro.png');
-    this.load.image('Tom_dialog', 'assets/sprites/spr_tom_portrait_1.png');
-    this.load.image('Tom_happy_dialog', 'assets/sprites/spr_tom_portrait_3.png');
-    this.load.image('Tom_bat_dialog', 'assets/sprites/spr_tom_portrait_2.png');
-    this.load.image('Zoey_dialog', 'assets/sprites/spr_zoey_portrait.png');
-    this.load.image('Harry_dialog', 'assets/sprites/spr_harry_portrait.png');
+    this.load.image('howToPlay', 'assets/sprites/user_interface/spr_how_to_play.png');
+    this.load.image('howToPlay_sp', 'assets/sprites/user_interface/spr_sp_how_to_play.png');
+    this.load.image('storyImage', 'assets/sprites/user_interface/spr_intro.png');
+    this.load.image('Tom_dialog', 'assets/sprites/dialogue/spr_tom_portrait_1.png');
+    this.load.image('Tom_happy_dialog', 'assets/sprites/dialogue/spr_tom_portrait_3.png');
+    this.load.image('Tom_bat_dialog', 'assets/sprites/dialogue/spr_tom_portrait_2.png');
+    this.load.image('Zoey_dialog', 'assets/sprites/dialogue/spr_zoey_portrait.png');
+    this.load.image('Harry_dialog', 'assets/sprites/dialogue/spr_harry_portrait.png');
     this.load.image('creditsBackground', 'assets/sprites/user_interface/spr_credits_background.png');
-    this.load.image('gameOverImage', 'assets/sprites/spr_game_over.png');
+    this.load.image('gameOverImage', 'assets/sprites/user_interface/spr_game_over.png');
     this.load.image("darkness",  'assets/sprites/spr_vignette_overlay.png');
     this.load.image('shadow', 'assets/sprites/spr_shadow.png');
-    this.load.image('ammo_pu', 'assets/sprites/spr_ammo_pickup.png');
+    this.load.image('ammo_pu', 'assets/sprites/pick_ups/spr_ammo_pickup.png');
     this.load.image('melee_attack', 'assets/sprites/spr_melee_attack.png');
-    this.load.spritesheet('enemy', 'assets/sprites/spr_enemy.png',{frameWidth: 48, frameHeight: 48});
+    this.load.spritesheet('enemy', 'assets/sprites/enemies/spr_enemy_clown.png',{frameWidth: 48, frameHeight: 48});
     this.load.image('barrier', 'assets/sprites/spr_fence.png');
     this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
     this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
 
     // Character Select
-    this.load.spritesheet('harry_char_select', dir + "spr_harry_character_select.png",{frameWidth: 500, frameHeight: 500});
-    this.load.spritesheet('tom_char_select', dir + "spr_tom_character_select.png",{frameWidth: 500, frameHeight: 500});
-    this.load.spritesheet('zoey_char_select', dir + "spr_zoey_character_select.png",{frameWidth: 500, frameHeight: 500});
-
+    this.load.spritesheet('harry_char_select', 'assets/sprites/user_interface/spr_harry_character_select.png',{frameWidth: 500, frameHeight: 500});
+    this.load.spritesheet('tom_char_select', 'assets/sprites/user_interface/spr_tom_character_select.png',{frameWidth: 500, frameHeight: 500});
+    this.load.spritesheet('zoey_char_select', 'assets/sprites/user_interface/spr_zoey_character_select.png',{frameWidth: 500, frameHeight: 500});
 
     // User Interface
     this.load.spritesheet('backButtons', 'assets/sprites/user_interface/spr_back_button.png',{frameWidth: 55, frameHeight: 24});
@@ -46,8 +45,8 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('player_tom_attack', 'assets/sprites/players/spr_player_tom_attack.png',{frameWidth: 53, frameHeight: 53});
 
 
-    this.load.spritesheet('beam', 'assets/sprites/spr_player_bullet.png',{frameWidth: 16, frameHeight: 16});
-    this.load.spritesheet('health_pickUp', 'assets/sprites/spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
+    this.load.spritesheet('beam', 'assets/sprites/players/spr_player_bullet.png',{frameWidth: 16, frameHeight: 16});
+    this.load.spritesheet('health_pickUp', 'assets/sprites/pick_ups/spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
     this.load.audio('gameOverMusic', ['assets/sounds/music/mus_game_over.wav']);

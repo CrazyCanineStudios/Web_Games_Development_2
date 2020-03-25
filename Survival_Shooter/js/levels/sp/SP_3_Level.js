@@ -14,6 +14,9 @@ class SP_3_Level extends Phaser.Scene {
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
     const walls = map.createStaticLayer('Walls', tileset, 0, 0);
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
+    this.darkness = this.add.sprite(0,0, 'darkness');
+    this.darkness.setOrigin(0.5, 0.5);
+    this.darkness.depth=7;
     this.players = this.add.group();
     this.projectiles = this.add.group();
     this.pickUps = this.add.group();
@@ -147,7 +150,7 @@ class SP_3_Level extends Phaser.Scene {
     this.physics.world.enableBody(generator);
     generator.body.setSize(32,32,8,5);
     generator.body.setImmovable();
-    this.physics.add.collider(player, generator, function (player, generator) {game.scene.win();});
+    this.physics.add.collider(player, generator, function (player, generator) {player.scene.win();});
 
     this.scene.launch('UIScene');
   }
@@ -172,14 +175,17 @@ class SP_3_Level extends Phaser.Scene {
 
     reticle.x = player.x;
     reticle.y = player.y;
+    this.darkness.x = player.x;
+    this.darkness.y = player.y;
   }
   shootBeam(x,y,direction,melee) {
     var beam = new Beam(this,x,y,direction,melee);
   }
 
-  // When the player(s) win the game
+  // When the player win the game
   win()
   {
+    this.scene.stop('UIScene');
     this.scene.launch('mainMenu');
   }
 }
