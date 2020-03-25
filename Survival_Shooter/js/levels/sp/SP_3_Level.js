@@ -1,6 +1,4 @@
 class SP_3_Level extends Phaser.Scene {
-  spotlight;
-  charLight;
   constructor() {
     super("sp_1");
   }
@@ -11,8 +9,6 @@ class SP_3_Level extends Phaser.Scene {
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
-    this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
-    this.background.setOrigin(0, 0);
     const map = this.make.tilemap({ key: 'level2' });
     const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
@@ -46,25 +42,8 @@ class SP_3_Level extends Phaser.Scene {
     this.cameras.main.roundPixels = true;
     reticle.visible = false;
     this.physics.add.collider(player, platforms);
-    this.spotlight = this.make.sprite({
-      x: player.x,
-      y: player.y,
-      key: 'mask',
-      add: false
-    });
-    this.charLight = this.make.sprite({
-      x: player.x,
-      y: player.y,
-      key: 'character_mask',
-      add: false
-    });
     var healthPickup = new health_pickUp(this,276,584,"health");
     var ammoPickup = new health_pickUp(this,276,650,"ammo");
-    floors.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    walls.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    objects.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotlight);
-    player.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
-    player.shadow.mask = new Phaser.Display.Masks.BitmapMask(this, this.charLight);
 
 // Locks pointer on mousedown
     game.canvas.addEventListener('mousedown', function () {
@@ -179,8 +158,6 @@ class SP_3_Level extends Phaser.Scene {
       this.scene.stop('UIScene');
       this.scene.start("mainMenu");
     }
-    this.charLight.x = this.spotlight.x;
-    this.charLight.y = this.spotlight.y;
     this.cameras.main.startFollow(reticle);
     for(var i = 0; i < this.players.getChildren().length; i++)
     {
@@ -195,10 +172,6 @@ class SP_3_Level extends Phaser.Scene {
 
     reticle.x = player.x;
     reticle.y = player.y;
-    this.spotlight.x = player.x;
-    this.spotlight.y = player.y;
-    this.charLight.x = player.x;
-    this.charLight.y = player.y;
   }
   shootBeam(x,y,direction,melee) {
     var beam = new Beam(this,x,y,direction,melee);

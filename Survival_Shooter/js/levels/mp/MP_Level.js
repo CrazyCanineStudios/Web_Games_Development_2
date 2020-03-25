@@ -9,8 +9,6 @@ preload()
   create() {
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
-    this.background = this.add.tileSprite(0, 0, 3200, 3200, "background");
-    this.background.setOrigin(0, 0);
     const map = this.make.tilemap({key: 'level2'});
     const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);

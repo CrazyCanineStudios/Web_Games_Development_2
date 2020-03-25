@@ -6,48 +6,48 @@ class Boot extends Phaser.Scene {
     // console.log("Boot State Started");
     var dir = "assets/sprites/";
 
-    this.load.image('menuImage', dir + 'menu.png');
-    this.load.image('howToPlay', dir + 'spr_howToPlay.png');
-    this.load.image('howToPlay_sp', dir + 'spr_howToPlay_sp.png');
-    this.load.image('storyImage', dir + 'story.png');
-    this.load.image('Tom_dialog', dir + 'Tom_Portrait.png');
-    this.load.image('Tom_happy_dialog', dir + 'Tom_Happy_Portrait.png');
-    this.load.image('Tom_bat_dialog', dir + 'Tom_Bat_Portrait.png');
-    this.load.image('Zoey_dialog', dir + 'Zoey_Portrait.png');
-    this.load.image('Harry_dialog', dir + 'Harry_Portrait.png');
-    this.load.image('creditsBackground', dir + 'credits_background.png');
-    this.load.image('gameOverImage', dir + 'gameOver_2.png');
-    this.load.image("background",  dir + 'backgrounds/bg_level_1.png');
-    this.load.image("darkness",  dir + 'darkness.png');
-    this.load.image('crosshair',  dir + 'spr_crosshair.png');
-    this.load.image('mask', dir + 'mask1.png');
-    this.load.image('character_mask', dir + 'mask.png');
-    this.load.image('shadow', dir + 'shadow.png');
-    this.load.image('ammo_pu', dir + 'ammo_pickup.png');
-    this.load.image('melee_attack', dir + 'spr_melee_attack.png');
-    this.load.spritesheet('enemy', dir + 'spr_enemy.png',{frameWidth: 48, frameHeight: 48});
-    this.load.image('barrier', dir + 'corner.png');
-    this.load.image('level1_atlas',dir + 'tilemaps/level1_atlas.png');
-    this.load.image('level2_atlas',dir + 'tilemaps/level2_atlas.png');
+    this.load.image('howToPlay', 'assets/sprites/spr_how_to_play.png');
+    this.load.image('howToPlay_sp', 'assets/sprites/spr_sp_how_to_play.png');
+    this.load.image('storyImage', 'assets/sprites/spr_intro.png');
+    this.load.image('Tom_dialog', 'assets/sprites/spr_tom_portrait_1.png');
+    this.load.image('Tom_happy_dialog', 'assets/sprites/spr_tom_portrait_3.png');
+    this.load.image('Tom_bat_dialog', 'assets/sprites/spr_tom_portrait_2.png');
+    this.load.image('Zoey_dialog', 'assets/sprites/spr_zoey_portrait.png');
+    this.load.image('Harry_dialog', 'assets/sprites/spr_harry_portrait.png');
+    this.load.image('creditsBackground', 'assets/sprites/user_interface/spr_credits_background.png');
+    this.load.image('gameOverImage', 'assets/sprites/spr_game_over.png');
+    this.load.image("darkness",  'assets/sprites/spr_vignette_overlay.png');
+    this.load.image('shadow', 'assets/sprites/spr_shadow.png');
+    this.load.image('ammo_pu', 'assets/sprites/spr_ammo_pickup.png');
+    this.load.image('melee_attack', 'assets/sprites/spr_melee_attack.png');
+    this.load.spritesheet('enemy', 'assets/sprites/spr_enemy.png',{frameWidth: 48, frameHeight: 48});
+    this.load.image('barrier', 'assets/sprites/spr_fence.png');
+    this.load.image('level1_atlas','assets/sprites/tilemaps/level1_atlas.png');
+    this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
 
     // Character Select
-    this.load.image('charSelect', dir + 'character_select_menu.png');
     this.load.spritesheet('harry_char_select', dir + "spr_harry_character_select.png",{frameWidth: 500, frameHeight: 500});
     this.load.spritesheet('tom_char_select', dir + "spr_tom_character_select.png",{frameWidth: 500, frameHeight: 500});
     this.load.spritesheet('zoey_char_select', dir + "spr_zoey_character_select.png",{frameWidth: 500, frameHeight: 500});
-    this.load.spritesheet('dialogue_Buttons', dir + "dialogue_buttons.png",{frameWidth: 745, frameHeight: 208});
 
 
-    this.load.spritesheet('player', dir + 'zoey2.png',{frameWidth: 53, frameHeight: 53});
-    this.load.spritesheet('player_tom', dir + 'spr_tom.png',{frameWidth: 53, frameHeight: 53});
-    this.load.spritesheet('player_harry', dir + 'spr_player_harry.png',{frameWidth: 53, frameHeight: 53});
-    this.load.spritesheet('player_tom_attack', 'assets/sprites/spr_tom_attack.png',{frameWidth: 53, frameHeight: 53});
-    this.load.spritesheet('buttons', dir + 'buttons.png',{frameWidth: 736, frameHeight: 276});
-    this.load.spritesheet('backButtons', dir + 'back_button.png',{frameWidth: 55, frameHeight: 24});
-    this.load.spritesheet('continueButton', dir + 'continue_button.png',{frameWidth: 195, frameHeight: 66});
-    this.load.spritesheet('continueStoryButton', dir + 'continueStoryButton.png',{frameWidth: 84, frameHeight: 24});
-    this.load.spritesheet('beam', dir + 'beam.png',{frameWidth: 16, frameHeight: 16});
-    this.load.spritesheet('health_pickUp', dir + 'spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
+    // User Interface
+    this.load.spritesheet('backButtons', 'assets/sprites/user_interface/spr_back_button.png',{frameWidth: 55, frameHeight: 24});
+    this.load.spritesheet('buttons', 'assets/sprites/user_interface/spr_menu_buttons.png',{frameWidth: 736, frameHeight: 276});
+    this.load.image('charSelect', 'assets/sprites/user_interface/spr_character_select_menu.png');
+    this.load.spritesheet('continueButton', 'assets/sprites/user_interface/spr_continue_button.png',{frameWidth: 195, frameHeight: 66});
+    this.load.image('menuImage', 'assets/sprites/user_interface/spr_main_menu.png');
+    this.load.spritesheet('dialogue_Buttons','assets/sprites/user_interface/spr_dialogue_buttons.png',{frameWidth: 745, frameHeight: 208});
+
+    // Players
+    this.load.spritesheet('player', 'assets/sprites/players/spr_player_zoey.png',{frameWidth: 53, frameHeight: 53});
+    this.load.spritesheet('player_tom', 'assets/sprites/players/spr_player_tom.png',{frameWidth: 53, frameHeight: 53});
+    this.load.spritesheet('player_harry', 'assets/sprites/players/spr_player_harry.png',{frameWidth: 53, frameHeight: 53});
+    this.load.spritesheet('player_tom_attack', 'assets/sprites/players/spr_player_tom_attack.png',{frameWidth: 53, frameHeight: 53});
+
+
+    this.load.spritesheet('beam', 'assets/sprites/spr_player_bullet.png',{frameWidth: 16, frameHeight: 16});
+    this.load.spritesheet('health_pickUp', 'assets/sprites/spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
     this.load.audio('gameOverMusic', ['assets/sounds/music/mus_game_over.wav']);
@@ -390,7 +390,7 @@ class Boot extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     });
-    if (quickStart) this.scene.start("sp_1");
+    if (quickStart) this.scene.start("game_over");
     else this.scene.start("mainMenu");
 
   }

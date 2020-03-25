@@ -1,8 +1,8 @@
-class Credits extends Phaser.Scene {
+class Credits extends Phaser.Scene
+{
   constructor() {
     super("credits");
   }
-
   preload()
   {
     this.load.image('credits1',"assets/sprites/credits/credits1.png");
@@ -15,9 +15,12 @@ class Credits extends Phaser.Scene {
 
   create()
   {
+    this.skip = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.skip2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.skip3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     game.input.mouse.releasePointerLock();
     this.creditsGroup = this.add.group({runChildUpdate: true});
-    var creditsBG = this.add.sprite(config.width/2, config.height/2, 'creditsBackground');
+    this.add.sprite(config.width/2, config.height/2, 'creditsBackground');
     var credits = new CreditsPanel(this,config.width/2,config.height/2,"credits1",1,false);
     var credits2 = new CreditsPanel(this,config.width/2,credits.y + config.height,"credits2",2,false);
     var credits3 = new CreditsPanel(this,config.width/2,credits2.y + config.height,"credits3",3,false);
@@ -35,5 +38,10 @@ class Credits extends Phaser.Scene {
   }
   update ()
   {
+    if ((Phaser.Input.Keyboard.JustDown(this.skip)) || (Phaser.Input.Keyboard.JustDown(this.skip2)) || (Phaser.Input.Keyboard.JustDown(this.skip3)))
+    {
+      this.scene.stop('UIScene');
+      this.scene.start("mainMenu");
+    }
   }
 }

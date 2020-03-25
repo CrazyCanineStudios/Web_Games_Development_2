@@ -10,11 +10,11 @@ class User_Interface extends Phaser.Scene {
     }
 preload ()
 {
-    this.load.image('zoey_health', 'assets/sprites/zoey_health.png');
-    this.load.image('tom_health', 'assets/sprites/tom_health.png');
-    this.load.image('harry_health', 'assets/sprites/harry_health.png');
-    this.load.image('health', 'assets/sprites/health.png');
-    this.load.image('health_mask', 'assets/sprites/health_mask.png');
+    this.load.image('zoey_health', 'assets/sprites/spr_player_zoey_health.png');
+    this.load.image('tom_health', 'assets/sprites/spr_tom_health.png');
+    this.load.image('harry_health', 'assets/sprites/spr_player_harry_health.png');
+    this.load.image('health', 'assets/sprites/spr_player_health_bar.png');
+    this.load.image('health_mask', 'assets/sprites/spr_health_mask.png');
 }
     create ()
     {
