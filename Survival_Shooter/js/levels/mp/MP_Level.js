@@ -219,6 +219,6 @@ preload()
     win()
     {
       this.scene.stop('UIScene');
-      this.scene.start("mainMenu");
+      this.scene.start("win");
     }
 }

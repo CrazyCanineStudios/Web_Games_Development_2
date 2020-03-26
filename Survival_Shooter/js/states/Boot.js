@@ -16,6 +16,7 @@ class Boot extends Phaser.Scene {
     this.load.image('Harry_dialog', 'assets/sprites/dialogue/spr_harry_portrait.png');
     this.load.image('creditsBackground', 'assets/sprites/user_interface/spr_credits_background.png');
     this.load.image('gameOverImage', 'assets/sprites/user_interface/spr_game_over.png');
+    this.load.image('winImage', 'assets/sprites/user_interface/spr_win_screen.png');
     this.load.image("darkness",  'assets/sprites/spr_vignette_overlay.png');
     this.load.image('shadow', 'assets/sprites/spr_shadow.png');
     this.load.image('ammo_pu', 'assets/sprites/pick_ups/spr_ammo_pickup.png');
@@ -49,6 +50,7 @@ class Boot extends Phaser.Scene {
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
     this.load.audio('gameOverMusic', ['assets/sounds/music/mus_game_over.wav']);
+    this.load.audio('winMusic', ['assets/sounds/music/mus_win.wav']);
     this.load.audio('characterSelectMusic', ['assets/sounds/music/mus_character_Select.ogg']);
     this.load.audio('level1Music', ['assets/sounds/music/mus_level_1.ogg']);
     this.load.audio('confirmSound', ['assets/sounds/sound effects/snd_confirm.ogg']);
@@ -387,7 +389,7 @@ class Boot extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     });
-    if (quickStart) this.scene.start("game_over");
+    if (quickStart) this.scene.start("win");
     else this.scene.start("mainMenu");
 
   }

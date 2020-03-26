@@ -67,6 +67,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
     }
     update()
     {
+        if (this.health>100) this.health = 100;
         this.shadow.x = this.x;
         this.shadow.y = this.y + 15;
         this.depth = this.y + this.height / 2;
