@@ -6,7 +6,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     {
         super(scene, x, y, "Enemy");
 
-        // Initialise
+        // Initialise physics
         scene.add.existing(this);
         scene.enemies.add(this);
         scene.physics.world.enableBody(this);
@@ -14,6 +14,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.body.setCollideWorldBounds(true);
         this.body.setSize(32);
 
+        // Initialise properties
         this.attackTime = 60;
         this.health = 100;
         this.damage = 10;
@@ -24,21 +25,22 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
         this.isRanged = isRanged;
         this.direction = null;
 
+        // Setup ranged/melee stats
         if(this.isRanged) {
             this.targetRange = 256;
             this.attackRange = 64;
+            this.setTexture('enemy');
         }
         else {
             this.targetRange = 128;
             this.attackRange = 32;
+            this.setTexture('meleeEnemy');
         }
 
-        // Can't get players group (yet), so target is set to player for now
+        // Initialise targets
         this.target = null;
         this.players = scene.players;
 
-        // Set sprite texture
-        this.setTexture('enemy');
         this.setSize(32, 32);
         this.hurtSound = scene.sound.add('enemy_hurt_sound');
     }
@@ -94,50 +96,96 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // Rotate and move towards a target
     moveToTarget(target, speed, scene)
     {
-        // Stop if within a certain distance
+        // Stop if within a certain distance or if out of sight
         var distance = Phaser.Math.Distance.Between(this.x, this.y, target.x, target.y);
 
         if (distance < this.targetRange && distance > this.attackRange)
         {
             //this.rotation = (Phaser.Math.Angle.Between(target.x, target.y, this.x, this.y) + 1.5);
             //this.enemyAngle = this.rotation * 100;
+
             scene.physics.moveTo(this, target.x, target.y, speed);
+
             //console.log("TargetX : " + target.x + " Target Y : " + target.y);
-            if (this.x > target.x  && target.x>target.y)
-            {
-                //console.log("Moving left");
-                if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_left'){}
-                else this.play("enemy_run_left");
 
-                // Notify direction as left
-                this.direction = "left";
+            // Play either of 4 animations, depending on the enemy type
+            if(this.isRanged){
+                // Ranged
+                if (this.x > target.x  && target.x>target.y)
+                {
+                    //console.log("Moving left");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_left'){}
+                    else this.play("enemy_run_left");
+
+                    // Notify direction as left
+                    this.direction = "left";
+                }
+                else if (this.x <= target.x && target.x>target.y)
+                {
+                    //console.log("Moving right");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_right'){}
+                    else this.play("enemy_run_right");
+
+                    // Notify direction as right
+                    this.direction = "right";
+                }
+                if (this.y > target.y && target.y>target.x)
+                {
+                    //console.log("Moving up");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_up'){}
+                    else this.play("enemy_run_up");
+
+                    // Notify direction as up
+                    this.direction = "up";
+                }
+                else if (this.y <= target.y && target.y>target.x)
+                {
+                    //console.log("Moving down");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_down'){}
+                    else this.play("enemy_run_down");
+
+                    // Notify direction as down
+                    this.direction = "down";
+                }
             }
-            else if (this.x <= target.x && target.x>target.y)
-            {
-                //console.log("Moving right");
-                if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_right'){}
-                else this.play("enemy_run_right");
+            else{
+                // Melee
+                if (this.x > target.x  && target.x>target.y)
+                {
+                    //console.log("Moving left");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'meleeEnemy_run_left'){}
+                    else this.play("meleeEnemy_run_left");
 
-                // Notify direction as right
-                this.direction = "right";
-            }
-            if (this.y > target.y && target.y>target.x)
-            {
-                //console.log("Moving up");
-                if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_up'){}
-                else this.play("enemy_run_up");
+                    // Notify direction as left
+                    this.direction = "left";
+                }
+                else if (this.x <= target.x && target.x>target.y)
+                {
+                    //console.log("Moving right");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'meleeEnemy_run_right'){}
+                    else this.play("meleeEnemy_run_right");
 
-                // Notify direction as up
-                this.direction = "up";
-            }
-            else if (this.y <= target.y && target.y>target.x)
-            {
-                //console.log("Moving down");
-                if (this.anims.isPlaying && this.anims.currentAnim.key === 'enemy_run_down'){}
-                else this.play("enemy_run_down");
+                    // Notify direction as right
+                    this.direction = "right";
+                }
+                if (this.y > target.y && target.y>target.x)
+                {
+                    //console.log("Moving up");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'meleeEnemy_run_up'){}
+                    else this.play("meleeEnemy_run_up");
 
-                // Notify direction as down
-                this.direction = "down";
+                    // Notify direction as up
+                    this.direction = "up";
+                }
+                else if (this.y <= target.y && target.y>target.x)
+                {
+                    //console.log("Moving down");
+                    if (this.anims.isPlaying && this.anims.currentAnim.key === 'meleeEnemy_run_down'){}
+                    else this.play("meleeEnemy_run_down");
+
+                    // Notify direction as down
+                    this.direction = "down";
+                }
             }
         }
     }
