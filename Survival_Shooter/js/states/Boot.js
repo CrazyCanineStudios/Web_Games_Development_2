@@ -22,6 +22,7 @@ class Boot extends Phaser.Scene {
     this.load.image('ammo_pu', 'assets/sprites/pick_ups/spr_ammo_pickup.png');
     this.load.image('melee_attack', 'assets/sprites/spr_melee_attack.png');
     this.load.spritesheet('enemy', 'assets/sprites/enemies/spr_enemy_clown.png',{frameWidth: 48, frameHeight: 48});
+    this.load.spritesheet('meleeEnemy', 'assets/sprites/enemies/EnemyBears.png',{frameWidth: 32, frameHeight: 32});
     this.load.image('barrier', 'assets/sprites/spr_fence.png');
     this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
 
@@ -380,6 +381,45 @@ class Boot extends Phaser.Scene {
       frameRate: 30,
       repeat: -1
     });
+
+    // Melee enemy animation setup
+    this.anims.create({
+        key: "meleeEnemy_run_down",
+        frames: this.anims.generateFrameNumbers("meleeEnemy", {
+            start:0,
+            end: 14
+        }),
+        frameRate: 30,
+        repeat: -1
+    });
+    this.anims.create({
+        key: "meleeEnemy_run_left",
+        frames: this.anims.generateFrameNumbers("meleeEnemy", {
+            start:45,
+            end: 59
+        }),
+        frameRate: 30,
+        repeat: -1
+    });
+    this.anims.create({
+        key: "meleeEnemy_run_up",
+        frames: this.anims.generateFrameNumbers("meleeEnemy", {
+            start:15,
+            end: 29
+        }),
+        frameRate: 30,
+        repeat: -1
+    });
+    this.anims.create({
+        key: "meleeEnemy_run_right",
+        frames: this.anims.generateFrameNumbers("meleeEnemy", {
+            start:30,
+            end: 44
+        }),
+        frameRate: 30,
+        repeat: -1
+    });
+
     this.anims.create({
       key: "anim_dialogue_Buttons",
       frames: this.anims.generateFrameNumbers("dialogue_Buttons", {
