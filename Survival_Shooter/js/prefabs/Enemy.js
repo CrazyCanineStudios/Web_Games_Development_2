@@ -201,7 +201,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
                 this.attackTime = 0;
 
                 // Deal damage
-                target.takeDamage(damage);
+                var enemyBullet = new enemyBeam(this.scene, this.x, this.y, this.direction, true);
                 console.log("Enemy Attacks")
             }
             // Increase the timer

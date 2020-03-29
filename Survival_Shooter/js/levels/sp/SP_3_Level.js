@@ -74,14 +74,17 @@ class SP_3_Level extends Phaser.Scene {
     this.physics.add.collider(this.enemyProjectiles, platforms, function (enemyProjectile, platform) {enemyProjectile.destroy();});
 
     // When a player and an enemy's projectile overlap
-    this.physics.add.overlap(this.enemyProjectiles, player, function (enemyProjectile, player) {enemyProjectile.destroy(); player.takeDamage(enemyProjectile.damage);});
+    this.physics.add.overlap(this.enemyProjectiles, player, function (enemyProjectile, player) {
+      enemyProjectile.destroy();
+      player.takeDamage(enemyProjectile.damage);
+
+    });
 
     // Create the Boss enemy
-    var boss = new Boss(this, 1650, 300);
+    //var boss = new Boss(this, 1650, 300);
 
     // Create the melee enemies; setting its Scene, X, Y, and if it is Ranged
-    /**this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
-    this.enemies.create(this.enemy2 = new Enemy(this, 323, 754, false));
+    this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
     this.enemies.create(this.enemy3 = new Enemy(this, 128, 450, false));
     this.enemies.create(this.enemy4 = new Enemy(this, 512, 200, false));
     this.enemies.create(this.enemy5 = new Enemy(this, 258, 172, true));
@@ -96,7 +99,7 @@ class SP_3_Level extends Phaser.Scene {
     this.enemies.create(this.enemy14 = new Enemy(this, 1200, 600, false));
     this.enemies.create(this.enemy15 = new Enemy(this, 1522, 570, true));
     this.enemies.create(this.enemy16 = new Enemy(this, 1522, 720, true));
-    this.physics.add.collider(this.enemies, platforms);**/
+    this.physics.add.collider(this.enemies, platforms);
 
     // When an enemy and a player projectile collide
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});

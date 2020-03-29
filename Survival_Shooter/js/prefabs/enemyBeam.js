@@ -34,6 +34,7 @@ class enemyBeam extends Phaser.GameObjects.Sprite{
       this.melee = true;
       this.damage = 5;
         this.setTexture('melee_attack');
+        this.setVisible(false);
         scene.physics.world.enableBody(this);
         this.body.setSize(32,32,8,5);
         this.setOrigin(0.5, 0.5);
