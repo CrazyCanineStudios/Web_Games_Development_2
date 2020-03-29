@@ -24,6 +24,7 @@ class Boot extends Phaser.Scene {
     this.load.spritesheet('enemy', 'assets/sprites/enemies/spr_enemy_clown.png',{frameWidth: 48, frameHeight: 48});
     this.load.spritesheet('meleeEnemy', 'assets/sprites/enemies/EnemyBears.png',{frameWidth: 32, frameHeight: 32});
     this.load.image('barrier', 'assets/sprites/spr_fence.png');
+    this.load.image('generator', 'assets/sprites/spr_generator.png');
     this.load.image('level2_atlas','assets/sprites/tilemaps/level2_atlas.png');
 
     // Character Select

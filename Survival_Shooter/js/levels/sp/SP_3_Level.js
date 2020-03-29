@@ -6,6 +6,7 @@ class SP_3_Level extends Phaser.Scene {
   {
   }
   create() {
+    lives = 3;
     // Create world bounds
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
@@ -38,7 +39,7 @@ class SP_3_Level extends Phaser.Scene {
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    player = new Player(this,256,736,player1Char,0);
+    player = new Player(this,141,661,player1Char,0);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(player.x,player.y, 'target');
@@ -78,26 +79,24 @@ class SP_3_Level extends Phaser.Scene {
     // Create the Boss enemy
     var boss = new Boss(this, 1650, 300);
 
-      // Create the melee enemies; setting its Scene, X, Y, and if it is Ranged
-      this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
-      this.enemies.create(this.enemy2 = new Enemy(this, 100, 750, false));
-      this.enemies.create(this.enemy3 = new Enemy(this, 128, 450, false));
-      this.enemies.create(this.enemy4 = new Enemy(this, 512, 200, false));
-      this.enemies.create(this.enemy5 = new Enemy(this, 258, 172, true));
-      this.enemies.create(this.enemy6 = new Enemy(this, 512, 48, false));
-      this.enemies.create(this.enemy7 = new Enemy(this, 786, 64, false));
-      this.enemies.create(this.enemy8 = new Enemy(this, 1020, 200, false));
-      this.enemies.create(this.enemy9 = new Enemy(this, 1120, 200, false));
-      this.enemies.create(this.enemy10 = new Enemy(this, 868, 464, true));
-      this.enemies.create(this.enemy11 = new Enemy(this, 1268, 350, false));
-      this.enemies.create(this.enemy12 = new Enemy(this, 932, 700, false));
-      this.enemies.create(this.enemy13 = new Enemy(this, 976, 624, false));
-      this.enemies.create(this.enemy14 = new Enemy(this, 1200, 600, false));
-      this.enemies.create(this.enemy15 = new Enemy(this, 1522, 570, true));
-      this.enemies.create(this.enemy16 = new Enemy(this, 1522, 720, true));
-
-    // When an enemy and a wall collide
-    this.physics.add.collider(this.enemies, platforms);
+    // Create the melee enemies; setting its Scene, X, Y, and if it is Ranged
+    /**this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
+    this.enemies.create(this.enemy2 = new Enemy(this, 323, 754, false));
+    this.enemies.create(this.enemy3 = new Enemy(this, 128, 450, false));
+    this.enemies.create(this.enemy4 = new Enemy(this, 512, 200, false));
+    this.enemies.create(this.enemy5 = new Enemy(this, 258, 172, true));
+    this.enemies.create(this.enemy6 = new Enemy(this, 512, 48, false));
+    this.enemies.create(this.enemy7 = new Enemy(this, 786, 64, false));
+    this.enemies.create(this.enemy8 = new Enemy(this, 1020, 200, false));
+    this.enemies.create(this.enemy9 = new Enemy(this, 1120, 200, false));
+    this.enemies.create(this.enemy10 = new Enemy(this, 868, 464, true));
+    this.enemies.create(this.enemy11 = new Enemy(this, 1268, 350, false));
+    this.enemies.create(this.enemy12 = new Enemy(this, 932, 700, false));
+    this.enemies.create(this.enemy13 = new Enemy(this, 976, 624, false));
+    this.enemies.create(this.enemy14 = new Enemy(this, 1200, 600, false));
+    this.enemies.create(this.enemy15 = new Enemy(this, 1522, 570, true));
+    this.enemies.create(this.enemy16 = new Enemy(this, 1522, 720, true));
+    this.physics.add.collider(this.enemies, platforms);**/
 
     // When an enemy and a player projectile collide
     this.physics.add.collider(this.enemies, this.projectiles, function(enemy, projectile){enemy.takeDamage(projectile.damage); projectile.destroy();});
@@ -147,7 +146,7 @@ class SP_3_Level extends Phaser.Scene {
     barrier.body.setImmovable();
     this.physics.add.collider(player, barrier);
 
-    let generator = this.add.sprite(1724, 200, 'ammo_pu');
+    let generator = this.add.sprite(1724, 200, 'generator');
     this.physics.world.enableBody(generator);
     generator.body.setSize(32,32,8,5);
     generator.body.setImmovable();

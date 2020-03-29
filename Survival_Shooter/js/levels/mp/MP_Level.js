@@ -7,6 +7,7 @@ preload()
 
 }
   create() {
+    lives = 3;
     this.pause = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     this.physics.world.setBounds(0, 0, 3200, 3200); // The world bounds
     const map = this.make.tilemap({key: 'level2'});
@@ -37,8 +38,8 @@ preload()
       'attack': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO,
       'special': Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
     });
-    this.player = new Player(this,256,736,player1Char,0);
-    this.player2 = new Player(this,288,736,player2Char,1);
+    this.player = new Player(this,141,661,player1Char,0);
+    this.player2 = new Player(this,96,731,player2Char,1);
     const platforms = map.createStaticLayer('Collisions', tileset, 0, 0);
     platforms.setCollisionByExclusion(-1, true);
     reticle = this.physics.add.sprite(this.player.x,this.player.y, 'target');
@@ -84,7 +85,7 @@ preload()
 
       // Create the melee enemies; setting its Scene, X, Y, and if it is Ranged
       this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
-      this.enemies.create(this.enemy2 = new Enemy(this, 100, 750, false));
+      this.enemies.create(this.enemy2 = new Enemy(this, 323, 754, false));
       this.enemies.create(this.enemy3 = new Enemy(this, 128, 450, false));
       this.enemies.create(this.enemy4 = new Enemy(this, 512, 200, false));
       this.enemies.create(this.enemy5 = new Enemy(this, 258, 172, true));
