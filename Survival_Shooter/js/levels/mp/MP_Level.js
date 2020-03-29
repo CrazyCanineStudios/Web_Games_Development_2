@@ -114,11 +114,11 @@ preload()
           }
         }
     );
-    this.physics.add.collider(this.enemyProjectiles, this.enemies, function(enemyProjectile, enemy)
+    this.physics.add.overlap(this.enemyProjectiles, this.enemies, function(enemyProjectile, enemy)
         {
           if (enemyProjectile.dealsDamageToEnemy)
           {
-            enemy.takeDamage(enemyProjectile.damage)
+            enemy.takeDamage(enemyProjectile.damage);
             enemyProjectile.destroy();
           }
         }
