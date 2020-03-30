@@ -83,18 +83,18 @@ class SP_3_Level extends Phaser.Scene {
 
     // Create the melee enemies; setting its Scene, X, Y, and if it is Ranged
     this.enemies.create(this.enemy1 = new Enemy(this, 288, 600, false));
-    this.enemies.create(this.enemy3 = new Enemy(this, 128, 450, false));
-    this.enemies.create(this.enemy4 = new Enemy(this, 512, 200, false));
-    this.enemies.create(this.enemy5 = new Enemy(this, 258, 172, true));
-    this.enemies.create(this.enemy6 = new Enemy(this, 512, 48, false));
-    this.enemies.create(this.enemy7 = new Enemy(this, 786, 64, false));
-    this.enemies.create(this.enemy8 = new Enemy(this, 1020, 200, false));
-    this.enemies.create(this.enemy9 = new Enemy(this, 1120, 200, false));
+    this.enemies.create(this.enemy3 = new Enemy(this, 128, 490, false));
+    this.enemies.create(this.enemy4 = new Enemy(this, 512, 232, false));
+    this.enemies.create(this.enemy5 = new Enemy(this, 290, 200, true));
+    this.enemies.create(this.enemy6 = new Enemy(this, 512, 72, false));
+    this.enemies.create(this.enemy7 = new Enemy(this, 786, 128, false));
+    this.enemies.create(this.enemy8 = new Enemy(this, 1048, 232, false));
+    this.enemies.create(this.enemy9 = new Enemy(this, 1156, 232, false));
     this.enemies.create(this.enemy10 = new Enemy(this, 1241, 481, true));
-    this.enemies.create(this.enemy11 = new Enemy(this, 1268, 350, false));
-    this.enemies.create(this.enemy12 = new Enemy(this, 932, 700, false));
+    this.enemies.create(this.enemy11 = new Enemy(this, 1268, 332, false));
+    this.enemies.create(this.enemy12 = new Enemy(this, 930, 732, false));
     this.enemies.create(this.enemy13 = new Enemy(this, 976, 624, false));
-    this.enemies.create(this.enemy14 = new Enemy(this, 1200, 600, false));
+    this.enemies.create(this.enemy14 = new Enemy(this, 1200, 632, false));
     this.enemies.create(this.enemy15 = new Enemy(this, 1522, 570, true));
     this.enemies.create(this.enemy16 = new Enemy(this, 1522, 720, true));
     this.physics.add.collider(this.enemies, platforms);
