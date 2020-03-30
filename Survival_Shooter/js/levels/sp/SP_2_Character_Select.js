@@ -32,6 +32,7 @@ class SP_2_Character_Select extends Phaser.Scene {
         this.tomSelect.on('pointerdown', () =>
         {
             this.Continue();
+            game.input.mouse.releasePointerLock();
         });
         
         this.zoeySelect = this.add.sprite(config.width/2, config.height/1.7, 'zoey_char_select',0);
@@ -40,6 +41,7 @@ class SP_2_Character_Select extends Phaser.Scene {
         this.zoeySelect.on('pointerdown', () =>
         {
             this.Continue();
+            game.input.mouse.releasePointerLock();
         });
         this.harrySelect = this.add.sprite(config.width/1.2, config.height/1.7, 'harry_char_select',0);
         this.harrySelect.setInteractive();
@@ -47,6 +49,7 @@ class SP_2_Character_Select extends Phaser.Scene {
         this.harrySelect.on('pointerdown', () =>
         {
             this.Continue();
+            game.input.mouse.releasePointerLock();
         });
         this.playerInput = [];
         this.playerInput [0] = this.input.keyboard.addKeys({
@@ -81,6 +84,7 @@ class SP_2_Character_Select extends Phaser.Scene {
     }
     update()
     {
+        game.input.mouse.releasePointerLock();
         switch (this.index)
         {
             case 0:

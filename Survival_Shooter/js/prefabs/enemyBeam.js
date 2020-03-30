@@ -1,13 +1,13 @@
 class enemyBeam extends Phaser.GameObjects.Sprite{
   constructor(scene,x,y,direction,melee){
 
-    super(scene, x, y, "beam");
+    super(scene, x, y, "enemy_beam");
     this.dealsDamageToEnemy = false;
     scene.add.existing(this);
     this.melee = melee;
     if (!melee)
     {
-      this.play("beam_anim");
+      this.play("enemy_beam_anim");
       scene.physics.world.enableBody(this);
       this.attackTime = 0;
       this.damage = 5;

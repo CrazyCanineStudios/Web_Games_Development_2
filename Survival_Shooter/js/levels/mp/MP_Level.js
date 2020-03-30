@@ -14,6 +14,7 @@ preload()
     const tileset = map.addTilesetImage('level 1 tilemap', 'level2_atlas');
     const floors = map.createStaticLayer('Floors', tileset, 0, 0);
     const walls = map.createStaticLayer('Walls', tileset, 0, 0);
+    const details = map.createStaticLayer('Details', tileset, 0, 0);
     const objects = map.createStaticLayer('Objects', tileset, 0, 0);
     this.darkness = this.add.sprite(0,0, 'darkness');
     this.darkness.setOrigin(0.5, 0.5);
@@ -93,7 +94,7 @@ preload()
       this.enemies.create(this.enemy7 = new Enemy(this, 786, 64, false));
       this.enemies.create(this.enemy8 = new Enemy(this, 1020, 200, false));
       this.enemies.create(this.enemy9 = new Enemy(this, 1120, 200, false));
-      this.enemies.create(this.enemy10 = new Enemy(this, 868, 464, true));
+      this.enemies.create(this.enemy10 = new Enemy(this, 1241, 481, true));
       this.enemies.create(this.enemy11 = new Enemy(this, 1268, 350, false));
       this.enemies.create(this.enemy12 = new Enemy(this, 932, 700, false));
       this.enemies.create(this.enemy13 = new Enemy(this, 976, 624, false));

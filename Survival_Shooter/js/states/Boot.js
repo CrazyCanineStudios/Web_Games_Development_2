@@ -48,6 +48,7 @@ class Boot extends Phaser.Scene {
 
 
     this.load.spritesheet('beam', 'assets/sprites/players/spr_player_bullet.png',{frameWidth: 16, frameHeight: 16});
+    this.load.spritesheet('enemy_beam', 'assets/sprites/players/spr_enemy_bullet.png',{frameWidth: 16, frameHeight: 16});
     this.load.spritesheet('health_pickUp', 'assets/sprites/pick_ups/spr_health_pickup.png',{frameWidth: 43, frameHeight: 67});
 
     this.load.audio('titleMusic', ['assets/sounds/music/mus_title.ogg']);
@@ -342,6 +343,12 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: "beam_anim",
       frames: this.anims.generateFrameNumbers("beam"),
+      frameRate: 20,
+      repeat: -1
+    });
+    this.anims.create({
+      key: "enemy_beam_anim",
+      frames: this.anims.generateFrameNumbers("enemy_beam"),
       frameRate: 20,
       repeat: -1
     });

@@ -10,7 +10,7 @@ class Beam extends Phaser.GameObjects.Sprite{
       this.play("beam_anim");
       scene.physics.world.enableBody(this);
       this.attackTime = 0;
-      this.damage = 20;
+      this.damage = 40;
       switch (direction) {
         case "left":
           this.body.velocity.x = -250;
