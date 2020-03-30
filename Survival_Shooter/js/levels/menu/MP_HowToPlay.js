@@ -18,7 +18,8 @@ class MP_HowToPlay extends Phaser.Scene {
     menuImage.fixedToCamera = true;
     confirmSound = this.sound.add('confirmSound');
 
-    var continueButton = this.add.sprite(1600,1000,'buttons',9);
+    var continueButton = this.add.sprite(1600,1020,'buttons',9);
+    continueButton.setScale(0.7);
     continueButton.setInteractive();
     continueButton.on('pointerover', () => { continueButton.setFrame(9)});
     continueButton.on('pointerout', () => { continueButton.setFrame(10)});
