@@ -48,25 +48,28 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
     // Actions every frame
     update()
     {
-        if (!this.busy)
+        if (!gamePaused)
         {
-            this.tint =0xffffff;
-            // Find a target player, depending on if co-op or not
-            this.getTarget();
-
-            // If a target has been found, move towards it
-            if (this.target)
+            if (!this.busy)
             {
-                this.moveToTarget(this.target, this.speed, this.scene);
-                this.rangedAttack(this.direction);
+                this.tint =0xffffff;
+                // Find a target player, depending on if co-op or not
+                this.getTarget();
+
+                // If a target has been found, move towards it
+                if (this.target)
+                {
+                    this.moveToTarget(this.target, this.speed, this.scene);
+                    this.rangedAttack(this.direction);
+                }
             }
-        }
-        else
-        {
-            this.tint = 0xff0000;
-            if (this.busyTime > 20) {this.busy = false;}
-            // Increase the timer
-            else {this.busyTime++;}
+            else
+            {
+                this.tint = 0xff0000;
+                if (this.busyTime > 20) {this.busy = false;}
+                // Increase the timer
+                else {this.busyTime++;}
+            }
         }
     }
 

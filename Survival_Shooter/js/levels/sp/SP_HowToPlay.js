@@ -10,7 +10,7 @@ class SP_HowToPlay extends Phaser.Scene {
 
   create()
   {
-
+    gamePaused = false;
     game.input.mouse.releasePointerLock();
     var menuImage = this.add.sprite(config.width/2, config.height/2, 'howToPlay_sp');
     menuImage.setDisplaySize(config.width,config.height);

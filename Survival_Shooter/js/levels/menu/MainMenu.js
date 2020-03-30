@@ -10,6 +10,7 @@ class MainMenu extends Phaser.Scene {
 
   create()
   {
+    gamePaused = false;
   player = null;
   player2 = null;
     game.input.mouse.releasePointerLock();

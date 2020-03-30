@@ -34,30 +34,33 @@ class Boss extends Phaser.Physics.Arcade.Sprite
     // Actions every frame
     update()
     {
-        if (!this.busy)
+        if (!gamePaused)
         {
-            this.tint = 0xffffff;
-            // Find a target player, depending on if co-op or not
-            if (player2) {
-                this.getTarget();
-            } else {
-                this.target = player;
-            }
+            if (!this.busy)
+            {
+                this.tint = 0xffffff;
+                // Find a target player, depending on if co-op or not
+                if (player2) {
+                    this.getTarget();
+                } else {
+                    this.target = player;
+                }
 
-            // If a target has been found, move towards it
-            if (this.target)
-                this.moveToTarget(this.target, this.speed, this.scene);
+                // If a target has been found, move towards it
+                if (this.target)
+                    this.moveToTarget(this.target, this.speed, this.scene);
 
-            if (this.target) {
-                this.burstAttack();
+                if (this.target) {
+                    this.burstAttack();
+                }
             }
-        }
-        else
-        {
-            this.tint = 0xff0000;
-            if (this.busyTime > 20) {this.busy = false;}
-            // Increase the timer
-            else {this.busyTime++;}
+            else
+            {
+                this.tint = 0xff0000;
+                if (this.busyTime > 20) {this.busy = false;}
+                // Increase the timer
+                else {this.busyTime++;}
+            }
         }
     }
 

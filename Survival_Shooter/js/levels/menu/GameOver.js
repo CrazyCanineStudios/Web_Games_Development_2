@@ -10,6 +10,7 @@ class GameOver extends Phaser.Scene {
 
   create()
   {
+    gamePaused = false;
     game.input.mouse.releasePointerLock();
     var gameOverImage = this.add.sprite(config.width/2, config.height/2, 'gameOverImage');
     gameOverImage.setDisplaySize(config.width,config.height);

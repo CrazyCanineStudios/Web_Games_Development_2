@@ -31,6 +31,7 @@ class SP_1_Intro extends Phaser.Scene {
 
   }
   create() {
+    gamePaused = false;
     game.input.mouse.releasePointerLock();
     var storyImage = this.add.sprite(config.width/2, config.height/2, 'storyImage');
     storyImage.setDisplaySize(config.width,config.height);

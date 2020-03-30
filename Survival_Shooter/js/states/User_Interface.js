@@ -15,6 +15,8 @@ preload ()
     this.load.image('harry_health', 'assets/sprites/user_interface/health/spr_player_harry_health.png');
     this.load.image('health', 'assets/sprites/user_interface/health/spr_player_health_bar.png');
     this.load.image('health_mask', 'assets/sprites/user_interface/health/spr_health_mask.png');
+    this.load.image('pauseScreen', 'assets/sprites/user_interface/spr_pause_screen.png');
+    this.load.spritesheet('pauseButtons', 'assets/sprites/user_interface/spr_pause_buttons.png',{frameWidth: 649, frameHeight: 119});
 }
     create ()
     {
@@ -23,6 +25,8 @@ preload ()
         this.value2 = 100;
         this.p = 76 / 100;
         this.healthBar = this.add.sprite(config.width * 0.125,100, 'health');
+        this.pauseScreen = this.add.sprite(config.width/2,config.height/2, 'pauseScreen');
+        this.pauseScreen.depth = 100;
         this.player1HealthPortrait = this.add.sprite(config.width * 0.125,100, 'zoey_health');
         this.healthValue = this.add.text(this.healthBar.x - 150, 170, "Sugar Levels : " + this.value, { font: '32px Arial', fill: '#ffb428' });
         this.healthMask = this.make.sprite({
@@ -59,9 +63,41 @@ preload ()
 
         // Create the Lives display
         this.livesDisplay = this.add.text((config.width / 2) - 70, 50, "Lives : " + lives, { font: '32px Arial', fill: '#ffb428', align: 'center' });
+
+        confirmSound = this.sound.add('confirmSound');
+        this.singlePlayerButton = this.add.sprite(config.width/2,(config.height/2) - 50,'pauseButtons',3);
+        this.singlePlayerButton.setInteractive();
+        this.singlePlayerButton.depth = 101;
+        this.singlePlayerButton.on('pointerover', () => { this.singlePlayerButton.setFrame(2)});
+        this.singlePlayerButton.on('pointerout', () => { this.singlePlayerButton.setFrame(3)});
+        this.singlePlayerButton.on('pointerdown', () =>
+        {
+            confirmSound.play();
+            this.singlePlayerButton.setFrame(2);
+            game.input.mouse.requestPointerLock();
+            gamePaused = false;
+            music.play();
+            pauseMusic.stop();
+        });
+        this.creditsButton = this.add.sprite(config.width/2,(config.height/2) + 150,'pauseButtons',1);
+        this.creditsButton.setInteractive();
+        this.creditsButton.depth = 101;
+        this.creditsButton.on('pointerover', () => { this.creditsButton.setFrame(0)});
+        this.creditsButton.on('pointerout', () => { this.creditsButton.setFrame(1)});
+        this.creditsButton.on('pointerdown', () =>
+        {
+            confirmSound.play();
+            this.creditsButton.setFrame(8);
+            player.scene.returnToMenu();
+        });
     }
     update()
     {
+        this.pauseScreen.setVisible(gamePaused);
+        this.singlePlayerButton.setVisible(gamePaused);
+        this.singlePlayerButton.input.enable = gamePaused;
+        this.creditsButton.setVisible(gamePaused);
+
         if (this.doOnce)
         {
             switch(player.characterNum)

@@ -17,6 +17,7 @@ class SP_2_Character_Select extends Phaser.Scene {
     {
     }
     create() {
+        gamePaused = false;
         this.currentPos =0;
         this.phase = 1;
         game.input.mouse.releasePointerLock();

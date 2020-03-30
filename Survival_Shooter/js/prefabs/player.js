@@ -67,16 +67,18 @@ class Player extends Phaser.Physics.Arcade.Sprite
     }
     update()
     {
-        if (this.health>100) this.health = 100;
-        this.shadow.x = this.x;
-        this.shadow.y = this.y + 15;
-        this.depth = this.y + this.height / 2;
-        // Increase the timer
-        this.attackTime < this.actualAttackTime ?  this.attackTime++ :  this.attacking = false;
-        if (this.invicible)
+        if (!gamePaused)
         {
-            this.tint =0xff0000;
-        }
+            if (this.health>100) this.health = 100;
+            this.shadow.x = this.x;
+            this.shadow.y = this.y + 15;
+            this.depth = this.y + this.height / 2;
+            // Increase the timer
+            this.attackTime < this.actualAttackTime ?  this.attackTime++ :  this.attacking = false;
+            if (this.invicible)
+            {
+                this.tint =0xff0000;
+            }
             if (this.busyTime > 30)
             {
                 this.tint = 0xffffff;
@@ -87,89 +89,89 @@ class Player extends Phaser.Physics.Arcade.Sprite
             {
                 this.busyTime++;
             }
-        if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
-        {
-            // Check if enough time has passed since the last attack
-            if (this.attackTime >= this.actualAttackTime)
+            if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.attack))
             {
-                switch (this.characterNum)
+                // Check if enough time has passed since the last attack
+                if (this.attackTime >= this.actualAttackTime)
                 {
-                    case 0:
-                        //zoey
-                        if (this.ammo>0)
-                        {
-                            this.attackSound.stop();
-                            this.attackSound = this.scene.sound.add('gun_attack');
-                            this.attackSound.play();
-                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
-                            this.ammo--;
-                        }
-                        break;
-                    case  1: // 1 = tom
-                        //tom
-                        switch (this.facingDir)
-                        {
-                            case "left":
-                                this.play("tom_attack_left");
-                                break;
-                            case  "right":
-                                this.play("tom_attack_right");
-                                break;
-                            case  "up":
-                                this.play("tom_attack_up");
-                                break;
-                            case  "down":
-                                this.play("tom_attack_down");
-                                break;
-                            case  "down-right":
-                                this.play("tom_attack_down_right");
-                                break;
-                            case  "down-left":
-                                this.play("tom_attack_down_left");
-                                break;
-                            case  "up-left":
-                                this.play("tom_attack_up_left");
-                                break;
-                            case  "up-right":
-                                this.play("tom_attack_up_right");
-                                break;
-                            default:
-                                this.play("tom_attack_down");
-                        }
+                    switch (this.characterNum)
+                    {
+                        case 0:
+                            //zoey
+                            if (this.ammo>0)
+                            {
+                                this.attackSound.stop();
+                                this.attackSound = this.scene.sound.add('gun_attack');
+                                this.attackSound.play();
+                                this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                                this.ammo--;
+                            }
+                            break;
+                        case  1: // 1 = tom
+                            //tom
+                            switch (this.facingDir)
+                            {
+                                case "left":
+                                    this.play("tom_attack_left");
+                                    break;
+                                case  "right":
+                                    this.play("tom_attack_right");
+                                    break;
+                                case  "up":
+                                    this.play("tom_attack_up");
+                                    break;
+                                case  "down":
+                                    this.play("tom_attack_down");
+                                    break;
+                                case  "down-right":
+                                    this.play("tom_attack_down_right");
+                                    break;
+                                case  "down-left":
+                                    this.play("tom_attack_down_left");
+                                    break;
+                                case  "up-left":
+                                    this.play("tom_attack_up_left");
+                                    break;
+                                case  "up-right":
+                                    this.play("tom_attack_up_right");
+                                    break;
+                                default:
+                                    this.play("tom_attack_down");
+                            }
                             this.attackSound.stop();
                             this.attackSound = this.scene.sound.add('melee_attack');
                             this.attackSound.play();
-                        this.scene.shootBeam(this.x,this.y,this.facingDir,true);
-                        this.attacking = true;
-                        break;
-                    case  2: // 2 = harry
-                        if (this.ammo>0)
-                        {
-                            this.attackSound.stop();
-                            this.attackSound = this.scene.sound.add('gun_attack');
-                            this.attackSound.play();
-                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
-                            this.ammo--;
-                        }
-                        break;
-                    default:
-                        if (this.ammo>0)
-                        {
-                            this.attackSound.stop();
-                            this.attackSound = this.scene.sound.add('gun_attack');
-                            this.attackSound.play();
-                            this.scene.shootBeam(this.x,this.y,this.facingDir,false);
-                            this.ammo--;
-                        }
+                            this.scene.shootBeam(this.x,this.y,this.facingDir,true);
+                            this.attacking = true;
+                            break;
+                        case  2: // 2 = harry
+                            if (this.ammo>0)
+                            {
+                                this.attackSound.stop();
+                                this.attackSound = this.scene.sound.add('gun_attack');
+                                this.attackSound.play();
+                                this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                                this.ammo--;
+                            }
+                            break;
+                        default:
+                            if (this.ammo>0)
+                            {
+                                this.attackSound.stop();
+                                this.attackSound = this.scene.sound.add('gun_attack');
+                                this.attackSound.play();
+                                this.scene.shootBeam(this.x,this.y,this.facingDir,false);
+                                this.ammo--;
+                            }
+                    }
+                    // Reset the timer
+                    this.attackTime = 0;
                 }
-                // Reset the timer
-                this.attackTime = 0;
             }
+            if (!this.attacking) this.movePlayer();
+            this.constrainVelocity();
         }
-        if (!this.attacking) this.movePlayer();
-        this.constrainVelocity();
     }
-
     // When the player takes damage
     takeDamage(amount)
     {

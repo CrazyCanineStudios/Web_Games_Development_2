@@ -70,6 +70,9 @@ class Boot extends Phaser.Scene {
     music = this.sound.add('titleMusic');
     music.loop = true;
     music.play();
+    pauseMusic = this.sound.add('characterSelectMusic');
+    pauseMusic.loop = true;
+    pauseMusic.stop();
     
     this.anims.create({
       key: "tom_run_right",

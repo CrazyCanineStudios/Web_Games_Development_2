@@ -15,6 +15,7 @@ class Credits extends Phaser.Scene
 
   create()
   {
+    gamePaused = false;
     this.skip = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.skip2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     this.skip3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);

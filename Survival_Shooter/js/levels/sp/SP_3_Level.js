@@ -54,7 +54,6 @@ class SP_3_Level extends Phaser.Scene {
     game.canvas.addEventListener('mousedown', function () {
       game.input.mouse.requestPointerLock();
     });
-
     if (music.key!== 'level1Music')
     {
       music.stop();
@@ -62,7 +61,6 @@ class SP_3_Level extends Phaser.Scene {
       music.loop = true;
       music.play();
     }
-
     this.player = player;
 
     // Create enemies group with collision
@@ -159,10 +157,27 @@ class SP_3_Level extends Phaser.Scene {
   }
   update()
   {
+    function pauseGame()
+    {
+      if (gamePaused)
+      {
+        game.input.mouse.requestPointerLock();
+        gamePaused = false;
+        music.play();
+        pauseMusic.stop();
+      }
+      else
+      {
+        game.input.mouse.releasePointerLock();
+        gamePaused = true;
+        music.stop();
+        pauseMusic.play();
+      }
+    }
+
     if (Phaser.Input.Keyboard.JustDown(this.pause))
     {
-      this.scene.stop('UIScene');
-      this.scene.start("mainMenu");
+      pauseGame();
     }
     this.cameras.main.startFollow(reticle);
     for(var i = 0; i < this.players.getChildren().length; i++)
@@ -188,7 +203,16 @@ class SP_3_Level extends Phaser.Scene {
   // When the player win the game
   win()
   {
+    music.play();
+    pauseMusic.stop();
     this.scene.stop('UIScene');
     this.scene.start("win");
+  }
+  returnToMenu()
+  {
+    music.play();
+    pauseMusic.stop();
+    this.scene.stop('UIScene');
+    this.scene.start("mainMenu");
   }
 }

@@ -168,10 +168,29 @@ preload()
   }
   update()
   {
+    function pauseGame()
+    {
+      if (gamePaused)
+      {
+        game.input.mouse.requestPointerLock();
+        gamePaused = false;
+        music.play();
+        pauseMusic.stop();
+      }
+      else
+      {
+        game.input.mouse.releasePointerLock();
+        gamePaused = true;
+        music.stop();
+        pauseMusic.play();
+      }
+    }
+
     if (Phaser.Input.Keyboard.JustDown(this.pause))
     {
-      this.scene.stop('UIScene');
-      this.scene.start("mainMenu");
+      pauseGame();
+      //this.scene.stop('UIScene');
+      //this.scene.start("mainMenu");
     }
     this.cameras.main.startFollow(reticle);
     if (this.player.body.x > this.player2.body.x)
@@ -220,7 +239,16 @@ preload()
     // When the player(s) win the game
     win()
     {
+      music.play();
+      pauseMusic.stop();
       this.scene.stop('UIScene');
       this.scene.start("win");
     }
+  returnToMenu()
+  {
+    music.play();
+    pauseMusic.stop();
+    this.scene.stop('UIScene');
+    this.scene.start("mainMenu");
+  }
 }
