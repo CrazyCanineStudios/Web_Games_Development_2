@@ -61,6 +61,7 @@ class Boot extends Phaser.Scene {
     this.load.audio('gun_attack', ['assets/sounds/sound effects/snd_bubble_gun.wav']);
     this.load.audio('tom_pickup_Sound', ['assets/sounds/voices/snd_tom_pickup.wav']);
     this.load.audio('harry_pickup_Sound', ['assets/sounds/voices/snd_harry_pickup.wav']);
+    this.load.audio('zoey_pickup_Sound', ['assets/sounds/voices/snd_zoey_pickup.wav']);
     this.load.audio('enemy_hurt_sound', ['assets/sounds/voices/snd_monster_hurt_02.wav']);
 
     this.load.tilemapTiledJSON('level2', 'assets/maps/level2.json');

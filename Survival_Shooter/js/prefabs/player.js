@@ -47,6 +47,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
             case  "Zoey":
                 this.actualAttackTime = 10;
                 this.speed = 180;
+                this.pickupSound = scene.sound.add('zoey_pickup_Sound');
                 this.characterNum = 0;
                 break;
             case  "Harry":

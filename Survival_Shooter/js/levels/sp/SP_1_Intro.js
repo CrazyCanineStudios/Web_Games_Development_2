@@ -50,7 +50,7 @@ class SP_1_Intro extends Phaser.Scene {
       "Harry, I can't sleep, the monsters won't leave me alone.",
       "Go away, Zoey. There's no such thing as monsters.",
       "What kind of monsters? It's not clowns is it, they give me the creeps.",
-      "It is now and big monster teddy bears too",
+      "It is now and giant monster teddy bears too",
       "No stop thinking about that you two, you're going to overload the ...",
       "You idiots, my machine is not responding - it's bringing the monsters to life",
       "What can we do?",
