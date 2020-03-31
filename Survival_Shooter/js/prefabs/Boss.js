@@ -167,7 +167,7 @@ class Boss extends Phaser.Physics.Arcade.Sprite
             console.log("Enemy Health: " + this.health);
             this.busyTime = 0;
         }
-        else{
+        else if (!this.busy){
             this.die();
         }
     }
